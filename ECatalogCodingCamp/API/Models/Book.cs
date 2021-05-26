@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace API.Models
 {
-    [Table("TB_M_Book")]
+    [Table("TB_T_Book")]
     public class Book
     {
         public int Id { get; set; }
         public Client Client { get; set; }
+        public User User { get; set; }
         public InterviewRequest InterviewRequest { get; set; }
     }
 }

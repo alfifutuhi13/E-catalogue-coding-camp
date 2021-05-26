@@ -16,12 +16,15 @@ namespace API.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "This field should not be empty"), EmailAddress(ErrorMessage = "Please input the valid email format"), 
             MaxLength(255, ErrorMessage = "Maximum 255 characters")]
+        public DateTime BirthDate { get; set; }
+        public string Status { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public Education Education { get; set; }
         public JobRole JobRole { get; set; }
-        public Participant Participant { get; set; }
         public Role Role { get; set; }
         public Account Account { get; set; }
+        public Client Client { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }

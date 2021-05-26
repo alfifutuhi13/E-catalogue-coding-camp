@@ -2,3 +2,13 @@
 ECatalogCodingCamp/API/obj/Debug/netcoreapp3.1/API.csprojAssemblyReference.cache
 ECatalogCodingCamp/.vs/ECatalogCodingCamp/v16/.suo
 ECatalogCodingCamp/.vs/ECatalogCodingCamp/v16/.suo
+*.pdb
+*.dll
+*.cache
+*.pdb
+ECatalogCodingCamp/API/obj/Debug/netcoreapp3.1/API.pdb
+ECatalogCodingCamp/API/obj/Debug/netcoreapp3.1/API.dll
+ECatalogCodingCamp/API/obj/Debug/netcoreapp3.1/API.csprojAssemblyReference.cache
+ECatalogCodingCamp/API/bin/Debug/netcoreapp3.1/API.pdb
+ECatalogCodingCamp/API/bin/Debug/netcoreapp3.1/API.dll
+ECatalogCodingCamp/.vs/ECatalogCodingCamp/v16/.suo

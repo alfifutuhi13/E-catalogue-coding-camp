@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ye1cQEDEhXiSXDS6mANrwQatwZCSIO8jGow2lpg3NXI5KUXmwGFIUtwqyUa6NTjWu6fjoWtLJT+jAcPC6gZ4Uw==",
+  "dgSpecHash": "BO9tNrQzpd59Jr8ZeQLEN6TUi6QJVKph2UX31Udt2GmDlchrp39oPa0TSKzR/XNAAP1rG+SpA/LjbAwvmBnkZw==",
   "success": true,
   "projectFilePath": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Lenovo\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

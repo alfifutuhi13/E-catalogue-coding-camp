@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Base;
+using API.Models;
+using API.Repositories.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ namespace API.Controllers
     public class SkillsController : BaseController<Skill, SkillRepository, int>
     {
         private readonly SkillRepository skillRepository;
-        public SkillController(SkillRepository skillRepository) : base(skillRepository)
+        public SkillsController(SkillRepository skillRepository) : base(skillRepository)
         {
             this.skillRepository = skillRepository;
         }

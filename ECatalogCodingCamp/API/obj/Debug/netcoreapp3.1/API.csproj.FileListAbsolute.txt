@@ -69,3 +69,4 @@ C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\o
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.RazorTargetAssemblyInfo.cache
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.dll
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.pdb
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.csprojAssemblyReference.cache

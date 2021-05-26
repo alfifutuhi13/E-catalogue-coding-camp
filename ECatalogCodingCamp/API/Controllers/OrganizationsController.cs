@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Base;
+using API.Models;
+using API.Repositories.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ namespace API.Controllers
     public class OrganizationsController : BaseController<Organization, OrganizationRepository, int>
     {
         private readonly OrganizationRepository organizationRepository;
-        public OrganizationController(OrganizationRepository organizationRepository) : base(organizationRepository)
+        public OrganizationsController(OrganizationRepository organizationRepository) : base(organizationRepository)
         {
             this.organizationRepository = organizationRepository;
         }

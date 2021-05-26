@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Base;
+using API.Models;
+using API.Repositories.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ namespace API.Controllers
     public class BooksController : BaseController<Book, BookRepository, int>
     {
         private readonly BookRepository bookRepository;
-        public BookController(BookRepository bookRepository) : base(bookRepository)
+        public BooksController(BookRepository bookRepository) : base(bookRepository)
         {
             this.bookRepository = bookRepository;
         }

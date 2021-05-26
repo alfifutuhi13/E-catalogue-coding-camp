@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Base;
+using API.Models;
+using API.Repositories.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ namespace API.Controllers
     public class MajorsController : BaseController<Major, MajorRepository, int>
     {
         private readonly MajorRepository majorRepository;
-        public MajorController(MajorRepository majorRepository) : base(majorRepository)
+        public MajorsController(MajorRepository majorRepository) : base(majorRepository)
         {
             this.majorRepository = majorRepository;
         }

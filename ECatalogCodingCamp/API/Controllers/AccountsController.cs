@@ -9,12 +9,12 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountsController : BaseController<Account, AccountR, int>
+    public class AccountsController : BaseController<Account, AccountRepository, int>
     {
-        private readonly SubDistrictRepository subDistrictRepository;
-        public SubDistrictsController(SubDistrictRepository subDistrictRepository) : base(subDistrictRepository)
+        private readonly AccountRepository accountRepository;
+        public AccountController(AccountRepository accountRepository) : base(accountRepository)
         {
-            this.subDistrictRepository = subDistrictRepository;
+            this.accountRepository = accountRepository;
         }
     }
 }

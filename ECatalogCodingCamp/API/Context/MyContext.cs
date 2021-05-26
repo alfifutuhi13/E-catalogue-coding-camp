@@ -65,7 +65,7 @@ namespace API.Context
 
             //User-CV
             modelBuilder.Entity<User>()
-                .HasOne(user => user.Education)
+                .HasOne(user => user.CV)
                 .WithOne(cv => cv.User)
                 .HasForeignKey<CV>(cv => cv.Id);
 

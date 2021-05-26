@@ -41,3 +41,31 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.pdb
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.genruntimeconfig.cache
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Dapper.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.csprojAssemblyReference.cache
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.AssemblyInfoInputs.cache
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.AssemblyInfo.cs
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\staticwebassets\API.StaticWebAssets.Manifest.cache
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\staticwebassets\API.StaticWebAssets.xml
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\scopedcss\bundle\API.styles.css
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.RazorTargetAssemblyInfo.cache
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.dll
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.pdb

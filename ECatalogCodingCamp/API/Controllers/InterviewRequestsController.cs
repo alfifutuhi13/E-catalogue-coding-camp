@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Base;
+using API.Models;
+using API.Repositories.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ namespace API.Controllers
     public class InterviewRequestsController : BaseController<InterviewRequest, InterviewRequestRepository, int>
     {
         private readonly InterviewRequestRepository interviewRequestRepository;
-        public InterviewRequestController(InterviewRequestRepository interviewRequestRepository) : base(interviewRequestRepository)
+        public InterviewRequestsController(InterviewRequestRepository interviewRequestRepository) : base(interviewRequestRepository)
         {
             this.interviewRequestRepository = interviewRequestRepository;
         }

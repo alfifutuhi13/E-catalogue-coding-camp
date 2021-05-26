@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Base;
+using API.Models;
+using API.Repositories.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ namespace API.Controllers
     public class ParametersController : BaseController<Parameter, ParameterRepository, int>
     {
         private readonly ParameterRepository parameterRepository;
-        public ParameterController(ParameterRepository parameterRepository) : base(parameterRepository)
+        public ParametersController(ParameterRepository parameterRepository) : base(parameterRepository)
         {
             this.parameterRepository = parameterRepository;
         }

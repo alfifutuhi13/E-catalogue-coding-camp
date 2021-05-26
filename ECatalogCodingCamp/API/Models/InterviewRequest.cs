@@ -12,5 +12,6 @@ namespace API.Models
         public int Id { get; set; }
         public long BidSalary { get; set; } //long int
         public string Email { get; set; }
+        public Book Book { get; set; }
     }
 }

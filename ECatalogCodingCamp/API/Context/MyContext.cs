@@ -25,7 +25,6 @@ namespace API.Context
         public DbSet<Major> Majors { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Parameter> Parameters { get; set; }
-        public DbSet<Participant> Participants { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<University> Universities { get; set; }
@@ -77,8 +76,6 @@ namespace API.Context
                 .HasOne(account => account.User)
                 .WithOne(user => user.Account)
                 .HasForeignKey<Account>(Account => Account.Id);
-
-            //User-Participant
 
             //User-JobRole
 

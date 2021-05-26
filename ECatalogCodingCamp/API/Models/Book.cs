@@ -11,6 +11,7 @@ namespace API.Models
     {
         public int Id { get; set; }
         public Client Client { get; set; }
+        public User User { get; set; }
         public InterviewRequest InterviewRequest { get; set; }
     }
 }

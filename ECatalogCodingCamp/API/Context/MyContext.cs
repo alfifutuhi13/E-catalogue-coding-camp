@@ -69,7 +69,10 @@ namespace API.Context
                 .WithOne(cv => cv.User)
                 .HasForeignKey<CV>(cv => cv.Id);
 
-            //User-Role
+            //Role-User
+            modelBuilder.Entity<User>()
+                .HasOne(user => user.Role)
+                .WithMany(role => role.Users);
 
             //User-Account
             modelBuilder.Entity<Account>()
@@ -77,14 +80,27 @@ namespace API.Context
                 .WithOne(user => user.Account)
                 .HasForeignKey<Account>(Account => Account.Id);
 
-            //User-JobRole
+            //JobRole-User
+            modelBuilder.Entity<User>()
+               .HasOne(user => user.Role)
+               .WithMany(jobrole => jobrole.Users);
 
             //User-Client (Where RoleID =2)
+            modelBuilder.Entity<User>()
+                .HasOne(user => user.Client)
+                .WithOne(client => client.User)
+                .HasForeignKey<Client>(client => client.Id);
 
             //User-Book
+            modelBuilder.Entity<Book>()
+               .HasOne(book => book.User)
+               .WithMany(user => user.Books);
 
             //Book-InterviewRequest
-
+            modelBuilder.Entity<Book>()
+                .HasOne(book => book.InterviewRequest)
+                .WithOne(interviewrequest => interviewrequest.Book)
+                .HasForeignKey<InterviewRequest>(interviewrequest => interviewrequest.Id);
         }
 
     }

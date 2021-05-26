@@ -10,7 +10,7 @@ namespace API.Models
     public class InterviewRequest
     {
         public int Id { get; set; }
-        public long BidSalary { get; set; } //long int
+        public long BidSalary { get; set; }
         public string Email { get; set; }
         public Book Book { get; set; }
     }

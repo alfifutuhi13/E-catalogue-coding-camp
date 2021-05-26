@@ -15,7 +15,7 @@ namespace API.Controllers
     public class InterviewRequestsController : BaseController<InterviewRequest, InterviewRequestRepository, int>
     {
         private readonly InterviewRequestRepository interviewRequestRepository;
-        public InterviewsRequestController(InterviewRequestRepository interviewRequestRepository) : base(interviewRequestRepository)
+        public InterviewRequestsController(InterviewRequestRepository interviewRequestRepository) : base(interviewRequestRepository)
         {
             this.interviewRequestRepository = interviewRequestRepository;
         }

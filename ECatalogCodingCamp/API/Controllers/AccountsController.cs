@@ -4,6 +4,7 @@ using API.Handlers;
 using API.Models;
 using API.Repositories.Data;
 using API.Repositories.Interface;
+using API.Services;
 using API.ViewModels;
 using Dapper;
 using Microsoft.AspNetCore.Http;
@@ -66,6 +67,35 @@ namespace API.Controllers
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterClient]", dbparams, commandType: CommandType.StoredProcedure));
             return Ok();
            
+        }
+
+        [HttpPost("Login/")]
+        public ActionResult Login(LoginVM login)
+        {
+            try
+            {
+
+                var dbparams = new DynamicParameters();
+                dbparams.Add("Email", login.Email, DbType.String);
+                dynamic result = _dapper.Get<dynamic>("[dbo].[SP_Login]"
+                , dbparams,
+                commandType: CommandType.StoredProcedure);
+
+                if (Hash.ValidatePassword(login.Password, result.Password))
+                {
+                    var jwt = new JwtService(_config);
+                    var token = jwt.GenerateSecurityLoginToken(result.Name, result.Email, result.Role);
+                    return Ok(new { token });
+                }
+
+                return Unauthorized("Failed To Make Token, Email / Password Wrong");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.InnerException);
+
+            }
+
         }
 
     }

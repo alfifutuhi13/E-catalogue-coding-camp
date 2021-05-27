@@ -1,4 +1,5 @@
 using API.Context;
+using API.Middleware;
 using API.Repositories;
 using API.Repositories.Data;
 using API.Repositories.Interface;
@@ -31,6 +32,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTokenAuthentication(Configuration);
             services.AddDbContext<MyContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
@@ -49,6 +51,10 @@ namespace API
             services.AddScoped<SkillRepository>();
             services.AddScoped<UniversityRepository>();
             services.AddScoped<UserRepository>();
+            services.AddScoped<OrganizationCVRepository>();
+            services.AddScoped<SkillCVRepository>();
+            services.AddScoped<WorkCVRepository>();
+            services.AddScoped<WorkRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +68,7 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -53,19 +53,39 @@ namespace API.Context
                 .WithOne(education => education.User)
                 .HasForeignKey<Education>(education => education.Id);
 
-            //Skill-CV
+            //SkillCV-CV
             modelBuilder.Entity<CV>()
-                .HasOne(cv => cv.Skill)
+                .HasOne(cv => cv.SkillCV)
                 .WithMany(skill => skill.CVs);
 
-            //Organization-CV
+            //SkillCV-Skill
+            modelBuilder.Entity<Skill>()
+                .HasOne(skill => skill.SkillCV)
+                .WithMany(skillcv => skillcv.Skills);
+
+            //OrganizationCV-CV
             modelBuilder.Entity<CV>()
-                .HasOne(cv => cv.Organization)
-                .WithMany(organization => organization.CVs);
+                .HasOne(cv => cv.OrganizationCV)
+                .WithMany(organizationcv => organizationcv.CVs);
+
+            //OrganizationCV-Organization
+            modelBuilder.Entity<Organization>()
+                .HasOne(organization => organization.OrganizationCV)
+                .WithMany(organizationcv => organizationcv.Organizations);
+
+            //WorkCV-CV
+            modelBuilder.Entity<CV>()
+                .HasOne(cv => cv.WorkCV)
+                .WithMany(workcv => workcv.CVs);
+
+            //WorkCV-Work
+            modelBuilder.Entity<Work>()
+                .HasOne(work => work.WorkCV)
+                .WithMany(workcv => workcv.Works);
 
             //User-CV
             modelBuilder.Entity<User>()
-                .HasOne(user => user.Education)
+                .HasOne(user => user.CV)
                 .WithOne(cv => cv.User)
                 .HasForeignKey<CV>(cv => cv.Id);
 

@@ -14,13 +14,12 @@ namespace API.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "This field should not be empty"), MaxLength(255, ErrorMessage = "Maximum 255 characters")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "This field should not be empty"), EmailAddress(ErrorMessage = "Please input the valid email format"), 
-            MaxLength(255, ErrorMessage = "Maximum 255 characters")]
+        [Required(ErrorMessage = "This field should not be empty"), EmailAddress(ErrorMessage = "Please input the valid email format"), MaxLength(255, ErrorMessage = "Maximum 255 characters")]
         public string Email { get; set; }
         public bool Gender { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime BirthDate { get; set; }
-        public string Status { get; set; }
+        public string StatusBook { get; set; }
         public string Phone { get; set; }
         public Education Education { get; set; }
         public CV CV { get; set; }

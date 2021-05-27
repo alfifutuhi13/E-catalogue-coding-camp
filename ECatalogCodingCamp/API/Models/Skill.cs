@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace API.Models
 {
-    [Table("TB_M_Organization")]
+    [Table("TB_M_Skill")]
     public class Skill
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<CV> CVs { get; set; }
+        public SkillCV SkillCV { get; set; }
     }
 }

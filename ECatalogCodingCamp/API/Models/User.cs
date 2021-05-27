@@ -21,6 +21,7 @@ namespace API.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public Education Education { get; set; }
+        public CV CV { get; set; }
         public JobRole JobRole { get; set; }
         public Role Role { get; set; }
         public Account Account { get; set; }

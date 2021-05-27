@@ -13,6 +13,7 @@ namespace API.Models
         [Key]
         public int Id { get; set; }
         public string Degree { get; set; }
+        public float GPA { get; set; }
         public Major Major { get; set; }
         public University University { get; set; }
         public User User { get; set; }

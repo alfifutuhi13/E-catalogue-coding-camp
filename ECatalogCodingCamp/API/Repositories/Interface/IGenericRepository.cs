@@ -12,6 +12,5 @@ namespace API.Repositories.Interface
         int Post(Entity obj);
         int Put(Entity obj);
         int Delete(TId Id);
-        //void Save();
     }
 }

@@ -4,6 +4,7 @@ using API.Handlers;
 using API.Models;
 using API.Repositories.Data;
 using API.Repositories.Interface;
+using API.Services;
 using API.ViewModels;
 using Dapper;
 using Microsoft.AspNetCore.Http;
@@ -51,7 +52,7 @@ namespace API.Controllers
             return Ok();
            
         }
-
+        
         [HttpPost("register/client")]
         public ActionResult RegisterClient(RegisterClientVM register)
         {
@@ -65,46 +66,37 @@ namespace API.Controllers
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterClient]", dbparams, commandType: CommandType.StoredProcedure));
             return Ok();
+           
+        }
+
+        [HttpPost("Login/")]
+        public ActionResult Login(LoginVM login)
+        {
+            try
+            {
+
+                var dbparams = new DynamicParameters();
+                dbparams.Add("Email", login.Email, DbType.String);
+                dynamic result = _dapper.Get<dynamic>("[dbo].[SP_Login]"
+                , dbparams,
+                commandType: CommandType.StoredProcedure);
+
+                if (Hash.ValidatePassword(login.Password, result.Password))
+                {
+                    var jwt = new JwtService(_config);
+                    var token = jwt.GenerateSecurityLoginToken(result.Name, result.Email, result.Role);
+                    return Ok(new { token });
+                }
+
+                return Unauthorized("Failed To Make Token, Email / Password Wrong");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.InnerException);
+
+            }
 
         }
 
-        //[HttpPost("login")]
-        //public ActionResult Login(LoginVM login)
-        //{
-        //    var password = Hash.HashPassword(login.Password);
-
-        //    var dbparams = new DynamicParameters();
-        //    dbparams.Add("Email", login.Email, DbType.String);
-        //    //dbparams.Add("Password", password, DbType.String);
-
-        //    dynamic result = _dapper.Get<dynamic>("[dbo].[SP_Login]", dbparams, commandType: CommandType.StoredProcedure);
-
-        //    //var user = context.Accounts.SingleOrDefault(a=>a.Employee.Email == login.Email);
-        //    if (result != null && Hash.ValidatePassword(login.Password, result.Password))
-        //    {
-
-        //        var jwt = new JwtService(_config);
-        //        var token = jwt.GenerateSecurityToken(result.Email, result.Name, result.Role);
-        //        return Ok(token);
-        //    }
-        //    //try 
-        //    //{
-        //    //    var user = context.Accounts.SingleOrDefault(a => a.Email == account.Email);
-        //    //    var role = context.Accounts.SingleOrDefault(a => a.Role.Id == user.Id);
-        //    //    var passwordCheck = Hash.ValidatePassword(account.Password, user.Password);
-        //    //    if (user != null && passwordCheck)
-        //    //    {
-        //    //        var jwt = new JwtService(_config);
-        //    //        var token = jwt.GenerateSecurityToken(account.Email, account.Password, role.Role.Name);
-        //    //        return Ok(token);
-        //    //    }
-        //    //    return BadRequest("Failed to login. Your email and password are not match.");
-        //    //}
-        //    //catch (Exception e)
-        //    //{
-        //    //    return BadRequest(e.InnerException);
-        //    //}
-        //    return BadRequest("Failed to login. Your email and password are not match");
-        //}
     }
 }

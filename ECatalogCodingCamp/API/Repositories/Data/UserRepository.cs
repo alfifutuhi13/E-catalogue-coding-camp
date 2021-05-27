@@ -1,5 +1,6 @@
 ﻿using API.Context;
 using API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace API.Repositories.Data
 
         public UserRepository(MyContext myContext) : base(myContext)
         {
-
+            
         }
     }
 }

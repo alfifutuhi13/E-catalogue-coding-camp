@@ -61,7 +61,7 @@ namespace API.Controllers
             dbparams.Add("Name", register.Name, DbType.String);
             dbparams.Add("Email", register.Email, DbType.String);
             dbparams.Add("Password", password, DbType.String);
-            dbparams.Add("RoleId", register.RoleId, DbType.String);
+            dbparams.Add("Phone", register.Phone, DbType.String);
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterClient]", dbparams, commandType: CommandType.StoredProcedure));
             return Ok();

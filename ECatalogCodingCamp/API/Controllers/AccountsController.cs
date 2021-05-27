@@ -21,47 +21,50 @@ namespace API.Controllers
     [ApiController]
     public class AccountsController : BaseController<Account, AccountRepository, int>
     {
-        private SendEmail sendEmail;
-        private AccountRepository accountRepository;
-        private MyContext context;
+        private readonly AccountRepository accountRepository;
+        private readonly MyContext context;
         private IConfiguration _config;
         private readonly IGenericDapper _dapper;
-
-        public AccountsController(AccountRepository accountRepository, MyContext context, IConfiguration _config, SendEmail sendEmail, IGenericDapper dapperr) : base(accountRepository)
+        public AccountsController(AccountRepository accountRepository, MyContext context, IConfiguration config, IGenericDapper dapper) : base(accountRepository)
         {
             this.accountRepository = accountRepository;
             this.context = context;
-            this._config = _config;
-            this.sendEmail = sendEmail;
-            _dapper = dapperr;
+            _config = config;
+            _dapper = dapper;
         }
 
-        [HttpPost("Login/")]
-        public ActionResult Login(LoginVM login)
+        [HttpPost("register/candidate")]
+        public ActionResult RegisterCandidate(RegisterCandidateVM register)
         {
-            try
-            {
 
-                var dbparams = new DynamicParameters();
-                dbparams.Add("Email", login.Email, DbType.String);
-                dynamic result = _dapper.Get<dynamic>("[dbo].[SP_Login]"
-                , dbparams,
-                commandType: CommandType.StoredProcedure);
+            var password = Hash.HashPassword(register.Password);
+            var dbparams = new DynamicParameters();
+            dbparams.Add("Name", register.Name, DbType.String);
+            dbparams.Add("Email", register.Email, DbType.String);
+            dbparams.Add("Password", password, DbType.String);
+            dbparams.Add("BirthDate", register.BirthDate, DbType.String);
+            dbparams.Add("Gender", register.Gender, DbType.String);
+            dbparams.Add("Phone", register.Phone, DbType.String);
+            dbparams.Add("JobRoleId", register.JobRoleId, DbType.String);
 
-                if (Hash.ValidatePassword(login.Password, result.Password))
-                {
-                    var jwt = new JwtService(_config);
-                    var token = jwt.GenerateSecurityLoginToken(result.Name, result.Email, result.Role);
-                    return Ok(new { token });
-                }
+            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterCandidate]", dbparams, commandType: CommandType.StoredProcedure));
+            return Ok();
+           
+        }
 
-                return Unauthorized("Failed To Make Token, Email / Password Wrong");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.InnerException);
+        [HttpPost("register/client")]
+        public ActionResult RegisterClient(RegisterClientVM register)
+        {
 
-            }
+            var password = Hash.HashPassword(register.Password);
+            var dbparams = new DynamicParameters();
+            dbparams.Add("Name", register.Name, DbType.String);
+            dbparams.Add("Email", register.Email, DbType.String);
+            dbparams.Add("Password", password, DbType.String);
+            dbparams.Add("RoleId", register.RoleId, DbType.String);
+
+            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterClient]", dbparams, commandType: CommandType.StoredProcedure));
+            return Ok();
 
         }
     }

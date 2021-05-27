@@ -23,7 +23,6 @@ namespace API.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public int Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)

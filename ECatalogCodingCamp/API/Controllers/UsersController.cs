@@ -15,9 +15,9 @@ namespace API.Controllers
     public class UsersController : BaseController<User, UserRepository, int>
     {
         private readonly UserRepository userRepository;
-    public UsersController(UserRepository userRepository) : base(userRepository)
-    {
-        this.userRepository = userRepository;
+        public UsersController(UserRepository userRepository) : base(userRepository)
+        {
+            this.userRepository = userRepository;
+        }
     }
-}
 }

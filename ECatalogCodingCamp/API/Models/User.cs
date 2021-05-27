@@ -26,6 +26,7 @@ namespace API.Models
         public Role Role { get; set; }
         public Account Account { get; set; }
         public Client Client { get; set; }
+        public CV CV { get; set; }
         public ICollection<Book> Books { get; set; }
     }
 }

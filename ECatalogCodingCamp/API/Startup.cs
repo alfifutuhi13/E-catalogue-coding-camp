@@ -1,4 +1,7 @@
 using API.Context;
+using API.Repositories;
+using API.Repositories.Data;
+using API.Repositories.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +33,22 @@ namespace API
             services.AddControllers();
             services.AddDbContext<MyContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+
+            services.AddScoped<IGenericDapper, GeneralDapper>();
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<BookRepository>();
+            services.AddScoped<ClientRepository>();
+            services.AddScoped<CVRepository>();
+            services.AddScoped<EducationRepository>();
+            services.AddScoped<InterviewRequestRepository>();
+            services.AddScoped<JobRoleRepository>();
+            services.AddScoped<MajorRepository>();
+            services.AddScoped<OrganizationRepository>();
+            services.AddScoped<ParameterRepository>();
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<SkillRepository>();
+            services.AddScoped<UniversityRepository>();
+            services.AddScoped<UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

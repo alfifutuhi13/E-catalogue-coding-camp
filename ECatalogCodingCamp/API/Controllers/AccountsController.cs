@@ -98,5 +98,33 @@ namespace API.Controllers
 
         }
 
+        [HttpPost("Change-Password")]
+        public ActionResult ChangePassword()
+        {
+
+            string email = Request.Headers["Email"].ToString();
+            string currentPassword = Request.Headers["CurrentPassword"].ToString();
+            string newPassword = Request.Headers["NewPassword"].ToString();
+            string confirmPassword = Request.Headers["ConfirmPassword"].ToString();
+            var foundAccount = context.Accounts.Where(account => account.User.Email == email).FirstOrDefault();
+
+            if (foundAccount == null || !Hash.ValidatePassword(currentPassword, foundAccount.Password))
+            {
+                return NotFound("Wrong Email / Current Password");
+            }
+            else if (newPassword != confirmPassword)
+            {
+                return BadRequest("New Password & Confirm Password Must Same");
+            }
+            else
+            {
+                string passwordHash = Hash.HashPassword(newPassword);
+                foundAccount.Password = passwordHash;
+                var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok("Data has been successfully updated.") : BadRequest("Data can't be updated.");
+                return result;
+            }
+
+        }
+
     }
 }

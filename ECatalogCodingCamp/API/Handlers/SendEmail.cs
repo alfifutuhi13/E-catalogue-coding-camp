@@ -1,4 +1,5 @@
 ﻿using API.Context;
+using API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,8 @@ namespace API.Handlers
             this.context = context;
         }
 
-        public void SendForgotPassword(string token, string resetCode, string email)
+        public void SendForgotPassword(string url, string token, User user)
         {
-            //[FromBody]Parameter parameter
             var parameter = context.Parameters.Find(1);
             var time24 = DateTime.Now.ToString("HH:mm:ss");
 
@@ -28,14 +28,13 @@ namespace API.Handlers
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Credentials = new NetworkCredential(parameter.Name, parameter.Value);
 
-            MailMessage m = new MailMessage();
-            m.From = new MailAddress(parameter.Name);
-            m.To.Add(new MailAddress(email));
-            m.Subject = "Reset Password " + time24;
-            m.IsBodyHtml = false;
-            m.Body = "Hi " + "\nThis is your reset code for your account. "
-                + resetCode + "\nReset link: https://localhost:44320/api/account/resetpassword \nToken: " + token + "\n Thank You";
-            smtp.Send(m);
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(parameter.Name);
+            message.To.Add(new MailAddress(user.Email));
+            message.Subject = "Reset Password " + time24;
+            message.IsBodyHtml = false;
+            message.Body = "Hi\nThis is your reset link for your account. \nReset link: "+ url + token ;
+            smtp.Send(message);
         }
     }
 }

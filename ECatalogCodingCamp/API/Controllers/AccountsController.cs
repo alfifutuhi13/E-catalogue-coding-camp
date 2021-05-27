@@ -45,9 +45,7 @@ namespace API.Controllers
             dbparams.Add("BirthDate", register.BirthDate, DbType.String);
             dbparams.Add("Gender", register.Gender, DbType.String);
             dbparams.Add("Phone", register.Phone, DbType.String);
-            dbparams.Add("StatusBook", register.StatusBook, DbType.String);
             dbparams.Add("JobRoleId", register.JobRoleId, DbType.String);
-            dbparams.Add("RoleId", register.RoleId, DbType.String);
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterCandidate]", dbparams, commandType: CommandType.StoredProcedure));
             return Ok();

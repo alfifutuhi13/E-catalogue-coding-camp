@@ -17,11 +17,9 @@ namespace API.ViewModels
         [Required(ErrorMessage = "Birth Date should not be empty")]
         public DateTime BirthDate { get; set; }
         [Required(ErrorMessage = "Gender should not be empty")]
-        public bool Gender { get; set; }
-        [Required(ErrorMessage = "Phone Number should not be empty"), RegularExpression(@"^08[0-9]{10,11}$", ErrorMessage = "This field should be numbers, start with '08'"), MinLength(11, ErrorMessage = "Minimum 11 characters")]
+        public string Gender { get; set; }
+        [Required(ErrorMessage = "Phone Number should not be empty"), RegularExpression(@"^[08][0-9]{10,11}$", ErrorMessage = "This field should be numbers, start with '08'"), MinLength(11, ErrorMessage = "Minimum 11 characters")]
         public string Phone { get; set; }
-        public string StatusBook { get; set; } //Otomatis Open
         public int JobRoleId { get; set; }
-        public int RoleId { get; set; } //Otomatis Candidate
     }
 }

@@ -16,9 +16,11 @@ namespace API.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "This field should not be empty"), EmailAddress(ErrorMessage = "Please input the valid email format"), 
             MaxLength(255, ErrorMessage = "Maximum 255 characters")]
+        public string Email { get; set; }
+        public bool Gender { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime BirthDate { get; set; }
         public string Status { get; set; }
-        public string Email { get; set; }
         public string Phone { get; set; }
         public Education Education { get; set; }
         public CV CV { get; set; }
@@ -26,7 +28,6 @@ namespace API.Models
         public Role Role { get; set; }
         public Account Account { get; set; }
         public Client Client { get; set; }
-        public CV CV { get; set; }
         public ICollection<Book> Books { get; set; }
     }
 }

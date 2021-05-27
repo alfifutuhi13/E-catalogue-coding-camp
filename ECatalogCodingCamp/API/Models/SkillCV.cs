@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace API.Models
 {
-    [Table("TB_M_Organization")]
-    public class Organization
+    [Table("TB_T_SkillCV")]
+    public class SkillCV
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string RoleOrganization { get; set; }
         public ICollection<CV> CVs { get; set; }
-        public OrganizationCV OrganizationCV { get; set; }
+        public ICollection<Skill> Skills { get; set; }
     }
 }

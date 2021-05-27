@@ -59,7 +59,6 @@ C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\o
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.pdb
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Dapper.dll
-D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.csprojAssemblyReference.cache
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\API.exe
@@ -98,3 +97,11 @@ C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\b
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

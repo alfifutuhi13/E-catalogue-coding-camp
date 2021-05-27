@@ -14,8 +14,7 @@ namespace API.ViewModels
         public string Email { get; set; }
         [Required(ErrorMessage = "Password should not be empty")]
         public string Password { get; set; }
-        [Required(ErrorMessage = "Phone Number should not be empty"), RegularExpression(@"^08[0-9]{10,11}$", ErrorMessage = "This field should be numbers, start with '08'"), MinLength(11, ErrorMessage = "Minimum 11 characters")]
+        [Required(ErrorMessage = "Phone Number should not be empty"), RegularExpression(@"^[08][0-9]{10,11}$", ErrorMessage = "This field should be numbers, start with '08'"), MinLength(11, ErrorMessage = "Minimum 11 characters")]
         public string Phone { get; set; }
-        public int RoleId { get; set; } //Otomatis Client
     }
 }

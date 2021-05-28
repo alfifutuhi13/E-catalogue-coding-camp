@@ -12,8 +12,13 @@ namespace API.Models
     {
         [Key]
         public int Id { get; set; }
-        public Client Client { get; set; }
+
+        public int CandidateId { get; set; }
+        public Candidate Candidate { get; set; }
+
+        public int UserId { get; set; }
         public User User { get; set; }
+
         public InterviewRequest InterviewRequest { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace API.Context
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<Candidate> Clients { get; set; }
         public DbSet<CV> CVs { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<InterviewRequest> InterviewRequests { get; set; }
@@ -105,16 +105,17 @@ namespace API.Context
                .HasOne(user => user.Role)
                .WithMany(jobrole => jobrole.Users);
 
-            //User-Client (Where RoleID =2)
-            modelBuilder.Entity<User>()
-                .HasOne(user => user.Client)
-                .WithOne(client => client.User)
-                .HasForeignKey<Client>(client => client.Id);
+            //Book-Candidate
+            modelBuilder.Entity<Candidate>()
+                .HasOne(candidate => candidate.Book)
+                .WithOne(book => book.Candidate)
+                .HasForeignKey<Book>(book => book.CandidateId);
 
             //User-Book
-            modelBuilder.Entity<Book>()
-               .HasOne(book => book.User)
-               .WithMany(user => user.Books);
+            modelBuilder.Entity<User>()
+               .HasOne(user => user.Book)
+               .WithOne(book => book.User)
+               .HasForeignKey<Book>(book => book.UserId);
 
             //Book-InterviewRequest
             modelBuilder.Entity<Book>()

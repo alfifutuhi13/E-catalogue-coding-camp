@@ -7,6 +7,7 @@ using API.Repositories.Interface;
 using API.Services;
 using API.ViewModels;
 using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -54,7 +55,7 @@ namespace API.Controllers
         }
 
         [HttpPost("register/client")]
-        public ActionResult RegisterClient(RegisterClientVM register)
+        public ActionResult RegisterClient(RegisterClientAdminVM register)
         {
             var password = Hash.HashPassword(register.Password);
             var dbparams = new DynamicParameters();
@@ -65,6 +66,21 @@ namespace API.Controllers
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterClient]", dbparams, commandType: CommandType.StoredProcedure));
             return Ok(new { result = result, message = "Successfully registered."});
+
+        }
+
+        [HttpPost("register/admin")]
+        public ActionResult RegisterAdmin(RegisterClientAdminVM register)
+        {
+            var password = Hash.HashPassword(register.Password);
+            var dbparams = new DynamicParameters();
+            dbparams.Add("Name", register.Name, DbType.String);
+            dbparams.Add("Email", register.Email, DbType.String);
+            dbparams.Add("Password", password, DbType.String);
+            dbparams.Add("Phone", register.Phone, DbType.String);
+
+            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterAdmin]", dbparams, commandType: CommandType.StoredProcedure));
+            return Ok(new { result = result, message = "Successfully registered." });
 
         }
 
@@ -96,6 +112,7 @@ namespace API.Controllers
 
         }
 
+        [Authorize]
         [HttpPost("Change-Password")]
         public ActionResult ChangePassword()
         {
@@ -146,6 +163,7 @@ namespace API.Controllers
 
         }
 
+        [Authorize]
         [HttpPost("Reset-Password")]
         public ActionResult ResetPassword()
         {

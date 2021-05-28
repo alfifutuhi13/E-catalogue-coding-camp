@@ -117,7 +117,7 @@ namespace API.Controllers
             {
                 string passwordHash = Hash.HashPassword(newPassword);
                 foundAccount.Password = passwordHash;
-                var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok((new { message = "Password has been successfully updated." }) : BadRequest((new { message = "Password can't be updated." });
+                var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok(new { message = "Password has been successfully updated." }) : BadRequest(new { message = "Password can't be updated." });
                 return result;
             }
         }

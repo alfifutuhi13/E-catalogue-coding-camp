@@ -49,7 +49,7 @@ namespace API.Controllers
             dbparams.Add("JobRoleId", register.JobRoleId, DbType.String);
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterCandidate]", dbparams, commandType: CommandType.StoredProcedure));
-            return Ok(new { result = result, message = "Successfully registered"});
+            return Ok();
 
         }
 
@@ -64,7 +64,7 @@ namespace API.Controllers
             dbparams.Add("Phone", register.Phone, DbType.String);
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterClient]", dbparams, commandType: CommandType.StoredProcedure));
-            return Ok(new { result = result, message = "Successfully registered"});
+            return Ok();
 
         }
 
@@ -86,7 +86,7 @@ namespace API.Controllers
                     return Ok(new { token });
                 }
 
-                return Unauthorized(new { message = "Failed to log in, your email or password Wrong" });
+                return Unauthorized("Failed to log in, your email or password Wrong");
             }
             catch (Exception e)
             {
@@ -107,17 +107,17 @@ namespace API.Controllers
 
             if (foundAccount == null || !Hash.ValidatePassword(currentPassword, foundAccount.Password))
             {
-                return NotFound( new { message = "Your email or your current password is incorrect" } );
+                return NotFound("Your email or your current password is incorrect");
             }
             else if (newPassword != confirmPassword)
             {
-                return BadRequest( new { message = "New Password & Confirm Password Must Same" });
+                return BadRequest("New password & confirmation password should be identical");
             }
             else
             {
                 string passwordHash = Hash.HashPassword(newPassword);
                 foundAccount.Password = passwordHash;
-                var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok( new { message = "Password has been updated." }) : BadRequest( new { message = "Password can't be updated." });
+                var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok("Password has been successfully updated.") : BadRequest("Password can't be updated.");
                 return result;
             }
         }
@@ -129,7 +129,7 @@ namespace API.Controllers
             var foundAccount = context.Accounts.Where(account => account.User.Email == headerEmail).FirstOrDefault();
             if (foundAccount == null)
             {
-                return NotFound(new { message = "Email Not Found" });
+                return NotFound("Email Not Found");
             }
             else
             {
@@ -140,7 +140,7 @@ namespace API.Controllers
 
                 var sendEmail = new SendEmail(context);
                 sendEmail.SendForgotPassword(url, token, foundUser);
-                return Ok(new { message = "Please Check Your Email" });
+                return Ok("Please Check Your Email");
 
             }
 
@@ -162,19 +162,19 @@ namespace API.Controllers
 
                 if (foundAccount == null)
                 {
-                    return NotFound(new { message = "Email Not Found" });
+                    return NotFound("Email not found");
                 }
                 else
                 {
                     string passwordHash = Hash.HashPassword(newPassword);
                     foundAccount.Password = passwordHash;
-                    var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok(new { message = "Password has been updated." }) : BadRequest(new { message = "Password can't be updated." });
+                    var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok("Password has been updated.") : BadRequest("Password can't be updated.");
                     return result;
                 }
             }
             else
             {
-                return BadRequest(new { message = "New Password & Confirm Password Must Same" });
+                return BadRequest("New password & confirmation password should be identical");
             }
         }  
     } 

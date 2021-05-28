@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "+0U018GJL6rwslTIa9sPjwlTWYy/Kgae1uDwkxsen2b29SHVi6P1x3rfkslP1x0o/x2I6hCk6FI4nFZKniBd7w==",
   "success": true,
-  "projectFilePath": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alfat\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\alfat\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",

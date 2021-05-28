@@ -7,6 +7,7 @@ using API.Repositories.Interface;
 using API.Services;
 using API.ViewModels;
 using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -96,6 +97,7 @@ namespace API.Controllers
 
         }
 
+        [Authorize]
         [HttpPost("Change-Password")]
         public ActionResult ChangePassword()
         {
@@ -146,6 +148,7 @@ namespace API.Controllers
 
         }
 
+        [Authorize]
         [HttpPost("Reset-Password")]
         public ActionResult ResetPassword()
         {

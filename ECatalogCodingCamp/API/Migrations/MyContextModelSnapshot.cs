@@ -39,17 +39,19 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClientId")
+                    b.Property<int>("CandidateId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("CandidateId")
+                        .IsUnique();
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("TB_T_Book");
                 });
@@ -97,12 +99,23 @@ namespace API.Migrations
                     b.ToTable("TB_M_CV");
                 });
 
-            modelBuilder.Entity("API.Models.Client", b =>
+            modelBuilder.Entity("API.Models.Candidate", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobRole")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -111,9 +124,12 @@ namespace API.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StatusBook")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TB_M_Client");
+                    b.ToTable("TB_M_Candidate");
                 });
 
             modelBuilder.Entity("API.Models.Education", b =>
@@ -393,13 +409,17 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Book", b =>
                 {
-                    b.HasOne("API.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
+                    b.HasOne("API.Models.Candidate", "Candidate")
+                        .WithOne("Book")
+                        .HasForeignKey("API.Models.Book", "CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Models.User", "User")
-                        .WithMany("Books")
-                        .HasForeignKey("UserId");
+                        .WithOne("Book")
+                        .HasForeignKey("API.Models.Book", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Models.CV", b =>
@@ -433,15 +453,6 @@ namespace API.Migrations
                     b.HasOne("API.Models.Work", null)
                         .WithMany("CVs")
                         .HasForeignKey("WorkId");
-                });
-
-            modelBuilder.Entity("API.Models.Client", b =>
-                {
-                    b.HasOne("API.Models.User", "User")
-                        .WithOne("Client")
-                        .HasForeignKey("API.Models.Client", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Models.Education", b =>

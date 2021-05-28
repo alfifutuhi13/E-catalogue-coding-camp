@@ -39,7 +39,7 @@ namespace API
             services.AddScoped<IGenericDapper, GeneralDapper>();
             services.AddScoped<AccountRepository>();
             services.AddScoped<BookRepository>();
-            services.AddScoped<ClientRepository>();
+            services.AddScoped<CandidateRepository>();
             services.AddScoped<CVRepository>();
             services.AddScoped<EducationRepository>();
             services.AddScoped<InterviewRequestRepository>();

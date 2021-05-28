@@ -49,7 +49,7 @@ namespace API.Controllers
             dbparams.Add("JobRoleId", register.JobRoleId, DbType.String);
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterCandidate]", dbparams, commandType: CommandType.StoredProcedure));
-            return Ok();
+            return Ok(new { result = result, message = "Successfully registered." });
 
         }
 
@@ -64,7 +64,7 @@ namespace API.Controllers
             dbparams.Add("Phone", register.Phone, DbType.String);
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterClient]", dbparams, commandType: CommandType.StoredProcedure));
-            return Ok();
+            return Ok(new { result = result, message = "Successfully registered."});
 
         }
 
@@ -107,11 +107,11 @@ namespace API.Controllers
 
             if (foundAccount == null || !Hash.ValidatePassword(currentPassword, foundAccount.Password))
             {
-                return NotFound("Your email or your current password is incorrect");
+                return NotFound(new { message = "Your email or your current password is incorrect" });
             }
             else if (newPassword != confirmPassword)
             {
-                return BadRequest("New password & confirmation password should be identical");
+                return BadRequest(new { message = "New password & confirmation password should be identical" });
             }
             else
             {
@@ -129,7 +129,7 @@ namespace API.Controllers
             var foundAccount = context.Accounts.Where(account => account.User.Email == headerEmail).FirstOrDefault();
             if (foundAccount == null)
             {
-                return NotFound("Email Not Found");
+                return NotFound(new { message = "Email Not Found" });
             }
             else
             {
@@ -140,7 +140,7 @@ namespace API.Controllers
 
                 var sendEmail = new SendEmail(context);
                 sendEmail.SendForgotPassword(url, token, foundUser);
-                return Ok("Please Check Your Email");
+                return Ok(new { message = "Please Check Your Email" });
 
             }
 
@@ -162,19 +162,19 @@ namespace API.Controllers
 
                 if (foundAccount == null)
                 {
-                    return NotFound("Email not found");
+                    return NotFound(new { message = "Email not found" });
                 }
                 else
                 {
                     string passwordHash = Hash.HashPassword(newPassword);
                     foundAccount.Password = passwordHash;
-                    var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok("Password has been updated.") : BadRequest("Password can't be updated.");
+                    var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok(new { message = "Password has been updated." }) : BadRequest(new { message = "Password can't be updated." });
                     return result;
                 }
             }
             else
             {
-                return BadRequest("New password & confirmation password should be identical");
+                return BadRequest(new { message = "New password & confirmation password should be identical" });
             }
         }  
     } 

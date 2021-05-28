@@ -106,6 +106,3 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.csprojAssemblyReference.cache
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\EntityFramework.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.CodeDom.dll

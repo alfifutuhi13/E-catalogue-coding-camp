@@ -105,4 +105,3 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.csprojAssemblyReference.cache

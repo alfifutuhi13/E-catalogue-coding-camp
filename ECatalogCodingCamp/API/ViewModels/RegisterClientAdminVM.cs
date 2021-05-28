@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.ViewModels
 {
-    public class RegisterClientVM
+    public class RegisterClientAdminVM
     {
         [Required(ErrorMessage = "Name should not be empty"), MaxLength(255, ErrorMessage = "Maximum 255 characters")]
         public string Name { get; set; }

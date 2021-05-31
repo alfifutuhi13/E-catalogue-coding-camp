@@ -166,8 +166,8 @@ namespace API.Migrations
                     b.Property<long>("BidSalary")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Schedule")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

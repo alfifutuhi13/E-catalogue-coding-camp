@@ -113,13 +113,10 @@ namespace API.Controllers
         }
 
         [Authorize]
-        [HttpPost("Change-Password")]
+        [HttpPut("Change-Password")]
         public ActionResult ChangePassword(ChangePasswordVM changePasswordVM)
         {
-            //string email = Request.Headers["Email"].ToString();
-            //string currentPassword = Request.Headers["CurrentPassword"].ToString();
-            //string newPassword = Request.Headers["NewPassword"].ToString();
-            //string confirmPassword = Request.Headers["ConfirmPassword"].ToString();
+            
             var foundAccount = context.Accounts.Where(account => account.User.Email == changePasswordVM.Email).FirstOrDefault();
 
             if (foundAccount == null || !Hash.ValidatePassword(changePasswordVM.CurrentPassword, foundAccount.Password))
@@ -164,7 +161,7 @@ namespace API.Controllers
         }
 
         [Authorize]
-        [HttpPost("Reset-Password")]
+        [HttpPut("Reset-Password")]
         public ActionResult ResetPassword(ChangePasswordVM changePasswordVM)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

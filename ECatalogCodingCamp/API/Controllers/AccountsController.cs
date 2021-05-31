@@ -114,25 +114,25 @@ namespace API.Controllers
 
         [Authorize]
         [HttpPost("Change-Password")]
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(ChangePasswordVM changePasswordVM)
         {
-            string email = Request.Headers["Email"].ToString();
-            string currentPassword = Request.Headers["CurrentPassword"].ToString();
-            string newPassword = Request.Headers["NewPassword"].ToString();
-            string confirmPassword = Request.Headers["ConfirmPassword"].ToString();
-            var foundAccount = context.Accounts.Where(account => account.User.Email == email).FirstOrDefault();
+            //string email = Request.Headers["Email"].ToString();
+            //string currentPassword = Request.Headers["CurrentPassword"].ToString();
+            //string newPassword = Request.Headers["NewPassword"].ToString();
+            //string confirmPassword = Request.Headers["ConfirmPassword"].ToString();
+            var foundAccount = context.Accounts.Where(account => account.User.Email == changePasswordVM.Email).FirstOrDefault();
 
-            if (foundAccount == null || !Hash.ValidatePassword(currentPassword, foundAccount.Password))
+            if (foundAccount == null || !Hash.ValidatePassword(changePasswordVM.CurrentPassword, foundAccount.Password))
             {
                 return NotFound(new { message = "Your email or your current password is incorrect" });
             }
-            else if (newPassword != confirmPassword)
+            else if (changePasswordVM.NewPassword != changePasswordVM.ConfirmPassword)
             {
                 return BadRequest(new { message = "New password & confirmation password should be identical" });
             }
             else
             {
-                string passwordHash = Hash.HashPassword(newPassword);
+                string passwordHash = Hash.HashPassword(changePasswordVM.NewPassword);
                 foundAccount.Password = passwordHash;
                 var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok(new { message = "Password has been successfully updated." }) : BadRequest(new { message = "Password can't be updated." });
                 return result;
@@ -140,10 +140,10 @@ namespace API.Controllers
         }
 
         [HttpPost("Forgot-Password")]
-        public ActionResult ForgotPassword()
+        public ActionResult ForgotPassword(ForgotPasswordVM forgotPasswordVM)
         {
-            string headerEmail = Request.Headers["Email"].ToString();
-            var foundAccount = context.Accounts.Where(account => account.User.Email == headerEmail).FirstOrDefault();
+            //string headerEmail = Request.Headers["Email"].ToString();
+            var foundAccount = context.Accounts.Where(account => account.User.Email == forgotPasswordVM.Email).FirstOrDefault();
             if (foundAccount == null)
             {
                 return NotFound(new { message = "Email Not Found" });
@@ -152,7 +152,7 @@ namespace API.Controllers
             {
                 var foundUser = context.Users.Where(user => user.Id == foundAccount.Id).FirstOrDefault();
                 var jwt = new JwtService(_config);
-                string token = jwt.GenerateSecurityForgotToken(headerEmail);
+                string token = jwt.GenerateSecurityForgotToken(forgotPasswordVM.Email);
                 string url = "https://localhost:44321/api/Accounts/Reset-Password?Token=";
 
                 var sendEmail = new SendEmail(context);
@@ -165,15 +165,15 @@ namespace API.Controllers
 
         [Authorize]
         [HttpPost("Reset-Password")]
-        public ActionResult ResetPassword()
+        public ActionResult ResetPassword(ChangePasswordVM changePasswordVM)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
 
-            var newPassword = Request.Headers["NewPassword"].ToString();
-            var confirmPassword = Request.Headers["ConfirmPassword"].ToString();
+            //var newPassword = Request.Headers["NewPassword"].ToString();
+            //var confirmPassword = Request.Headers["ConfirmPassword"].ToString();
 
-            if (newPassword == confirmPassword)
+            if (changePasswordVM.NewPassword == changePasswordVM.ConfirmPassword)
             {
                 var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
                 var foundAccount = context.Accounts.Where(account => account.User.Email == getEmail).FirstOrDefault();
@@ -184,7 +184,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    string passwordHash = Hash.HashPassword(newPassword);
+                    string passwordHash = Hash.HashPassword(changePasswordVM.NewPassword);
                     foundAccount.Password = passwordHash;
                     var result = accountRepository.Put(foundAccount) > 0 ? (ActionResult)Ok(new { message = "Password has been updated." }) : BadRequest(new { message = "Password can't be updated." });
                     return result;

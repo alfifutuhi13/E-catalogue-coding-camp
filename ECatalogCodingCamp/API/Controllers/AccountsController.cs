@@ -36,6 +36,25 @@ namespace API.Controllers
             _dapper = dapper;
         }
 
+        [HttpPost("register")]
+        public ActionResult Register(RegisterVM register)
+        {
+            var password = Hash.HashPassword(register.Password);
+            var dbparams = new DynamicParameters();
+            dbparams.Add("Name", register.Name, DbType.String);
+            dbparams.Add("Email", register.Email, DbType.String);
+            dbparams.Add("Password", password, DbType.String);
+            dbparams.Add("BirthDate", register.BirthDate, DbType.String);
+            dbparams.Add("Gender", register.Gender, DbType.String);
+            dbparams.Add("Phone", register.Phone, DbType.String);
+            dbparams.Add("JobRoleId", register.JobRoleId, DbType.Int32);
+            dbparams.Add("RoleId", register.RoleId, DbType.Int32);
+
+            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_Register]", dbparams, commandType: CommandType.StoredProcedure));
+            return Ok(new { result = result, message = "Successfully registered." });
+
+        }
+
         [HttpPost("register/candidate")]
         public ActionResult RegisterCandidate(RegisterCandidateVM register)
         {

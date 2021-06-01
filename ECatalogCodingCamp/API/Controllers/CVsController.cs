@@ -53,7 +53,6 @@ namespace API.Controllers
             var paramsGetSkillId = new DynamicParameters();
             paramsGetSkillId.Add("Name", insert.SkillName, DbType.String);
             var SkillId = Task.FromResult(_dapper.Get<int>("[dbo].[SP_GetInsert_TB_M_Skill]", paramsGetSkillId, commandType: CommandType.StoredProcedure));
-
             var paramsGetWorkId = new DynamicParameters();
             paramsGetWorkId.Add("Name", insert.WorkName, DbType.String);
             var WorkId = Task.FromResult(_dapper.Get<int>("[dbo].[SP_GetInsert_TB_M_Work]", paramsGetWorkId, commandType: CommandType.StoredProcedure));

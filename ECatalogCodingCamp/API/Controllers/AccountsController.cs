@@ -44,7 +44,7 @@ namespace API.Controllers
             dbparams.Add("Name", register.Name, DbType.String);
             dbparams.Add("Email", register.Email, DbType.String);
             dbparams.Add("Password", password, DbType.String);
-            dbparams.Add("BirthDate", register.BirthDate, DbType.DateTime);
+            dbparams.Add("BirthDate", register.BirthDate, DbType.String);
             dbparams.Add("Gender", register.Gender, DbType.String);
             dbparams.Add("Phone", register.Phone, DbType.String);
             dbparams.Add("JobRoleId", register.JobRoleId, DbType.Int32);

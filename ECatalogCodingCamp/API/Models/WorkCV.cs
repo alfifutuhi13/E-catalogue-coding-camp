@@ -10,7 +10,7 @@ namespace API.Models
     public class WorkCV
     {
         public int Id { get; set; }
-        public ICollection<CV> CVs { get; set; }
-        public ICollection<Work> Works { get; set; }
+        public CV CV { get; set; }
+        public Work Work { get; set; }
     }
 }

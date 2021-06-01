@@ -13,9 +13,9 @@ namespace API.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public OrganizationCV OrganizationCV { get; set; }
-        public SkillCV SkillCV { get; set; }
-        public WorkCV WorkCV { get; set; }
+        public ICollection<OrganizationCV> OrganizationCVs { get; set; }
+        public ICollection<SkillCV> SkillCVs { get; set; }
+        public ICollection<WorkCV> WorkCVs { get; set; }
         public User User { get; set; }
     }
 }

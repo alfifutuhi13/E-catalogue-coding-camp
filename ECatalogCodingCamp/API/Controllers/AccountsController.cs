@@ -55,39 +55,6 @@ namespace API.Controllers
 
         }
 
-        [HttpPost("register/candidate")]
-        public ActionResult RegisterCandidate(RegisterCandidateVM register)
-        {
-            var password = Hash.HashPassword(register.Password);
-            var dbparams = new DynamicParameters();
-            dbparams.Add("Name", register.Name, DbType.String);
-            dbparams.Add("Email", register.Email, DbType.String);
-            dbparams.Add("Password", password, DbType.String);
-            dbparams.Add("BirthDate", register.BirthDate, DbType.String);
-            dbparams.Add("Gender", register.Gender, DbType.String);
-            dbparams.Add("Phone", register.Phone, DbType.String);
-            dbparams.Add("JobRoleId", register.JobRoleId, DbType.String);
-
-            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterCandidate]", dbparams, commandType: CommandType.StoredProcedure));
-            return Ok(new { result = result, message = "Successfully registered." });
-
-        }
-
-        [HttpPost("register/client")]
-        public ActionResult RegisterClient(RegisterClientAdminVM register)
-        {
-            var password = Hash.HashPassword(register.Password);
-            var dbparams = new DynamicParameters();
-            dbparams.Add("Name", register.Name, DbType.String);
-            dbparams.Add("Email", register.Email, DbType.String);
-            dbparams.Add("Password", password, DbType.String);
-            dbparams.Add("Phone", register.Phone, DbType.String);
-
-            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_RegisterClient]", dbparams, commandType: CommandType.StoredProcedure));
-            return Ok(new { result = result, message = "Successfully registered."});
-
-        }
-
         [HttpPost("register/admin")]
         public ActionResult RegisterAdmin(RegisterClientAdminVM register)
         {
@@ -185,9 +152,6 @@ namespace API.Controllers
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
-
-            //var newPassword = Request.Headers["NewPassword"].ToString();
-            //var confirmPassword = Request.Headers["ConfirmPassword"].ToString();
 
             if (changePasswordVM.NewPassword == changePasswordVM.ConfirmPassword)
             {

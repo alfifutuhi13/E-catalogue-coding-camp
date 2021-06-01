@@ -13,7 +13,7 @@ namespace API.Models
         [Key]
         public int Id { get; set; }
         public long BidSalary { get; set; }
-        public string Email { get; set; }
+        public DateTime Schedule { get; set; }
         public Book Book { get; set; }
     }
 }

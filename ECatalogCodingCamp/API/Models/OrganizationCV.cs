@@ -10,8 +10,8 @@ namespace API.Models
     public class OrganizationCV
     {
         public int Id { get; set; }
-        public ICollection<CV> CVs { get; set; }
-        public ICollection<Organization> Organizations { get; set; }
+        public CV CV { get; set; }
+        public Organization Organization { get; set; }
 
     }
 }

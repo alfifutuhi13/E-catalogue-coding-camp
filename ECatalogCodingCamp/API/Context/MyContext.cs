@@ -54,34 +54,34 @@ namespace API.Context
                 .HasForeignKey<Education>(education => education.Id);
 
             //SkillCV-CV
-            modelBuilder.Entity<CV>()
-                .HasOne(cv => cv.SkillCV)
-                .WithMany(skill => skill.CVs);
+            modelBuilder.Entity<SkillCV>()
+                .HasOne(skillcv => skillcv.CV)
+                .WithMany(cv => cv.SkillCVs);
 
             //SkillCV-Skill
-            modelBuilder.Entity<Skill>()
-                .HasOne(skill => skill.SkillCV)
-                .WithMany(skillcv => skillcv.Skills);
+            modelBuilder.Entity<SkillCV>()
+                .HasOne(skillcv => skillcv.Skill)
+                .WithMany(skill => skill.SkillCVs);
 
             //OrganizationCV-CV
-            modelBuilder.Entity<CV>()
-                .HasOne(cv => cv.OrganizationCV)
-                .WithMany(organizationcv => organizationcv.CVs);
+            modelBuilder.Entity<OrganizationCV>()
+                .HasOne(organizationcv => organizationcv.CV)
+                .WithMany(cv => cv.OrganizationCVs);
 
             //OrganizationCV-Organization
-            modelBuilder.Entity<Organization>()
-                .HasOne(organization => organization.OrganizationCV)
-                .WithMany(organizationcv => organizationcv.Organizations);
+            modelBuilder.Entity<OrganizationCV>()
+                .HasOne(organizationcv => organizationcv.Organization)
+                .WithMany(organization => organization.OrganizationCVs);
 
             //WorkCV-CV
-            modelBuilder.Entity<CV>()
-                .HasOne(cv => cv.WorkCV)
-                .WithMany(workcv => workcv.CVs);
+            modelBuilder.Entity<WorkCV>()
+                .HasOne(workcv => workcv.CV)
+                .WithMany(cv => cv.WorkCVs);
 
             //WorkCV-Work
-            modelBuilder.Entity<Work>()
-                .HasOne(work => work.WorkCV)
-                .WithMany(workcv => workcv.Works);
+            modelBuilder.Entity<WorkCV>()
+                .HasOne(workcv => workcv.Work)
+                .WithMany(work => work.WorkCVs);
 
             //User-CV
             modelBuilder.Entity<User>()

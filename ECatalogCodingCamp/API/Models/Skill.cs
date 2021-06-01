@@ -13,7 +13,6 @@ namespace API.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<CV> CVs { get; set; }
-        public SkillCV SkillCV { get; set; }
+        public ICollection<SkillCV> SkillCVs { get; set; }
     }
 }

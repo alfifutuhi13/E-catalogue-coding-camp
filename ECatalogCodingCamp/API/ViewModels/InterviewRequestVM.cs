@@ -7,6 +7,7 @@ namespace API.ViewModels
 {
     public class InterviewRequestVM
     {
+        public int CandidateId { get; set; }
         public long BidSalary { get; set; }
         public DateTime Schedule { get; set; }
     }

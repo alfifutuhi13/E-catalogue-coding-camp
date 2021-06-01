@@ -64,37 +64,7 @@ namespace API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrganizationCVId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OrganizationId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SkillCVId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SkillId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WorkCVId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WorkId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OrganizationCVId");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.HasIndex("SkillCVId");
-
-                    b.HasIndex("SkillId");
-
-                    b.HasIndex("WorkCVId");
-
-                    b.HasIndex("WorkId");
 
                     b.ToTable("TB_M_CV");
                 });
@@ -214,15 +184,10 @@ namespace API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrganizationCVId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RoleOrganization")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrganizationCVId");
 
                     b.ToTable("TB_M_Organization");
                 });
@@ -234,7 +199,17 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CVId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrganizationId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CVId");
+
+                    b.HasIndex("OrganizationId");
 
                     b.ToTable("TB_T_OrganizationCV");
                 });
@@ -282,12 +257,7 @@ namespace API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SkillCVId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SkillCVId");
 
                     b.ToTable("TB_M_Skill");
                 });
@@ -299,7 +269,17 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CVId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SkillId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CVId");
+
+                    b.HasIndex("SkillId");
 
                     b.ToTable("TB_T_SkillCV");
                 });
@@ -376,12 +356,7 @@ namespace API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WorkCVId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WorkCVId");
 
                     b.ToTable("TB_M_Work");
                 });
@@ -393,7 +368,17 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CVId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WorkId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CVId");
+
+                    b.HasIndex("WorkId");
 
                     b.ToTable("TB_T_WorkCV");
                 });
@@ -429,30 +414,6 @@ namespace API.Migrations
                         .HasForeignKey("API.Models.CV", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("API.Models.OrganizationCV", "OrganizationCV")
-                        .WithMany("CVs")
-                        .HasForeignKey("OrganizationCVId");
-
-                    b.HasOne("API.Models.Organization", null)
-                        .WithMany("CVs")
-                        .HasForeignKey("OrganizationId");
-
-                    b.HasOne("API.Models.SkillCV", "SkillCV")
-                        .WithMany("CVs")
-                        .HasForeignKey("SkillCVId");
-
-                    b.HasOne("API.Models.Skill", null)
-                        .WithMany("CVs")
-                        .HasForeignKey("SkillId");
-
-                    b.HasOne("API.Models.WorkCV", "WorkCV")
-                        .WithMany("CVs")
-                        .HasForeignKey("WorkCVId");
-
-                    b.HasOne("API.Models.Work", null)
-                        .WithMany("CVs")
-                        .HasForeignKey("WorkId");
                 });
 
             modelBuilder.Entity("API.Models.Education", b =>
@@ -481,18 +442,26 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Models.Organization", b =>
+            modelBuilder.Entity("API.Models.OrganizationCV", b =>
                 {
-                    b.HasOne("API.Models.OrganizationCV", "OrganizationCV")
-                        .WithMany("Organizations")
-                        .HasForeignKey("OrganizationCVId");
+                    b.HasOne("API.Models.CV", "CV")
+                        .WithMany("OrganizationCVs")
+                        .HasForeignKey("CVId");
+
+                    b.HasOne("API.Models.Organization", "Organization")
+                        .WithMany("OrganizationCVs")
+                        .HasForeignKey("OrganizationId");
                 });
 
-            modelBuilder.Entity("API.Models.Skill", b =>
+            modelBuilder.Entity("API.Models.SkillCV", b =>
                 {
-                    b.HasOne("API.Models.SkillCV", "SkillCV")
-                        .WithMany("Skills")
-                        .HasForeignKey("SkillCVId");
+                    b.HasOne("API.Models.CV", "CV")
+                        .WithMany("SkillCVs")
+                        .HasForeignKey("CVId");
+
+                    b.HasOne("API.Models.Skill", "Skill")
+                        .WithMany("SkillCVs")
+                        .HasForeignKey("SkillId");
                 });
 
             modelBuilder.Entity("API.Models.User", b =>
@@ -506,11 +475,15 @@ namespace API.Migrations
                         .HasForeignKey("RoleId");
                 });
 
-            modelBuilder.Entity("API.Models.Work", b =>
+            modelBuilder.Entity("API.Models.WorkCV", b =>
                 {
-                    b.HasOne("API.Models.WorkCV", "WorkCV")
-                        .WithMany("Works")
-                        .HasForeignKey("WorkCVId");
+                    b.HasOne("API.Models.CV", "CV")
+                        .WithMany("WorkCVs")
+                        .HasForeignKey("CVId");
+
+                    b.HasOne("API.Models.Work", "Work")
+                        .WithMany("WorkCVs")
+                        .HasForeignKey("WorkId");
                 });
 #pragma warning restore 612, 618
         }

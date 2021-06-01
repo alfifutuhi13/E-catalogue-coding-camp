@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Client,Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class InterviewRequestsController : BaseController<InterviewRequest, InterviewRequestRepository, int>

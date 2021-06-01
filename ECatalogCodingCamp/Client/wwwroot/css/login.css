@@ -1,0 +1,15 @@
+﻿.container {
+    width: 50%;
+    margin-top: 9%;
+    padding: 30px;
+}
+
+.login {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+.login-button {
+    width: 100%;
+}

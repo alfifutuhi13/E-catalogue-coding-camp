@@ -22,5 +22,10 @@ namespace Client.Controllers
         {
             return View("Views/Login/Forgot.cshtml");
         }
+        
+        public IActionResult Reset()
+        {
+            return View("Views/Login/Reset.cshtml");
+        }
     }
 }

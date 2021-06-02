@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewData["Title"] = "Login Page";
+}
+
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="img/logo.jpg" alt="bootstrap 4 login page">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">Register</h4>
+                        <form method="POST" class="my-login-validation" novalidate="">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input id="name" type="text" class="form-control" name="name" required autofocus>
+                                <div class="invalid-feedback">
+                                    What's your name?
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">E-Mail Address</label>
+                                <input id="email" type="email" class="form-control" name="email" required>
+                                <div class="invalid-feedback">
+                                    Your email is invalid
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" type="password" class="form-control" name="password" required
+                                       data-eye>
+                                <div class="invalid-feedback">
+                                    Password is required
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthdate">Birth Date</label>
+                                <input id="birthdate" type="date" class="form-control" name="birthdate" required
+                                       data-eye>
+                                <div class="invalid-feedback">
+                                    Birthdate is required
+                                </div>
+                            </div>
+
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <label class="col-form-label">Gender</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="male"
+                                                   value="Pria" required>
+                                            <label class="form-check-label" for="male">
+                                                Male
+                                            </label>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Choose Gender.
+                                            </div>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="female"
+                                                   value="Wanita" required>
+                                            <label class="form-check-label" for="female">
+                                                Female
+                                            </label>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Choose Gender.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input id="phone" type="number" class="form-control" name="phone" required data-eye>
+                                <div class="invalid-feedback">
+                                    phone is required
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dropdownMenuButton">Job Role</label>
+                                <select class="dropdown" id="filterId">
+                                    <option value="1" selected="selected">Front End Developer</option>
+                                    <option value="2" selected="selected">Back End Developer</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    job role is required
+                                </div>
+                            </div>
+
+                            <div class="form-group m-0">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Register
+                                </button>
+                            </div>
+                            <div class="mt-4 text-center">
+                                Already have an account? <a href="index.html">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer">
+                    Copyright &copy; 2017 &mdash; Your Company
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

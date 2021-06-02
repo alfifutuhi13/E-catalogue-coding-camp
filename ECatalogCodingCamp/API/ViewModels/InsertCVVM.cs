@@ -25,10 +25,5 @@ namespace API.ViewModels
     {
         public string WorkName { get; set; }
     }
-    public class Work
-    {
-        public int WorkId { get; set; }
-        public string workname { get; set; }
-    }
 }
 

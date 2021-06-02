@@ -10,7 +10,17 @@ namespace Client.Controllers
     {
         public IActionResult Index()
         {
-            return View("Views/Login/Index.cshtml");
+            return View("Views/Login/Login.cshtml");
+        }
+        
+        public IActionResult Register()
+        {
+            return View("Views/Login/Register.cshtml");
+        }
+        
+        public IActionResult Forgot()
+        {
+            return View("Views/Login/Register.cshtml");
         }
     }
 }

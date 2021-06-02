@@ -451,7 +451,8 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.Organization", "Organization")
                         .WithMany("OrganizationCVs")
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("API.Models.SkillCV", b =>
@@ -463,7 +464,8 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.Skill", "Skill")
                         .WithMany("SkillCVs")
-                        .HasForeignKey("SkillId");
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("API.Models.User", b =>
@@ -486,7 +488,8 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.Work", "Work")
                         .WithMany("WorkCVs")
-                        .HasForeignKey("WorkId");
+                        .HasForeignKey("WorkId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

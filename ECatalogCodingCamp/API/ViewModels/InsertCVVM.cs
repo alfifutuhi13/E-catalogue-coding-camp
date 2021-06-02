@@ -7,11 +7,6 @@ namespace API.ViewModels
 {
     public class InsertCVVM
     {
-        //public string OrganizationName { get; set; }
-        //public string RoleOrganization { get; set; }
-        //public string SkillName { get; set; }
-        //public string WorkName { get; set; }
-
         public List<Organization> Organizations { get; set; }
         public List<Skill> Skills { get; set; }
         public List<Work> Works { get; set; }
@@ -19,14 +14,16 @@ namespace API.ViewModels
 
     public class Organization
     {
-        public int OrganizationId { get; set; }
         public string OrganizationName { get; set; }
         public string RoleOrganization { get; set; }
     }
     public class Skill
     {
-        public int SkillId { get; set; }
         public string SkillName { get; set; }
+    }
+    public class Work
+    {
+        public string WorkName { get; set; }
     }
     public class Work
     {
@@ -34,3 +31,4 @@ namespace API.ViewModels
         public string workname { get; set; }
     }
 }
+

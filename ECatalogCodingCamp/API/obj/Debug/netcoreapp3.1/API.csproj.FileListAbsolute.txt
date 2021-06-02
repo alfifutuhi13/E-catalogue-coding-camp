@@ -113,3 +113,4 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\EntityFramework.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\API\obj\Debug\netcoreapp3.1\API.csprojAssemblyReference.cache

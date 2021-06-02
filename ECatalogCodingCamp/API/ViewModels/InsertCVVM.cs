@@ -7,21 +7,21 @@ namespace API.ViewModels
 {
     public class InsertCVVM
     {
-        public List<Organization> Organizations { get; set; }
-        public List<Skill> Skills { get; set; }
-        public List<Work> Works { get; set; }
+        public List<OrganizationVM> Organizations { get; set; }
+        public List<SkillVM> Skills { get; set; }
+        public List<WorkVM> Works { get; set; }
     }
 
-    public class Organization
+    public class OrganizationVM
     {
         public string OrganizationName { get; set; }
         public string RoleOrganization { get; set; }
     }
-    public class Skill
+    public class SkillVM
     {
         public string SkillName { get; set; }
     }
-    public class Work
+    public class WorkVM
     {
         public string WorkName { get; set; }
     }

@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label for="password">
                                     Password
-                                    <a href="forgot.html" class="float-right">
+                                    <a asp-area="" asp-controller="login" asp-action="Forgot" class="float-right">
                                         Forgot Password?
                                     </a>
                                 </label>
@@ -43,13 +43,10 @@
                                 </button>
                             </div>
                             <div class="mt-4 text-center">
-                                Don't have an account? <a href="register.html">Create One</a>
+                                Don't have an account? <a asp-area="" asp-controller="login" asp-action="Register">Create One</a>
                             </div>
                         </form>
                     </div>
-                </div>
-                <div class="footer">
-                    Copyright &copy; 2021 &mdash; E-Catalogue Coding Camp
                 </div>
             </div>
         </div>

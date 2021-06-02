@@ -20,7 +20,7 @@ namespace Client.Controllers
         
         public IActionResult Forgot()
         {
-            return View("Views/Login/Register.cshtml");
+            return View("Views/Login/Forgot.cshtml");
         }
     }
 }

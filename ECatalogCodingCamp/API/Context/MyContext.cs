@@ -56,7 +56,8 @@ namespace API.Context
             //SkillCV-CV
             modelBuilder.Entity<SkillCV>()
                 .HasOne(skillcv => skillcv.CV)
-                .WithMany(cv => cv.SkillCVs);
+                .WithMany(cv => cv.SkillCVs)
+                .OnDelete(DeleteBehavior.Cascade);
 
             //SkillCV-Skill
             modelBuilder.Entity<SkillCV>()
@@ -66,7 +67,8 @@ namespace API.Context
             //OrganizationCV-CV
             modelBuilder.Entity<OrganizationCV>()
                 .HasOne(organizationcv => organizationcv.CV)
-                .WithMany(cv => cv.OrganizationCVs);
+                .WithMany(cv => cv.OrganizationCVs)
+                .OnDelete(DeleteBehavior.Cascade);
 
             //OrganizationCV-Organization
             modelBuilder.Entity<OrganizationCV>()
@@ -76,7 +78,8 @@ namespace API.Context
             //WorkCV-CV
             modelBuilder.Entity<WorkCV>()
                 .HasOne(workcv => workcv.CV)
-                .WithMany(cv => cv.WorkCVs);
+                .WithMany(cv => cv.WorkCVs)
+                .OnDelete(DeleteBehavior.Cascade);
 
             //WorkCV-Work
             modelBuilder.Entity<WorkCV>()

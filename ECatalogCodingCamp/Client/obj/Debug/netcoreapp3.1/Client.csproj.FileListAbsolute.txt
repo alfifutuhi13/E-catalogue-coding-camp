@@ -47,7 +47,6 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\De
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Client.pdb
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Client.Views.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Client.Views.pdb
-D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.csprojAssemblyReference.cache
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfoInputs.cache
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfo.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.csproj.CoreCompileInputs.cache

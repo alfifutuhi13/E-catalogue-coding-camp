@@ -22,5 +22,7 @@ namespace Client.Controllers
         {
             return View("Views/Login/Forgot.cshtml");
         }
+
+
     }
 }

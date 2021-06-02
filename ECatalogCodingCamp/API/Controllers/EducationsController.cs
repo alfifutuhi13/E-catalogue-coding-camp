@@ -33,7 +33,7 @@ namespace API.Controllers
         }
 
         [Authorize (Roles = "Candidate")]
-        [HttpPost("Education")]
+        [HttpPost("Insert-Education")]
         public ActionResult InsertEducation(EducationVM educationVM)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

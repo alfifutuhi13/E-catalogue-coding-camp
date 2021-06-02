@@ -32,7 +32,7 @@ namespace API.Controllers
             _dapper = dapper;
         }
 
-        [HttpPost("CV")]
+        [HttpPost("Insert/CV")]
         public ActionResult InsertCV(InsertCVVM insert)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -45,8 +45,8 @@ namespace API.Controllers
             paramsGetCVId.Add("Email", foundCandidate.Email, DbType.String);
             var CVId = Task.FromResult(_dapper.Get<int>("[dbo].[SP_GetInsertCVId]", paramsGetCVId, commandType: CommandType.StoredProcedure));
 
-            //looping
-            for (int i =0; i<insert.Organizations.Count; i++)
+            //Inserting more than one objects
+            for (int i = 0; i < insert.Organizations.Count; i++)
             {
                 var paramsGetOrganizationId = new DynamicParameters();
                 paramsGetOrganizationId.Add("Name", insert.Organizations[i].OrganizationName, DbType.String);

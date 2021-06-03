@@ -28,6 +28,14 @@ namespace Client.Controllers
         {
             return View("Views/Authentication/Forgot.cshtml");
         }
+        public IActionResult RegisterRole()
+        {
+            return View("Views/Authentication/RegisterRole.cshtml");
+        }
+        public IActionResult RegisterClient()
+        {
+            return View("Views/Authentication/RegisterClient.cshtml");
+        }
 
         public IActionResult Reset()
         {

@@ -136,7 +136,7 @@ namespace API.Controllers
                 var foundUser = context.Users.Where(user => user.Id == foundAccount.Id).FirstOrDefault();
                 var jwt = new JwtService(_config);
                 string token = jwt.GenerateSecurityForgotToken(forgotPasswordVM.Email);
-                string url = "https://localhost:44321/api/Accounts/Reset-Password?Token=";
+                string url = "https://localhost:44321/client/Athentication/ResetPassword?Token=";
 
                 var sendEmail = new SendEmail(context);
                 sendEmail.SendForgotPassword(url, token, foundUser);

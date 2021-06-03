@@ -1,0 +1,91 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewData["Title"] = "Login Page";
+}
+
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center align-items-center h-100">
+            <div class="card-wrapper">
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">Forgot Password</h4>
+                        <form method="POST" class="my-login-validation" id="myform" novalidate="">
+                            <div class="form-group">
+                                <label for="email">E-Mail Address</label>
+                                <input id="email" type="email" class="form-control" name="email" required autofocus>
+                                <div class="invalid-feedback">
+                                    Email is invalid
+                                </div>
+                                <div class="form-text text-muted">
+                                    By clicking "Reset Password" we will send a password reset link
+                                </div>
+                            </div>
+
+                            <div class="form-group m-0">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Reset Password
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(`#myform`).submit(function (event) {
+                event.preventDefault();
+                forgot();
+            });
+        })
+
+        let forgot = () => {
+            let forgotData = {
+                Email: $(`#email`).val()
+            };
+
+            $.ajax({
+                url: `ForgotPassword`,
+                type: `POST`,
+                data: forgotData,
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Please wait...',
+                        showConfirmButton: false,
+                        imageUrl: 'https://media.giphy.com/media/feN0YJbVs0fwA/giphy.gif',
+                        backdrop: `rgba(0,0,0,0.6)`
+                    })
+                },
+                success: (data) => {
+                    console.log(data)
+                    //alert(data)
+                    Swal.fire({
+                        text: 'Email has been sent to your address',
+                        icon: 'success',
+                        timer: 10000,
+                        timerProgressBar: true
+                    });
+                },
+                error: (data) => {
+                    console.log(data)
+                    //alert(data)
+                    Swal.fire({
+                        text: 'the email you send is not valid',
+                        icon: 'error',
+                        timer: 5000,
+                        timerProgressBar: true
+                    });
+                }
+            });
+        }
+
+    </script>
+
+
+}

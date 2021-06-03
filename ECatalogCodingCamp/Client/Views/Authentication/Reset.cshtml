@@ -10,7 +10,7 @@
                 <div class="card fat">
                     <div class="card-body">
                         <h4 class="card-title">Reset Password</h4>
-                        <form method="POST" class="my-login-validation" novalidate="">
+                        <form class="my-login-validation" id="myform" novalidate="">
                             <div class="form-group">
                                 <label for="new-password">New Password</label>
                                 <input id="new-password" type="password" class="form-control" name="new-password" required autofocus data-eye>
@@ -33,6 +33,10 @@
                                 </div>
                             </div>
 
+                            <div class="input-group mb-3">
+                                <input type="hidden" class="form-control" id="token" name="token" value="@ViewData["Token"]">
+                            </div>
+
                             <div class="form-group m-0">
                                 <button type="submit" class="btn btn-primary btn-block">
                                     Reset Password
@@ -48,3 +52,55 @@
         </div>
     </div>
 </section>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $('#myform').submit(function (e) {
+                e.preventDefault();
+                reset();
+            })
+        })
+        const reset = () => {
+            let dataReset = {
+                NewPassword: $("#new-password").val(),
+                ConfirmPassword: $("#confirm-password").val(),
+                Token: $("#token").val(),
+            };
+            console.log(dataReset);
+            if (dataReset.NewPassword === dataReset.ConfirmPassword) {
+                $.ajax({
+                    type: "PUT",
+                    url: "ResetPassword",
+                    data: dataReset,
+                    beforeSend: () => {
+                        Swal.fire({
+                            title: 'Please wait...',
+                            showConfirmButton: false,
+                            imageUrl: 'https://media.giphy.com/media/feN0YJbVs0fwA/giphy.gif',
+                            backdrop: `rgba(0,0,0,0.6)`
+                        })
+                    },
+                    success: (data) => {
+                        console.log(data)
+                        //alert(data)
+                        Swal.fire({
+                            text: 'Password has been reset',
+                            icon: 'success',
+                            confirmButtonText: 'Go to Login Page'
+                        }).then(result => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'https://localhost:44354/Authentication';
+                            }
+                        })
+                    },
+                    error: (data) => {
+                        console.log(data)
+                        //alert(data)
+                    }
+                });
+            }
+        }
+    </script>
+
+}

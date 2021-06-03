@@ -1,4 +1,5 @@
 ﻿using API.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -29,7 +30,13 @@ namespace Client.Controllers
 
         public IActionResult Reset()
         {
-            return View("Views/Authentication/Reset.cshtml");
+            if (Request.Query.ContainsKey("Token"))
+            {
+                var token = Request.Query["Token"].ToString();
+                ViewData["Token"] = token;
+                return View();
+            }
+            return NotFound();
         }
 
         public string Login(LoginVM login)
@@ -38,11 +45,13 @@ namespace Client.Controllers
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
                 var result = client.PostAsync("https://localhost:44321/api/Accounts/Login", stringContent).Result;
             var data = result.Content.ReadAsStringAsync().Result;
-            var token = JsonConvert.DeserializeObject(data);
+            //var token = JsonConvert.DeserializeObject(data).ToString();
+            HttpContext.Session.SetString("jwtoken", data);
             return Url.Action("Index", "Home");
 
         }
 
+        
         public IActionResult ForgotPassword(ForgotPasswordVM forgotPassword)
         {
             var client = new HttpClient();
@@ -57,12 +66,12 @@ namespace Client.Controllers
                 return BadRequest(new { result });
             }
         }
-
+        
         public IActionResult ResetPassword(ChangePasswordVM resetPassword)
         {
             var client = new HttpClient();
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(resetPassword), Encoding.UTF8, "application/json");
-            var result = client.PostAsync("https://localhost:44321/api/Accounts/Reset-Password", stringContent).Result;
+            var result = client.PutAsync("https://localhost:44321/api/Accounts/Reset-Password", stringContent).Result;
             if (result.IsSuccessStatusCode)
             {
                 return Ok(new { result });

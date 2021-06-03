@@ -32,6 +32,14 @@ namespace Client.Controllers
         {
             return View("Views/Login/Reset.cshtml");
         }
+        public IActionResult RegisterRole()
+        {
+            return View("Views/Login/RegisterRole.cshtml");
+        }
+        public IActionResult RegisterClient()
+        {
+            return View("Views/Login/RegisterClient.cshtml");
+        }
 
         [HttpPost]
         public HttpStatusCode Register(RegisterVM registerVM)

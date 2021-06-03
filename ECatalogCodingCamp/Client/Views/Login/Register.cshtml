@@ -3,7 +3,7 @@
     ViewData["Title"] = "Login Page";
 }
 
-<div class="h-100">
+<div class="h-100" id="modalForm">
     <div class="container h-100">
         <div class="row justify-content-md-center h-100">
             <div class="card-wrapper">
@@ -12,7 +12,7 @@
                 </div>
                 <div class="card fat">
                     <div class="card-body">
-                        <h4 class="card-title">Register</h4>
+                        <h4 class="card-title">Register as Candidate</h4>
                         <form class="my-login-validation" novalidate="" id="registerForm">
                             <!--Name-->
                             <div class="form-group">
@@ -50,7 +50,7 @@
                             </div>
                             <!--Gender-->
                             <fieldset class="form-group">
-                                <div class="row">
+                                <div class="row form-group" >
                                     <label class="col-form-label">Gender</label>
                                     <div class="col-sm-10">
                                         <div class="form-check">
@@ -77,26 +77,16 @@
                             <!--JobRole-->
                             <div class="form-group">
                                 <label for="JobRoleId">Job Role</label>
-                                @*<select class="dropdown" id="JobRoleDropDown">
-                                        <option value="0" selected="selected"> Job Role </option>
-                                        <option value="1" selected="selected">Front End Developer</option>
-                                        <option value="2" selected="selected">Back End Developer</option>
-                                    </select>*@
-                                <input id="JobRoleId" type="text" class="form-control" name="JobRoleId" required data-eye>
+                                <select class="dropdown" id="JobRoleId">
+                                    <option selected disabled> Job Role </option>
+                                    <option value="1" >Front End Developer</option>
+                                    <option value="2" >Back End Developer</option>
+                                </select>
+                                @*<input id="JobRoleId" type="text" class="form-control" name="JobRoleId" required data-eye>*@
                                 <div class="invalid-feedback">
                                     Job role is required
                                 </div>
                             </div>
-
-                            <!--Role-->
-                            <div class="form-group">
-                                <label for="roleid">RoleId</label>
-                                <input id="roleid" type="text" class="form-control" name="roleid" required autofocus>
-                                <div class="invalid-feedback">
-                                    Role is required
-                                </div>
-                            </div>
-
                             <button type="submit" class="btn btn-primary btn-block" id="submit">Register</button>
                             <div class="mt-4 text-center">
                                 Already have an account? <a asp-area="" asp-controller="login" asp-action="Index">Login</a>
@@ -112,22 +102,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            //$(".dropdown").change(function () {
-            //    var element = document.getElementById("JobRoleDropDown")
-            //    var selected = element.options[element.selectedIndex].value
-            //    var urlSelected = `https://localhost:44321/api/JobRoles/job/${selected}`;
-            //    console.log(urlSelected)
+            $(".dropdown").change(function () {
+                var element = document.getElementById("#JobRoleId");
+                var selected = element.options[element.selectedIndex].value;
+                var urlSelected = `https://localhost:44321/api/JobRoles/job/${selected}`;
+                console.log(urlSelected);
 
-            //});
+            });
 
             $("#registerForm").submit(function (e) {
-                alert("Prevent reload");
                 e.preventDefault();
             });
+
+            $("#candidate").click(function () {
+                let fired_button = $("#candidate").val();
+                alert(fired_button);
+                $("#birthdate").show();
+                $("#gender").show();
+                $("#JobRoleId").show();
+            });
+
+            $("#client").click(function () {
+                let fired_button = $("#client").val();
+                alert(fired_button);
+                $("#birthdate").hide();
+                $("#gender").hide();
+                $("#JobRoleId").hide();
+            });
+
+            
+            
         })
 
         let Register = () => {
-            var User = new Object();
+            let User = new Object();
             User.Name = $("#name").val();
             User.Email = $("#email").val();
             User.Password = $("#password").val();
@@ -135,7 +143,7 @@
             User.Gender = $("input[type='radio'][name='gender']:checked").val();
             User.Phone = $("#phone").val();
             User.JobRoleId = $("#JobRoleId").val();
-            User.RoleId = $("#roleid").val();
+            User.RoleId = 1;
 
             console.log(JSON.stringify(User));
             alert(JSON.stringify(User));
@@ -159,6 +167,10 @@
         $("#submit").click(function () {
             Register();
         })
+
+        //let getRoleValue = (str) => {
+        //    let roleValue = 
+        //}
 
 
     </script>

@@ -125,3 +125,5 @@ C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Clien
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.pdb
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Index.cshtml.g.cs
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Candidate.cshtml.g.cs
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Client.cshtml.g.cs

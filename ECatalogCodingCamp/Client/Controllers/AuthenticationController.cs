@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -46,8 +47,27 @@ namespace Client.Controllers
                 var result = client.PostAsync("https://localhost:44321/api/Accounts/Login", stringContent).Result;
             var data = result.Content.ReadAsStringAsync().Result;
             //var token = JsonConvert.DeserializeObject(data).ToString();
-            HttpContext.Session.SetString("jwtoken", data);
-            return Url.Action("Index", "Home");
+            HttpContext.Session.SetString("JWToken", data);
+            if (result.IsSuccessStatusCode)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(data);
+
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                if (role == "Candidate")
+                {
+                    return Url.Action("Candidate", "Home");
+                }
+                else
+                {
+                    return Url.Action("Client", "Home");
+                }
+            }
+            else
+            {
+                return "Error";
+                //return BadRequest(new { result });
+            }   
 
         }
 

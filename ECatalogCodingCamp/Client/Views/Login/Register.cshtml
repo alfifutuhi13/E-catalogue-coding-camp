@@ -3,7 +3,7 @@
     ViewData["Title"] = "Login Page";
 }
 
-<section class="h-100">
+<div class="h-100">
     <div class="container h-100">
         <div class="row justify-content-md-center h-100">
             <div class="card-wrapper">
@@ -13,7 +13,8 @@
                 <div class="card fat">
                     <div class="card-body">
                         <h4 class="card-title">Register</h4>
-                        <form method="POST" class="my-login-validation" novalidate="">
+                        <form class="my-login-validation" novalidate="" id="registerForm">
+                            <!--Name-->
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input id="name" type="text" class="form-control" name="name" required autofocus>
@@ -21,7 +22,7 @@
                                     What's your name?
                                 </div>
                             </div>
-
+                            <!--Email-->
                             <div class="form-group">
                                 <label for="email">Email Address</label>
                                 <input id="email" type="email" class="form-control" name="email" required>
@@ -29,7 +30,7 @@
                                     Your email is invalid
                                 </div>
                             </div>
-
+                            <!--Password-->
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input id="password" type="password" class="form-control" name="password" required
@@ -38,7 +39,7 @@
                                     Password is required
                                 </div>
                             </div>
-
+                            <!--Birth Date-->
                             <div class="form-group">
                                 <label for="birthdate">Birth Date</label>
                                 <input id="birthdate" type="date" class="form-control" name="birthdate" required
@@ -47,65 +48,56 @@
                                     Birthdate is required
                                 </div>
                             </div>
-
+                            <!--Gender-->
                             <fieldset class="form-group">
                                 <div class="row">
                                     <label class="col-form-label">Gender</label>
                                     <div class="col-sm-10">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="male"
-                                                   value="Pria" required>
-                                            <label class="form-check-label" for="male">
-                                                Male
-                                            </label>
-                                            <div class="valid-feedback">
-                                                Looks good!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please Choose Gender.
-                                            </div>
+                                            <input class="form-check-input" type="radio" name="gender" id="male" value="Pria" required>
+                                            <label class="form-check-label" for="male">Male</label>
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">Please Choose Gender.</div>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="female"
-                                                   value="Wanita" required>
-                                            <label class="form-check-label" for="female">
-                                                Female
-                                            </label>
-                                            <div class="valid-feedback">
-                                                Looks good!
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please Choose Gender.
-                                            </div>
+                                            <input class="form-check-input" type="radio" name="gender" id="female" value="Wanita" required>
+                                            <label class="form-check-label" for="female">Female</label>
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">Please Choose Gender.</div>
                                         </div>
                                     </div>
                                 </div>
                             </fieldset>
-
+                            <!--Phone-->
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input id="phone" type="number" class="form-control" name="phone" required data-eye>
-                                <div class="invalid-feedback">
-                                    phone is required
-                                </div>
+                                <input id="phone" type="text" class="form-control" name="phone" required data-eye>
+                                <div class="invalid-feedback">phone is required</div>
                             </div>
-
+                            <!--JobRole-->
                             <div class="form-group">
-                                <label for="filterId">Job Role</label>
-                                <select class="dropdown" id="filterId">
-                                    <option value="1" selected="selected">Front End Developer</option>
-                                    <option value="2" selected="selected">Back End Developer</option>
-                                </select>
+                                <label for="JobRoleId">Job Role</label>
+                                @*<select class="dropdown" id="JobRoleDropDown">
+                                        <option value="0" selected="selected"> Job Role </option>
+                                        <option value="1" selected="selected">Front End Developer</option>
+                                        <option value="2" selected="selected">Back End Developer</option>
+                                    </select>*@
+                                <input id="JobRoleId" type="text" class="form-control" name="JobRoleId" required data-eye>
                                 <div class="invalid-feedback">
-                                    job role is required
+                                    Job role is required
                                 </div>
                             </div>
 
-                            <div class="form-group m-0">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    Register
-                                </button>
+                            <!--Role-->
+                            <div class="form-group">
+                                <label for="roleid">RoleId</label>
+                                <input id="roleid" type="text" class="form-control" name="roleid" required autofocus>
+                                <div class="invalid-feedback">
+                                    Role is required
+                                </div>
                             </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" id="submit">Register</button>
                             <div class="mt-4 text-center">
                                 Already have an account? <a asp-area="" asp-controller="login" asp-action="Index">Login</a>
                             </div>
@@ -115,4 +107,59 @@
             </div>
         </div>
     </div>
-</section>
+</div>
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$(".dropdown").change(function () {
+            //    var element = document.getElementById("JobRoleDropDown")
+            //    var selected = element.options[element.selectedIndex].value
+            //    var urlSelected = `https://localhost:44321/api/JobRoles/job/${selected}`;
+            //    console.log(urlSelected)
+
+            //});
+
+            $("#registerForm").submit(function (e) {
+                alert("Prevent reload");
+                e.preventDefault();
+            });
+        })
+
+        let Register = () => {
+            var User = new Object();
+            User.Name = $("#name").val();
+            User.Email = $("#email").val();
+            User.Password = $("#password").val();
+            User.BirthDate = $("#birthdate").val();
+            User.Gender = $("input[type='radio'][name='gender']:checked").val();
+            User.Phone = $("#phone").val();
+            User.JobRoleId = $("#JobRoleId").val();
+            User.RoleId = $("#roleid").val();
+
+            console.log(JSON.stringify(User));
+            alert(JSON.stringify(User));
+            $.ajax({
+                url: '/Login/Register',
+                type: 'POST',
+                data: User
+            }).done((result) => {
+                console.log(result);
+                alert(result);
+                if (result == 200) {
+                    alert("Successed to Add Data!");
+                    location.reload(true);
+                }
+            }).fail((result) => {
+                console.log(result);
+                alert("Failed to Add Data!");
+            });
+        }
+
+        $("#submit").click(function () {
+            Register();
+        })
+
+
+    </script>
+}

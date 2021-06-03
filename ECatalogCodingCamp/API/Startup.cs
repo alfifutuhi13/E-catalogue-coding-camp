@@ -32,6 +32,19 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                //options.AddDefaultPolicy(
+                //    builder =>
+                //    {
+                //        builder.WithOrigins("https://localhost:44354")
+                //        .AllowAnyHeader().AllowAnyMethod();
+                //    });
+                options.AddPolicy("mypolicy", builder =>
+                    builder.WithOrigins("https://www.test-cors.org", "https://localhost:44354", "http://localhost:36716", "http://localhost:14060")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
 
             services.AddControllers();
             services.AddTokenAuthentication(Configuration);
@@ -125,6 +138,9 @@ namespace API
             });
 
             app.UseRouting();
+
+            app.UseCors();
+
             app.UseAuthentication();
             app.UseAuthorization();
 

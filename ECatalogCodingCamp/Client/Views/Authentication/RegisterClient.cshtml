@@ -78,7 +78,7 @@
             console.log(JSON.stringify(User));
             alert(JSON.stringify(User));
             $.ajax({
-                url: '/Login/Register',
+                url: '/Authentication/Register',
                 type: 'POST',
                 data: User
             }).done((result) => {

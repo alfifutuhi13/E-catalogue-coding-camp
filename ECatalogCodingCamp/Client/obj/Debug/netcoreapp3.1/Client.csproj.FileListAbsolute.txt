@@ -132,3 +132,4 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\De
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Reset.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Candidate.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Client.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Profile.cshtml.g.cs

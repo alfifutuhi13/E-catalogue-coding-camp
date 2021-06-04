@@ -102,13 +102,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $(".dropdown").change(function () {
-                var element = document.getElementById("#JobRoleId");
-                var selected = element.options[element.selectedIndex].value;
-                var urlSelected = `https://localhost:44321/api/JobRoles/job/${selected}`;
-                console.log(urlSelected);
+            //$(".dropdown").change(function () {
+            //    var element = document.getElementById("#JobRoleId");
+            //    var selected = element.options[element.selectedIndex].value;
+            //    var urlSelected = `https://localhost:44321/api/JobRoles/job/${selected}`;
+            //    console.log(urlSelected);
 
-            });
+            //});
 
             $("#registerForm").submit(function (e) {
                 e.preventDefault();
@@ -148,16 +148,12 @@
             console.log(JSON.stringify(User));
             alert(JSON.stringify(User));
             $.ajax({
-                url: '/Login/Register',
+                url: '/Authentication/Register',
                 type: 'POST',
                 data: User
             }).done((result) => {
                 console.log(result);
-                alert(result);
-                if (result == 200) {
-                    alert("Successed to Add Data!");
-                    location.reload(true);
-                }
+                window.location.href = result;
             }).fail((result) => {
                 console.log(result);
                 alert("Failed to Add Data!");

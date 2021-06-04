@@ -85,7 +85,7 @@ namespace API.Controllers
                 {
                     var jwt = new JwtService(_config);
                     var token = jwt.GenerateSecurityLoginToken(result.Name, result.Email, result.Role);
-                    return Ok(new { token });
+                    return Ok(token);
                 }
 
                 return Unauthorized("Failed to log in, your email or password Wrong");
@@ -136,7 +136,7 @@ namespace API.Controllers
                 var foundUser = context.Users.Where(user => user.Id == foundAccount.Id).FirstOrDefault();
                 var jwt = new JwtService(_config);
                 string token = jwt.GenerateSecurityForgotToken(forgotPasswordVM.Email);
-                string url = "https://localhost:44321/api/Accounts/Reset-Password?Token=";
+                string url = "https://localhost:44354/Authentication/Reset?Token=";
 
                 var sendEmail = new SendEmail(context);
                 sendEmail.SendForgotPassword(url, token, foundUser);
@@ -146,12 +146,13 @@ namespace API.Controllers
 
         }
 
-        [Authorize]
+        
         [HttpPut("Reset-Password")]
         public ActionResult ResetPassword(ChangePasswordVM changePasswordVM)
         {
+            string token = changePasswordVM.Token;
             var tokenHandler = new JwtSecurityTokenHandler();
-            var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
+            var readToken = tokenHandler.ReadJwtToken(token);
 
             if (changePasswordVM.NewPassword == changePasswordVM.ConfirmPassword)
             {

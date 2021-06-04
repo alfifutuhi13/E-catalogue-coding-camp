@@ -36,14 +36,14 @@ namespace API.Controllers
         [HttpPost("Insert-Education")]
         public ActionResult InsertEducation(EducationVM educationVM)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
-            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
+            //var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
 
-            var foundCandidate = context.Users.Where(user => user.Email == getEmail).FirstOrDefault();
+            //var foundCandidate = context.Users.Where(user => user.Email == getEmail).FirstOrDefault();
 
             var dbparams = new DynamicParameters();
-            dbparams.Add("Email", foundCandidate.Email, DbType.String);
+            dbparams.Add("Email", educationVM.Email, DbType.String);
             dbparams.Add("Major", educationVM.Major, DbType.String);
             dbparams.Add("Univ", educationVM.University, DbType.String);
             dbparams.Add("Degree", educationVM.Degree, DbType.String);

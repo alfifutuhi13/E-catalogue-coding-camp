@@ -11,5 +11,7 @@ namespace API.ViewModels
         public string University { get; set; }
         public string Degree { get; set; }
         public double GPA { get; set; }
+        public string Email { get; set; }
+        public string Role { get; set; }
     }
 }

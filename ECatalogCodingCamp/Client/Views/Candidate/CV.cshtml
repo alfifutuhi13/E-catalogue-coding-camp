@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "E-Catalogue Coding Camp";
+}
+
+<div class="card-body">
+    <h4 class="card-title">Update Education</h4>
+    <form class="my-login-validation" novalidate="" id="registerForm">
+        <!--List Organization-->
+        <div class="form-group">
+            <label for="organization">Organization</label>
+            <input id="organization" type="text" class="form-control" name="organization" placeholder="Ex: Himpunan" required autofocus>
+            <div class="invalid-feedback">
+                Organization is required
+            </div>
+            <br />
+            <label for="roleorganization">Role Organization</label>
+            <input id="roleorganization" type="text" class="form-control" name="roleorganization" placeholder="Ex: Ketua" required autofocus>
+            <div class="invalid-feedback">
+                Role Organization is required
+            </div>
+        </div>
+        <!--List Skill-->
+        <div class="form-group">
+            <label for="skill">Skill</label>
+            <input id="skill" type="email" class="form-control" name="skill" placeholder="Ex: Institut Teknologi Bandung" required>
+            <div class="invalid-feedback">
+                University is required
+            </div>
+        </div>
+        <!--List Work-->
+        <div class="form-group">
+            <label for="work">Work Experience</label>
+            <input id="work" type="text" class="form-control" name="work" placeholder="Ex: S1" required data-eye>
+            <div class="invalid-feedback">
+                Degree is required
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="submit">Update</button>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#registerForm").submit(function (e) {
+                e.preventDefault();
+            });
+        })
+
+        let InsertCV = () => {
+            let Obj = new Object();
+            Obj.OrganizationName = $("#major").val();
+            Obj.University = $("#univ").val();
+            Obj.Degree = $("#degree").val();
+            Obj.GPA = $("#gpa").val();
+
+            console.log(JSON.stringify(Obj));
+            alert(JSON.stringify(Obj));
+            $.ajax({
+                url: '/Candidate/InsertCV',
+                type: 'POST',
+                data: Obj
+            }).done((result) => {
+                console.log(result);
+                sAlertAdd();
+            }).fail((result) => {
+                console.log(result);
+                alert("Failed to Add Data!");
+            });
+        }
+
+        $("#submit").click(function () {
+            InsertCV();
+        })
+
+        let sAlertAdd = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully added.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        $('#irow').click(function () {
+            if ($('#row').val()) {
+                $('#mtable tbody').append($("#mtable tbody tr:last").clone());
+                $('#mtable tbody tr:last :checkbox').attr('checked', false);
+                $('#mtable tbody tr:last td:first').html($('#row').val());
+            } else { alert('Enter Text'); }
+        });
+        $('#icol').click(function () {
+            if ($('#col').val()) {
+                $('#mtable tr').append($("<td>"));
+                $('#mtable thead tr>td:last').html($('#col').val());
+                $('#mtable tbody tr').each(function () { $(this).children('td:last').append($('<input type="checkbox">')) });
+            } else { alert('Enter Text'); }
+        });
+
+
+    </script>
+}

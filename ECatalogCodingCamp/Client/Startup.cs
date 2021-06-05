@@ -1,6 +1,11 @@
+using API.Context;
+using API.Repositories;
+using API.Repositories.Data;
+using API.Repositories.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +37,9 @@ namespace Client
                 options.Cookie.IsEssential = true;
             });
             services.AddControllersWithViews();
+            services.AddDbContext<MyContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+            services.AddScoped<CandidateRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

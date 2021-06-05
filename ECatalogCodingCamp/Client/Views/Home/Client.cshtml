@@ -1,8 +1,147 @@
-﻿@{
+﻿@model List<API.Models.Candidate>
+@{
     ViewData["Title"] = "E-Catalogue Coding Camp";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
-
 <div class="text-center">
     <h1 class="display-4">Welcome To E-Catalogue Coding Camp</h1>
     <p>Place where you look for your future candidates.</p>
 </div>
+
+<div class="card-deck">
+   
+</div>
+
+<div class="modal fade" id="book" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="intrequest">Interview Request</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formdata" class="needs-validation">
+                    <input type="hidden" class="form-control" id="id">
+
+                    <div class="form-group row">
+                        <label for="salary" class="col-sm-2 col-form-label">Salary</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="salary" name="salary" placeholder="Bid Your Salary for this Candidate" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please fill name.
+                            </div>
+                        </div>
+                    </div>                   
+
+                    <div class="form-group row">
+                        <label for="interviewdate" class="col-sm-2 col-form-label">Interview Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="interviewdate" name="interviewdate" placeholder="Place your Inteview Date" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please Choose Iinterview Date.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button id="submit" type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            getCandidates();
+
+            $('#submit').click(function () {
+                let bookCandidate = new Object();
+                bookCandidate.Id = can
+            })
+        })
+
+        let clearModal = () => {
+            $("#salary").val("");            
+            $("#id").val("");            
+            $("#interviewdate").val("");           
+        }
+
+        let clickFunction = id => {
+            clearModal();
+            getById(id);
+        }
+
+        
+
+        let getCandidates = () => {
+
+
+            $.ajax({
+                url: `GetAllCandidates`,
+                type: `GET`,
+                success: data => {
+                    console.log(`masuk done`);
+                    console.log(data);
+                    const cardDeck = document.querySelector('div.card-deck');
+                    data.forEach(eachCandidates);
+
+                    function eachCandidates(candidate) {
+                        cardDeck.innerHTML += `<div class="card">
+            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-center">${candidate.name}</h5>
+                <p class="card-text text-center">${candidate.jobRole}</p>
+                <button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
+                    Book
+                </button>
+            </div>
+        </div>`
+                    }
+                    
+                },
+                error: data => {
+                    console.log(`masuk fail`);
+                    console.log(data);
+                }
+            });
+        }
+
+        let getById = id => {
+            $.ajax({
+                url: `GetById/`,
+                type: `GET`,
+                data: { "id": id },
+                dataSrc: "",
+                success: data => {
+                    let jsonResult = JSON.parse(data);
+                    $(`#id`).val(jsonResult.id);
+                },
+                error: data => {
+                    console.log(data);
+                }
+            })
+        }
+
+    </script>
+
+
+}

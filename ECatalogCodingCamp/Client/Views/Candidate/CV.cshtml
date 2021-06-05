@@ -61,6 +61,25 @@
                 e.preventDefault();
             });
 
+            $.ajax({
+                type: "GET",
+                url: `/Candidate/GetCVId/`,
+                dataSrc: '',
+                success: (data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+
+                    $("#organization0").val(`${obj.organizationName}`);
+                    $("#roleorganization0").val(`${obj.roleOrganization}`);
+                    $("#skill0").val(`${obj.skillName}`);
+                    $("#work0").val(`${obj.workName}`);
+
+                },
+                error: (data) => {
+                    console.log(JSON.stringify(data));
+                }
+            })
+
             //dynamic input Experiences Fields
             var maxField = 10; //input fields increment limitation
 
@@ -179,6 +198,8 @@
                     location.reload(true);
                 });
             }
+
+
         })
        
     </script>

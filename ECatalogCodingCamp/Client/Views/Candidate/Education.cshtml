@@ -50,7 +50,26 @@
             $("#registerForm").submit(function (e) {
                 e.preventDefault();
             });
-            getId();
+
+            $.ajax({
+                type: "GET",
+                url: `/Candidate/GetEduId/`,
+                dataSrc: '',
+                success: (data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+
+                    $("#id").val(`${obj.id}`);
+                    $("#major").val(`${obj.major}`);
+                    $("#univ").val(`${obj.university}`);
+                    $("#degree").val(`${obj.degree}`);
+                    $("#gpa").val(`${obj.gpa}`);
+
+                },
+                error: (data) => {
+                    console.log(JSON.stringify(data));
+                }
+            })
             
         })
 
@@ -91,29 +110,6 @@
             });
         }
 
-        let getId = (Id) => {
-            $.ajax({
-                type: "GET",
-                url: `/Candidate/GetEduId/${Id}`,
-                success: (data) => {
-                    console.log(data);
-
-                    let myForm = $("#registerForm");
-
-                    $("#id").val(data.Id);
-                    $("#major").val(data.Major);
-                    $("#univ").val(data.University);
-                    $("#degree").val(data.Degree);
-                    $("#gpa").val(data.GPA);
-
-                    myForm.modal("show");
-
-                },
-                error: (data) => {
-                    console.log("Error " + data);
-                }
-            })
-        }
         
 
     </script>

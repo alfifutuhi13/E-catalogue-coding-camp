@@ -88,5 +88,15 @@ namespace API.Controllers
 
             return Ok(new { message = "CV has been updated." });
         }
+
+        [HttpGet("Experience")]
+        public ActionResult GetAllExp(InsertCVVM cv)
+        {
+            var param = new DynamicParameters();
+            param.Add("Email", cv.Email, DbType.String);
+            var result = Task.FromResult(_dapper.Get<int>("[dbo].[SP_RetrieveCVId]", param, commandType: CommandType.StoredProcedure));
+
+            return Ok(result);
+        }
     }
 }

@@ -49,6 +49,10 @@ namespace Client.Controllers
         {
             return View();
         }
+        public IActionResult Profile()
+        {
+            return View();
+        }
 
         [HttpGet]
         public async Task<List<CandidatesVM>> GetAllCandidates()

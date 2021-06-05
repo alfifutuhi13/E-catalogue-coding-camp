@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewData["Title"] = "Login Page";
+}
+
+<div class="h-100" id="modalForm">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="~/img/logo.jpg" alt="bootstrap 4 login page">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">Register</h4>
+                        <form class="my-login-validation" novalidate="" id="registerForm">
+                            <div class="mt-1 text-lg-center">
+                                <a asp-area="" asp-controller="Authentication" asp-action="Register">Candidate</a>
+                                <a asp-area="" asp-controller="Authentication" asp-action="RegisterClient">Client</a>
+                            </div>
+                            <div class="mt-4 text-center">
+                                Already have an account? <a asp-area="" asp-controller="Authentication" asp-action="Index">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

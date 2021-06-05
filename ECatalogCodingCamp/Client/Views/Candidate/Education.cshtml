@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "E-Catalogue Coding Camp";
+}
+
+<div class="card-body">
+    <h4 class="card-title">Update Education</h4>
+    <form class="my-login-validation" novalidate="" id="registerForm">
+        <!--Major-->
+        <div class="form-group">
+            <label for="name">Major</label>
+            <input id="major" type="text" class="form-control" name="major" placeholder="Ex: Teknik Informatika" required autofocus>
+            <div class="invalid-feedback">
+                Major is required
+            </div>
+        </div>
+        <!--Univ-->
+        <div class="form-group">
+            <label for="univ">University</label>
+            <input id="univ" type="email" class="form-control" name="univ" placeholder="Ex: Institut Teknologi Bandung" required>
+            <div class="invalid-feedback">
+                University is required
+            </div>
+        </div>
+        <!--Degree-->
+        <div class="form-group">
+            <label for="degree">Degree</label>
+            <input id="degree" type="text" class="form-control" name="degree" placeholder="Ex: S1" required data-eye>
+            <div class="invalid-feedback">
+                Degree is required
+            </div>
+        </div>
+        <!--GPA-->
+        <div class="form-group">
+            <label for="gpa">GPA</label>
+            <input id="gpa" type="text" class="form-control" name="gpa" placeholder="Ex: 3.99" required data-eye>
+            <div class="invalid-feedback">GPA is required</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="submit">Update</button>
+
+    </form>
+</div>
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#registerForm").submit(function (e) {
+                e.preventDefault();
+            });
+        })
+
+        let InsertEdu = () => {
+            let Obj = new Object();
+            Obj.Major = $("#major").val();
+            Obj.University = $("#univ").val();
+            Obj.Degree = $("#degree").val();
+            Obj.GPA = $("#gpa").val();
+
+            console.log(JSON.stringify(Obj));
+            alert(JSON.stringify(Obj));
+            $.ajax({
+                url: '/Candidate/InsertEducation',
+                type: 'POST',
+                data: Obj
+            }).done((result) => {
+                console.log(result);
+                sAlertAdd();
+            }).fail((result) => {
+                console.log(result);
+                alert("Failed to Add Data!");
+            });
+        }
+
+        $("#submit").click(function () {
+            InsertEdu();
+        })
+
+        let sAlertAdd = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully added.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+        //let getRoleValue = (str) => {
+        //    let roleValue =
+        //}
+
+
+    </script>
+}

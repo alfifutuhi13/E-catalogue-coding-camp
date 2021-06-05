@@ -34,19 +34,22 @@ namespace API
         {
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("https://localhost:44354")
-                        .AllowAnyHeader().AllowAnyMethod();
-                    });
+                //options.AddDefaultPolicy(
+                //    builder =>
+                //    {
+                //        builder.WithOrigins("https://localhost:44354")
+                //        .AllowAnyHeader().AllowAnyMethod();
+                //    });
+                options.AddPolicy("mypolicy", builder =>
+                    builder.WithOrigins("https://www.test-cors.org", "https://localhost:44354", "http://localhost:36716", "http://localhost:14060")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
             });
 
             services.AddControllers();
             services.AddTokenAuthentication(Configuration);
-            services.AddDbContext<MyContext>(options => 
-            options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
+            // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -80,6 +83,8 @@ namespace API
 
                 });
             });
+            services.AddDbContext<MyContext>(options => 
+            options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
 
             services.AddScoped<IGenericDapper, GeneralDapper>();
@@ -122,8 +127,20 @@ namespace API
 
             app.UseHttpsRedirection();
 
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
             app.UseRouting();
+
             app.UseCors();
+
             app.UseAuthentication();
             app.UseAuthorization();
 

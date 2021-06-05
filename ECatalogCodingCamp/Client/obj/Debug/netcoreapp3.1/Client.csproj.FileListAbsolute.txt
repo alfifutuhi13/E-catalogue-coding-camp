@@ -46,7 +46,6 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\De
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Client.pdb
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Client.Views.dll
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Client.Views.pdb
-D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.csprojAssemblyReference.cache
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfoInputs.cache
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.AssemblyInfo.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.csproj.CoreCompileInputs.cache
@@ -61,7 +60,6 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\De
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.RazorCoreGenerate.cache
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
-D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutLogin.cshtml.g.cs
@@ -75,55 +73,66 @@ D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\De
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.pdb
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.csproj.CopyComplete
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Reset.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Forgot.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Register.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.deps.json
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.runtimeconfig.json
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.runtimeconfig.dev.json
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.exe
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Dapper.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\EntityFramework.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.CodeDom.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.dll
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.pdb
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Index.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Candidate.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Client.cshtml.g.cs
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Login\Register.cshtml.g.cs
+C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Login\Forgot.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Login\Forgot.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.csprojAssemblyReference.cache
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.deps.json
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.runtimeconfig.json
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.runtimeconfig.dev.json
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.exe
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Dapper.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\EntityFramework.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.dll
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\bin\Debug\netcoreapp3.1\API.pdb
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Client.MvcApplicationPartsAssemblyInfo.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Forgot.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Index.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Register.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\RegisterClient.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\RegisterRole.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Authentication\Reset.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Candidate.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Client.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Profile.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\CV.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Education.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Index.cshtml.g.cs

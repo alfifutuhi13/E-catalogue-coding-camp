@@ -1,5 +1,4 @@
-﻿@model List<API.Models.Candidate>
-@{
+﻿@{
     ViewData["Title"] = "E-Catalogue Coding Camp";
     Layout = "/Views/Shared/_Layout.cshtml";
 }
@@ -114,7 +113,40 @@
                     Book
                 </button>
             </div>
-        </div>`
+        </div>`;
+
+                        cardDeck.innerHTML += `<div class="card">
+            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-center">${candidate.name}</h5>
+                <p class="card-text text-center">${candidate.jobRole}</p>
+                <button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
+                    Book
+                </button>
+            </div>
+        </div>`;
+
+                        cardDeck.innerHTML += `<div class="card">
+            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-center">${candidate.name}</h5>
+                <p class="card-text text-center">${candidate.jobRole}</p>
+                <button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
+                    Book
+                </button>
+            </div>
+        </div>`;
+
+                        cardDeck.innerHTML += `<div class="card">
+            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-center">${candidate.name}</h5>
+                <p class="card-text text-center">${candidate.jobRole}</p>
+                <button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
+                    Book
+                </button>
+            </div>
+        </div>`;
                     }
                     
                 },

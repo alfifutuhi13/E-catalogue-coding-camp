@@ -67,9 +67,13 @@ namespace Client.Controllers
                 {
                     return Url.Action("Candidate", "Home");
                 }
-                else
+                else if (role == "Client")
                 {
                     return Url.Action("Client", "Home");
+                }
+                else
+                {
+                    return Url.Action("Admin", "Home");
                 }
             }
             else

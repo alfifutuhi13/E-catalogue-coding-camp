@@ -1,4 +1,5 @@
-﻿using API.ViewModels;
+﻿using API.Models;
+using API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -101,6 +102,17 @@ namespace Client.Controllers
                 //return "Error";
                 return BadRequest(new { result = result, Message = "Can't Insert Education data." });
             }
+        }
+
+        [HttpGet]
+        public Education GetEduId(int id)
+        {
+            var httpClient = new HttpClient();
+            var response = httpClient.GetAsync("https://localhost:44321/api/Educations/" + id).Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            var jsn = JsonConvert.DeserializeObject<Education>(apiResponse.Result);
+            return jsn;
         }
     }
 }

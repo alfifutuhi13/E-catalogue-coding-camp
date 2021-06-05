@@ -5,6 +5,8 @@
 <div class="card-body">
     <h4 class="card-title">Update Education</h4>
     <form class="my-login-validation" novalidate="" id="registerForm">
+        <!--Id-->
+        <input type="hidden" class="form-control" id="id" name="id">
         <!--Major-->
         <div class="form-group">
             <label for="name">Major</label>
@@ -48,6 +50,8 @@
             $("#registerForm").submit(function (e) {
                 e.preventDefault();
             });
+            getId();
+            
         })
 
         let InsertEdu = () => {
@@ -87,6 +91,30 @@
             });
         }
 
+        let getId = (Id) => {
+            $.ajax({
+                type: "GET",
+                url: `/Candidate/GetEduId/${Id}`,
+                success: (data) => {
+                    console.log(data);
+
+                    let myForm = $("#registerForm");
+
+                    $("#id").val(data.Id);
+                    $("#major").val(data.Major);
+                    $("#univ").val(data.University);
+                    $("#degree").val(data.Degree);
+                    $("#gpa").val(data.GPA);
+
+                    myForm.modal("show");
+
+                },
+                error: (data) => {
+                    console.log("Error " + data);
+                }
+            })
+        }
+        
 
     </script>
 }

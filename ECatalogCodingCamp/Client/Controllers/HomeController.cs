@@ -194,6 +194,20 @@ namespace Client.Controllers
             return apiResponse.Result;
         }
 
+
+        [HttpGet]
+        public string GetClientId()
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = httpClient.GetAsync("https://localhost:44321/api/Books/GetClientId").Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+        }
+
         [HttpPut]
         public HttpStatusCode UpdateProfile(ProfileVM profile)
         {
@@ -332,6 +346,20 @@ namespace Client.Controllers
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = client.GetAsync("https://localhost:44321/api/Books/GetClient/" + id);
+            response.Wait();
+            var result = response.Result;
+            var apiResponse = result.Content.ReadAsStringAsync();
+
+            return apiResponse.Result;
+        }
+
+        [HttpGet]
+        public string GetCandidate(int id)
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = client.GetAsync("https://localhost:44321/api/Books/GetCandidate/" + id);
             response.Wait();
             var result = response.Result;
             var apiResponse = result.Content.ReadAsStringAsync();

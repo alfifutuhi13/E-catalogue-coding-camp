@@ -118,6 +118,7 @@ namespace Client.Controllers
         {
             changePasswordVM.Token = HttpContext.Session.GetString("JWToken");
             var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", changePasswordVM.Token);
             StringContent content = new StringContent(JsonConvert.SerializeObject(changePasswordVM), Encoding.UTF8, "application/json");
             var result = httpClient.PutAsync("https://localhost:44321/api/Accounts/Change-Password", content).Result;
             return result.StatusCode;

@@ -39,6 +39,7 @@ namespace Client
             services.AddControllersWithViews();
             services.AddDbContext<MyContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+
             services.AddScoped<CandidateRepository>();
         }
 
@@ -60,7 +61,7 @@ namespace Client
 
             app.UseRouting();
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

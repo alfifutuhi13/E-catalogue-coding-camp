@@ -3,36 +3,50 @@
 }
 
 <div class="card-body">
-    <h4 class="card-title">Update Education</h4>
+    <h4 class="card-title">Update Experiences</h4>
     <form class="my-login-validation" novalidate="" id="registerForm">
         <!--List Organization-->
         <div class="form-group">
-            <label for="organization">Organization</label>
-            <input id="organization" type="text" class="form-control" name="organization" placeholder="Ex: Himpunan" required autofocus>
-            <div class="invalid-feedback">
-                Organization is required
-            </div>
-            <br />
-            <label for="roleorganization">Role Organization</label>
-            <input id="roleorganization" type="text" class="form-control" name="roleorganization" placeholder="Ex: Ketua" required autofocus>
-            <div class="invalid-feedback">
-                Role Organization is required
+            <div class="field_wrapperOrg">
+                <div>
+                    <label for="organization0">Organization</label><br />
+                    <input id="organization0" type="text" class="form-control" name="organization0" value="" placeholder="Ex: Himpunan" required /><br />
+                    <div class="invalid-feedback">
+                        Organization is required
+                    </div>
+                    <label for="roleorganization0">Role Organization</label><br />
+                    <input id="roleorganization0" type="text" class="form-control" name="roleorganization0" value="" placeholder="Ex: Ketua" required /><br />
+                    <div class="invalid-feedback">
+                        Role Organization is required
+                    </div>
+                    <a href="javascript:void(0);" class="add_buttonOrg" title="Add field">Add More Organization and Role Organization</a> <br />
+                </div>
             </div>
         </div>
         <!--List Skill-->
         <div class="form-group">
-            <label for="skill">Skill</label>
-            <input id="skill" type="email" class="form-control" name="skill" placeholder="Ex: Institut Teknologi Bandung" required>
-            <div class="invalid-feedback">
-                University is required
+            <div class="field_wrapperSkill">
+                <div>
+                    <label for="skill0">Skill</label>
+                    <input id="skill0" type="text" class="form-control" name="skill0" placeholder="Ex: Python" required><br />
+                    <div class="invalid-feedback">
+                        Skill is required
+                    </div>
+                    <a href="javascript:void(0);" class="add_buttonSkill" title="Add field">Add More Skills</a> <br />
+                </div>
             </div>
         </div>
         <!--List Work-->
         <div class="form-group">
-            <label for="work">Work Experience</label>
-            <input id="work" type="text" class="form-control" name="work" placeholder="Ex: S1" required data-eye>
-            <div class="invalid-feedback">
-                Degree is required
+            <div class="field_wrapperWork">
+                <div>
+                    <label for="work0">Work Experience</label>
+                    <input id="work0" type="text" class="form-control" name="work0" placeholder="Ex: Metrodata" required><br />
+                    <div class="invalid-feedback">
+                        Work is required
+                    </div>
+                    <a href="javascript:void(0);" class="add_buttonWork" title="Add field">Add More Works</a><br />
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block" id="submit">Update</button>
@@ -46,60 +60,170 @@
             $("#registerForm").submit(function (e) {
                 e.preventDefault();
             });
-        })
 
-        let InsertCV = () => {
-            let Obj = new Object();
-            Obj.OrganizationName = $("#major").val();
-            Obj.University = $("#univ").val();
-            Obj.Degree = $("#degree").val();
-            Obj.GPA = $("#gpa").val();
-
-            console.log(JSON.stringify(Obj));
-            alert(JSON.stringify(Obj));
             $.ajax({
-                url: '/Candidate/InsertCV',
-                type: 'POST',
-                data: Obj
-            }).done((result) => {
-                console.log(result);
-                sAlertAdd();
-            }).fail((result) => {
-                console.log(result);
-                alert("Failed to Add Data!");
+                type: "GET",
+                url: `/Candidate/GetCVId/`,
+                dataSrc: '',
+                success: (data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    $("#organization0").val(`${obj.organizations[0].OrganizationName}`);
+                    $("#roleorganization0").val(`${obj.organizations[0].RoleOrganization}`);
+                    $("#skill0").val(`${obj.skills[0].SkillName}`);
+                    $("#work0").val(`${obj.works[0].WorkName}`);
+
+                    for (let ij = 1; ij < obj.organizations.length; ij++) {
+                        $(wrapperOrg).append(`<div><label for="organization${ij}">Organization</label><br /><input id="organization${ij}" type="text" class="form-control" name="organization${ij}" value="" placeholder="Ex: Himpunan" required /><br /><div class="invalid-feedback">Organization is required</div><label for="roleorganization${ij}">Role Organization</label><br /><input id="roleorganization${ij}" type="text" class="form-control" name="roleorganization${ij}" value="" placeholder="Ex: Ketua" required /><br /><div class="invalid-feedback">Role Organization is required</div> <a href="javascript:void(0);" class="remove_button">Remove Organization and Role Organization Field</a></div>`); //add field html
+                        countOrg = ij; //increment field counter
+
+                        $(`#organization${ij}`).val(`${obj.organizations[ij].OrganizationName}`);
+                        $(`#roleorganization${ij}`).val(`${obj.organizations[ij].RoleOrganization}`);
+                    }
+
+                    for (let ik = 1; ik < obj.skills.length; ik++) {
+                        $(wrapperSkill).append(`<div><label for="skill${ik}">Skill</label><input id="skill${ik}" type="text" class="form-control" name="skill${ik}" placeholder="Ex: Python" required><br /><div class="invalid-feedback">Skill is required</div> <a href="javascript:void(0);" class="remove_button">Remove Skill Field</a></div>`); //add field html
+                        countSkill = ik; //increment field counter
+
+                        $(`#skill${ik}`).val(`${obj.skills[ik].SkillName}`);
+                    }
+
+                    for (let il = 1; il < obj.works.length; il++) {
+                        $(wrapperWork).append(`<div><label for="work${il}" >Work Experience</label><input id="work${il}" type="text" class="form-control" name="work${il}" placeholder="Ex: Metrodata" required><br /><div class="invalid-feedback">Work is required</div> <a href="javascript:void(0);" class="remove_button">Remove Work Field</a></div>`); //add field html
+                        countWork = il; //increment field counter
+
+                        $(`#work${il}`).val(`${obj.works[il].WorkName}`);
+                    }
+  
+                },
+                error: (data) => {
+                    console.log(JSON.stringify(data));
+                }
             });
-        }
 
-        $("#submit").click(function () {
-            InsertCV();
-        })
+            //dynamic input Experiences Fields
+            var maxField = 10; //input fields increment limitation
 
-        let sAlertAdd = () => {
-            swal({
-                title: "Done",
-                text: "Data successfully added.",
-                icon: "success",
-                button: "Ok",
-            }).then(() => {
-                location.reload(true);
+            //Organization Inputs
+            var addButtonOrg = $('.add_buttonOrg');//add button Org
+            var wrapperOrg = $('.field_wrapperOrg');//input field wrapper
+
+            var countOrg = 1; //initial field counter Organization
+
+            //Once add button is clicked
+            $(addButtonOrg).click(function () {
+                //check maximum number of input fields
+                if (countOrg < maxField) {
+                    $(wrapperOrg).append(`<div><label for="organization${countOrg}">Organization</label><br /><input id="organization${countOrg}" type="text" class="form-control" name="organization${countOrg}" value="" placeholder="Ex: Himpunan" required /><br /><div class="invalid-feedback">Organization is required</div><label for="roleorganization${countOrg}">Role Organization</label><br /><input id="roleorganization${countOrg}" type="text" class="form-control" name="roleorganization${countOrg}" value="" placeholder="Ex: Ketua" required /><br /><div class="invalid-feedback">Role Organization is required</div> <a href="javascript:void(0);" class="remove_button">Remove Organization and Role Organization Field</a></div>`); //add field html
+                    countOrg++; //increment field counter
+                }
             });
-        }
 
-        $('#irow').click(function () {
-            if ($('#row').val()) {
-                $('#mtable tbody').append($("#mtable tbody tr:last").clone());
-                $('#mtable tbody tr:last :checkbox').attr('checked', false);
-                $('#mtable tbody tr:last td:first').html($('#row').val());
-            } else { alert('Enter Text'); }
+            //Once remove button is clicked
+            $(wrapperOrg).on('click', '.remove_button', function (e) {
+                e.preventDefault();
+                $(this).parent('div').remove(); //remove field html
+                countOrg--; //decrement field counter
+            });
+
+            //Skill inputs
+            var wrapperSkill = $('.field_wrapperSkill');//input field wrapper
+            var addButtonSkill = $('.add_buttonSkill');//add button Skill
+
+            var countSkill = 1; //initial field counter Skills
+
+            //Once add button is clicked
+            $(addButtonSkill).click(function () {
+                //check maximum number of input fields
+                if (countSkill < maxField) {
+                    $(wrapperSkill).append(`<div><label for="skill${countSkill}">Skill</label><input id="skill${countSkill}" type="text" class="form-control" name="skill${countSkill}" placeholder="Ex: Python" required><br /><div class="invalid-feedback">Skill is required</div> <a href="javascript:void(0);" class="remove_button">Remove Skill Field</a></div>`); //add field html
+                    countSkill++; //increment field counter
+                }
+            });
+
+            //Once remove button is clicked
+            $(wrapperSkill).on('click', '.remove_button', function (e) {
+                e.preventDefault();
+                $(this).parent('div').remove(); //remove field html
+                countSkill--; //decrement field counter
+            });
+
+            //Work inputs
+            var wrapperWork = $('.field_wrapperWork');//input field wrapper
+            var addButtonWork = $('.add_buttonWork');//add button Skill
+
+            var countWork = 1; //initial field counter Works
+
+            //Once add button is clicked
+            $(addButtonWork).click(function () {
+                //check maximum number of input fields
+                if (countWork < maxField) {
+                    $(wrapperWork).append(`<div><label for="work${countWork}" >Work Experience</label><input id="work${countWork}" type="text" class="form-control" name="work${countWork}" placeholder="Ex: Metrodata" required><br /><div class="invalid-feedback">Work is required</div> <a href="javascript:void(0);" class="remove_button">Remove Work Field</a></div>`); //add field html
+                    countWork++; //increment field counter
+                }
+            });
+
+            //Once remove button is clicked
+            $(wrapperWork).on('click', '.remove_button', function (e) {
+                e.preventDefault();
+                $(this).parent('div').remove(); //remove field html
+                countWork--; //decrement field counter
+            });
+
+            let InsertCV = () => {
+                let Obj = new Object();
+                Obj.Organizations = [];
+                Obj.Skills = [];
+                Obj.Works = [];
+
+                for (let i = 0; i < countOrg; i++) {
+                    Obj.Organizations[i] = new Object();
+                    Obj.Organizations[i].OrganizationName = $(`#organization${i}`).val();
+                    Obj.Organizations[i].RoleOrganization = $(`#roleorganization${i}`).val();
+                }
+                for (let j = 0; j < countSkill; j++) {
+                    Obj.Skills[j] = new Object();
+                    Obj.Skills[j].SkillName = $(`#skill${j}`).val();
+                }
+                for (let k = 0; k < countWork; k++) {
+                    Obj.Works[k] = new Object();
+                    Obj.Works[k].WorkName = $(`#work${k}`).val();
+                }
+                console.log(Obj);
+                console.log(JSON.stringify(Obj));
+                alert(JSON.stringify(Obj));
+                $.ajax({
+                    url: '/Candidate/InsertCV',
+                    type: 'POST',
+                    data: Obj
+                }).done((result) => {
+                    console.log(result);
+                    sAlertAdd();
+                }).fail((result) => {
+                    console.log(result);
+                    alert("Failed to Add Data!");
+                });
+            }
+
+            $("#submit").click(function () {
+                InsertCV();
+            })
+
+            let sAlertAdd = () => {
+                swal({
+                    title: "Done",
+                    text: "Data successfully added.",
+                    icon: "success",
+                    button: "Ok",
+                }).then(() => {
+                    location.reload(true);
+                });
+            }
+
+
         });
-        $('#icol').click(function () {
-            if ($('#col').val()) {
-                $('#mtable tr').append($("<td>"));
-                $('#mtable thead tr>td:last').html($('#col').val());
-                $('#mtable tbody tr').each(function () { $(this).children('td:last').append($('<input type="checkbox">')) });
-            } else { alert('Enter Text'); }
-        });
-
-
+       
     </script>
 }

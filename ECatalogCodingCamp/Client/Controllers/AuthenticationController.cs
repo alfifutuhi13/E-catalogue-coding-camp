@@ -53,7 +53,7 @@ namespace Client.Controllers
         {
             var client = new HttpClient();
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
-                var result = client.PostAsync("https://localhost:44321/api/Accounts/Login", stringContent).Result;
+            var result = client.PostAsync("https://localhost:44321/api/Accounts/Login", stringContent).Result;
             var data = result.Content.ReadAsStringAsync().Result;
             //var token = JsonConvert.DeserializeObject(data).ToString();
             HttpContext.Session.SetString("JWToken", data);

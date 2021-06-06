@@ -8,9 +8,11 @@ using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,11 +27,13 @@ namespace API.Controllers
         private readonly CVRepository cvRepository;
         private readonly MyContext context;
         private readonly IGenericDapper _dapper;
-        public CVsController(CVRepository cvRepository, MyContext context, IGenericDapper dapper) : base(cvRepository)
+        private readonly IConfiguration config;
+        public CVsController(CVRepository cvRepository, MyContext context, IGenericDapper dapper, IConfiguration config) : base(cvRepository)
         {
             this.cvRepository = cvRepository;
             this.context = context;
             _dapper = dapper;
+            this.config = config;
         }
 
 
@@ -87,6 +91,51 @@ namespace API.Controllers
             }
 
             return Ok(new { message = "CV has been updated." });
+        }
+
+        //[HttpPut("UpdateCV")]
+        //public ActionResult UpdateEducation(InsertCVVM cv)
+        //{
+
+        //    var dbparams = new DynamicParameters();
+        //    dbparams.Add("Email", cv.Email, DbType.String);
+        //    dbparams.Add("Major", cv.Major, DbType.String);
+        //    dbparams.Add("Univ", cv.University, DbType.String);
+        //    dbparams.Add("Degree", cv.Degree, DbType.String);
+        //    dbparams.Add("GPA", cv.GPA, DbType.Double);
+
+        //    var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_Update_TB_T_Education]", dbparams, commandType: CommandType.StoredProcedure));
+
+        //    return Ok(new { result = result, message = "Education has been updated." });
+        //}
+        [HttpGet("Experience")]
+        public dynamic GetAllExp()
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
+
+            var paramOrg = new DynamicParameters();
+            var paramSkill = new DynamicParameters();
+            var paramWork = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            paramOrg.Add("Email", getEmail, DbType.String);
+            var queryOrg = db.Query<dynamic>("[dbo].[SP_RetrieveOrganization]", paramOrg, commandType: CommandType.StoredProcedure);
+
+            paramSkill.Add("Email", getEmail, DbType.String);
+            var querySkill = db.Query<dynamic>("[dbo].[SP_RetrieveSkill]", paramSkill, commandType: CommandType.StoredProcedure);
+
+            paramWork.Add("Email", getEmail, DbType.String);
+            var queryWork = db.Query<dynamic>("[dbo].[SP_RetrieveWork]", paramWork, commandType: CommandType.StoredProcedure);
+
+            var queryObject = new
+            {
+                Organizations = queryOrg,
+                Skills = querySkill,
+                Works = queryWork
+            };
+
+            return queryObject;
         }
     }
 }

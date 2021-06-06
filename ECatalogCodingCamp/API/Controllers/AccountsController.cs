@@ -98,7 +98,7 @@ namespace API.Controllers
 
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPut("Change-Password")]
         public ActionResult ChangePassword(ChangePasswordVM changePasswordVM)
         {

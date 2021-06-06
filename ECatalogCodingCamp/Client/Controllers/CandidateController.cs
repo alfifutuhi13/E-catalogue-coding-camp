@@ -16,6 +16,11 @@ namespace Client.Controllers
 {
     public class CandidateController : Controller
     {
+        private readonly API.Context.MyContext context;
+        public CandidateController(API.Context.MyContext context)
+        {
+            this.context = context;
+        }
         public IActionResult Index()
         {
             return View();
@@ -25,6 +30,10 @@ namespace Client.Controllers
             return View();
         }
         public IActionResult CV()
+        {
+            return View();
+        }
+        public IActionResult Biodata()
         {
             return View();
         }
@@ -102,5 +111,56 @@ namespace Client.Controllers
                 return BadRequest(new { result = result, Message = "Can't Insert Education data." });
             }
         }
+
+        [HttpGet]
+        public string GetEduId()
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = httpClient.GetAsync("https://localhost:44321/api/Educations/GetAllData").Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+        }
+
+        [HttpPut]
+        public HttpStatusCode UpdateEducation(EducationVM education)
+        {
+            var httpClient = new HttpClient();
+
+            var token = HttpContext.Session.GetString("JWToken");
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var role = jwt.Claims.First(c => c.Type == "role").Value;
+            var email = jwt.Claims.First(c => c.Type == "email").Value;
+
+            education.Role = role;
+            education.Email = email;
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(education), Encoding.UTF8, "application/json");
+            var response = httpClient.PutAsync("https://localhost:44321/api/Educations/update-education/", content);
+            response.Wait();
+            var result = response.Result;
+            return result.StatusCode;
+        }
+
+        [HttpGet]
+        public string GetCVId()
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = httpClient.GetAsync("https://localhost:44321/api/CVs/Experience").Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+
+        }
+
+        
     }
 }

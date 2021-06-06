@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210606015338_updating_child_object_education.cs" />
+    <Compile Remove="Migrations\20210606015338_updating_child_object_education.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />

@@ -5,6 +5,8 @@
 <div class="card-body">
     <h4 class="card-title">Update Education</h4>
     <form class="my-login-validation" novalidate="" id="registerForm">
+        <!--Id-->
+        <input type="hidden" class="form-control" id="id" name="id">
         <!--Major-->
         <div class="form-group">
             <label for="name">Major</label>
@@ -48,14 +50,55 @@
             $("#registerForm").submit(function (e) {
                 e.preventDefault();
             });
+
+            $.ajax({
+                type: "GET",
+                url: `/Candidate/GetEduId/`,
+                success: (data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    $("#id").val(`${obj[0].Id}`);
+                    $("#major").val(`${obj[0].MajorName}`);
+                    $("#univ").val(`${obj[0].UniversityName}`);
+                    $("#degree").val(`${obj[0].Degree}`);
+                    $("#gpa").val(`${obj[0].GPA}`);
+
+                },
+                error: (data) => {
+                    console.log("error");
+                    console.log(JSON.stringify(data));
+                }
+            })
+            
         })
 
-        let InsertEdu = () => {
-            let Obj = new Object();
-            Obj.Major = $("#major").val();
-            Obj.University = $("#univ").val();
-            Obj.Degree = $("#degree").val();
-            Obj.GPA = $("#gpa").val();
+        $("#submit").click(function () {
+            let obj = new Object();
+
+            obj.Id = $("#id").val();
+            obj.Major = $("#major").val();
+            obj.University = $("#univ").val();
+            obj.Degree = $("#degree").val();
+            obj.GPA = $("#gpa").val();
+
+            if (obj.id == "") {
+                InsertEdu(obj);
+            }
+            else {
+                UpdateEdu(obj);
+            }
+
+            
+        })
+
+        let InsertEdu = (Obj) => {
+            //let Obj = new Object();
+            //Obj.Major = $("#major").val();
+            //Obj.University = $("#univ").val();
+            //Obj.Degree = $("#degree").val();
+            //Obj.GPA = $("#gpa").val();
 
             console.log(JSON.stringify(Obj));
             alert(JSON.stringify(Obj));
@@ -72,9 +115,26 @@
             });
         }
 
-        $("#submit").click(function () {
-            InsertEdu();
-        })
+        let UpdateEdu = (obj) => {
+            $.ajax({
+                url: "/Candidate/UpdateEducation",
+                type: "PUT",
+                data: obj
+            }).done((result) => {
+                console.log(result);
+                if (result == 200) {
+                    alert("Data updated.");
+                    sAlertPut();
+                }
+                else {
+                    alert("status code: " + result);
+                }
+
+            }).fail((error) => {
+                console.log(error);
+                alert("Data can't be updated.");
+            })
+        }
 
         let sAlertAdd = () => {
             swal({
@@ -86,10 +146,19 @@
                 location.reload(true);
             });
         }
-        //let getRoleValue = (str) => {
-        //    let roleValue =
-        //}
 
+        let sAlertPut = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully updated.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        
 
     </script>
 }

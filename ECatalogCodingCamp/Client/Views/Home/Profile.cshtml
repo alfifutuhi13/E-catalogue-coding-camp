@@ -1,5 +1,5 @@
 ﻿@{ ViewData["Title"] = "E-Catalogue Coding Camp";
-                Layout = "/Views/Shared/_LayoutCandidate.cshtml"; }
+                Layout = "/Views/Shared/_Layout.cshtml"; }
 
 <div class="card-body">
 
@@ -35,3 +35,94 @@
 
     </form>
 </div>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $("#registerForm").submit(function (e) {
+                e.preventDefault();
+            });
+
+            $.ajax({
+                type: "GET",
+                url: `/Home/GetUserId/`,
+                success: (data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    $("#id").val(`${obj[0].Id}`);
+                    $("#name").val(`${obj[0].Name}`);
+                    $("#email").val(`${obj[0].Email}`);
+                    $("#phone").val(`${obj[0].Phone}`);
+
+                },
+                error: (data) => {
+                    console.log("error");
+                    console.log(JSON.stringify(data));
+                }
+            })
+
+        })
+
+
+        $("#submit").click(function () {
+            let obj = new Object();
+
+            obj.Id = $("#id").val();
+            obj.Name = $("#name").val();
+            obj.Email = $("#email").val();
+            obj.Phone = $("#phone").val();
+           
+            UpdateProfile(obj);
+
+
+        });
+
+        
+
+        let UpdateProfile = (obj) => {
+            $.ajax({
+                url: "/Home/UpdateProfile",
+                type: "PUT",
+                data: obj
+            }).done((result) => {
+                console.log(result);
+                if (result == 200) {
+                    alert("Data updated.");
+                    sAlertPut();
+                }
+                else {
+                    alert("status code: " + result);
+                }
+
+            }).fail((error) => {
+                console.log(error);
+                alert("Data can't be updated.");
+            })
+        }
+
+        let sAlertAdd = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully added.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        let sAlertPut = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully updated.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+    </script>
+
+}

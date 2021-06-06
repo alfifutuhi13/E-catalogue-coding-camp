@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css" />
     <link rel="stylesheet" href="~/css/adminlte.min.css">
     <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -24,10 +25,10 @@
                     <a asp-controller="Home" asp-action="Client" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a asp-controller="Home" asp-action="Profile" class="nav-link">Profile</a>
+                    <a asp-controller="Home" asp-action="ProfileClient" class="nav-link">Profile</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Interview</a>
+                    <a asp-controller="Home" asp-action="InterviewClient" class="nav-link">Interview</a>
                 </li>
             </ul>
 
@@ -138,6 +139,7 @@
     <script src="~/js/adminlte.js"></script>
     <script src="~/js/demo.js"></script>
     <script src="~/js/pages/dashboard3.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>

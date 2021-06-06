@@ -128,7 +128,7 @@ namespace Client.Controllers
         {
             return View();
         }
-        public IActionResult Profile()
+        public IActionResult ProfileClient()
         {
             var token = HttpContext.Session.GetString("JWToken");
             if (token != null)
@@ -146,6 +146,72 @@ namespace Client.Controllers
             {
                 return RedirectToAction("Index", "Authentication");
             }
+        }
+
+        public IActionResult ProfileCandidate()
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = myContext.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+        }
+
+        [HttpGet]
+        public string GetUserId()
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = httpClient.GetAsync("https://localhost:44321/api/Users/GetUser").Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+        }
+
+        [HttpGet]
+        public string GetCandidateId()
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = httpClient.GetAsync("https://localhost:44321/api/Books/GetCandidate").Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+        }
+
+        [HttpPut]
+        public HttpStatusCode UpdateProfile(ProfileVM profile)
+        {
+            var httpClient = new HttpClient();
+
+            var token = HttpContext.Session.GetString("JWToken");
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var email = jwt.Claims.First(c => c.Type == "email").Value;
+
+            profile.Email = email;
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(profile), Encoding.UTF8, "application/json");
+            var response = httpClient.PutAsync("https://localhost:44321/api/Users/Update-Profile/", content);
+            response.Wait();
+            var result = response.Result;
+            return result.StatusCode;
         }
 
         public IActionResult Logout()
@@ -198,6 +264,79 @@ namespace Client.Controllers
             //var apiResponse = result.Content.ReadAsStringAsync();
 
             return HttpStatusCode.BadRequest;
+        }
+
+        public IActionResult InterviewCandidate()
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = myContext.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+        }
+
+
+        public IActionResult InterviewClient()
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = myContext.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+        }
+
+        //[HttpGet]
+        //public HttpStatusCode GetClient(int id)
+        //{
+        //    var token = HttpContext.Session.GetString("JWToken");
+        //    var client = new HttpClient();
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        //    var response = client.GetAsync($"https://localhost:44321/api/Books/GetClient/{id}");
+        //    response.Wait();
+        //    var result = response.Result;
+        //    if (result.IsSuccessStatusCode)
+        //    {
+        //        return HttpStatusCode.OK;
+        //    }
+        //    //var apiResponse = result.Content.ReadAsStringAsync();
+
+        //    return HttpStatusCode.BadRequest;
+        //}
+
+        [HttpGet]
+        public string GetClient(int id)
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = client.GetAsync("https://localhost:44321/api/Books/GetClient/" + id);
+            response.Wait();
+            var result = response.Result;
+            var apiResponse = result.Content.ReadAsStringAsync();
+
+            return apiResponse.Result;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

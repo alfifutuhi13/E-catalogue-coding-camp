@@ -1,8 +1,9 @@
-﻿.card-columns {
-    @@include media-breakpoint-only(lg) {
+﻿.card-deck {
+    @include media-breakpoint-only(lg) {
         column-count: 4;
     }
 
-    @@include media-breakpoint-only(xl) {
+    @include media-breakpoint-only(xl) {
         column-count: 5;
     }
+}

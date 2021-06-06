@@ -146,7 +146,6 @@ namespace API.Controllers
 
             return Ok(new { message = "CV has been updated." });
         }
-
         [HttpGet("Experience")]
         public dynamic GetAllExp()
         {

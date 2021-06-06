@@ -1,25 +1,128 @@
-﻿@{
-    ViewData["Title"] = "E-Catalogue Coding Camp";
-}
+﻿@{ ViewData["Title"] = "E-Catalogue Coding Camp";
+                Layout = "/Views/Shared/_Layout.cshtml"; }
 
-<div class="text-center">
-    <h1 class="display-4">Update profile</h1>
-    <p>Update your profile to get clients' attention</p>
-</div>
+<div class="card-body">
 
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Candidate" asp-action="Education">Education</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Candidate" asp-action="CV">Experience</a>
-                    </li>
-                </ul>
+    <form class="my-login-validation" novalidate="" id="registerForm">
+        <!--Id-->
+        <input type="hidden" class="form-control" id="id" name="id">
+        <!--Name-->
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" type="text" class="form-control" name="name" placeholder="Ex: Steve Jobs" required autofocus>
+            <div class="invalid-feedback">
+                Name is required
             </div>
         </div>
-    </nav>
-</header>
+        <!--Email-->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" class="form-control" name="email" placeholder="Ex: youremail@gmail.com" required>
+            <div class="invalid-feedback">
+                Email is required
+            </div>
+        </div>
+        <!--Phone-->
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" type="text" class="form-control" name="phone" placeholder="Ex: 08123456789" required data-eye>
+            <div class="invalid-feedback">
+                Degree is required
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="submit">Submit</button>
+
+    </form>
+</div>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $("#registerForm").submit(function (e) {
+                e.preventDefault();
+            });
+
+            $.ajax({
+                type: "GET",
+                url: `/Home/GetUserId/`,
+                success: (data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    $("#id").val(`${obj[0].Id}`);
+                    $("#name").val(`${obj[0].Name}`);
+                    $("#email").val(`${obj[0].Email}`);
+                    $("#phone").val(`${obj[0].Phone}`);
+
+                },
+                error: (data) => {
+                    console.log("error");
+                    console.log(JSON.stringify(data));
+                }
+            })
+
+        })
+
+
+        $("#submit").click(function () {
+            let obj = new Object();
+
+            obj.Id = $("#id").val();
+            obj.Name = $("#name").val();
+            obj.Email = $("#email").val();
+            obj.Phone = $("#phone").val();
+           
+            UpdateProfile(obj);
+
+
+        });
+
+        
+
+        let UpdateProfile = (obj) => {
+            $.ajax({
+                url: "/Home/UpdateProfile",
+                type: "PUT",
+                data: obj
+            }).done((result) => {
+                console.log(result);
+                if (result == 200) {
+                    alert("Data updated.");
+                    sAlertPut();
+                }
+                else {
+                    alert("status code: " + result);
+                }
+
+            }).fail((error) => {
+                console.log(error);
+                alert("Data can't be updated.");
+            })
+        }
+
+        let sAlertAdd = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully added.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        let sAlertPut = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully updated.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+    </script>
+
+}

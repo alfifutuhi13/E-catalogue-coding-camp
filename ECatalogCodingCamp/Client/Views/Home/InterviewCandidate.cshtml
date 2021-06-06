@@ -1,0 +1,56 @@
+﻿@{ ViewData["Title"] = "E-Catalogue Coding Camp";
+    Layout = "/Views/Shared/_LayoutCandidate.cshtml"; }
+
+<div class="container">
+    <table id="table_id" class="display">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Bid Salary</th>
+                <th>Interview Schedule</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            getCandidate();
+        });
+
+        let getClientById = id => {
+            $('#table_id').DataTable({
+                ajax: {
+                    url: `GetClient/${id}`,
+                    dataSrc: ''
+                },
+                columns: [
+                    {data: 'Name'},
+                    {data: 'Email'},
+                    {data: 'Phone'},
+                    {data: 'BidSalary'},
+                    {data: 'Schedule'}
+                ]
+            });
+        }
+
+        let getCandidate = () => {
+            $.ajax({
+                type: 'GET',
+                url: `GetCandidateId`
+            }).done(result => {
+                let json = JSON.parse(result);
+                getClientById(json[0].Id);
+            }).fail(result => {
+                console.log(result);
+            })
+        }
+    </script>
+
+}

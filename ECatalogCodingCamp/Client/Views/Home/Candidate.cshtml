@@ -1,8 +1,23 @@
 ﻿@{
     ViewData["Title"] = "E-Catalogue Coding Camp";
+    Layout = "/Views/Shared/_LayoutCandidate.cshtml";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome To E-Catalogue Coding Camp </h1>
     <p>Place where you look for your future client.</p>
 </div>
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Profile">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

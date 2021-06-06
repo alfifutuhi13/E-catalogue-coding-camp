@@ -48,11 +48,12 @@ namespace Client.Controllers
             return NotFound();
         }
 
+        [HttpPost]
         public string Login(LoginVM login)
         {
             var client = new HttpClient();
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
-                var result = client.PostAsync("https://localhost:44321/api/Accounts/Login", stringContent).Result;
+            var result = client.PostAsync("https://localhost:44321/api/Accounts/Login", stringContent).Result;
             var data = result.Content.ReadAsStringAsync().Result;
             //var token = JsonConvert.DeserializeObject(data).ToString();
             HttpContext.Session.SetString("JWToken", data);
@@ -66,9 +67,13 @@ namespace Client.Controllers
                 {
                     return Url.Action("Candidate", "Home");
                 }
-                else
+                else if (role == "Client")
                 {
                     return Url.Action("Client", "Home");
+                }
+                else
+                {
+                    return Url.Action("Admin", "Home");
                 }
             }
             else
@@ -79,7 +84,7 @@ namespace Client.Controllers
 
         }
 
-        
+        [HttpPost]
         public IActionResult ForgotPassword(ForgotPasswordVM forgotPassword)
         {
             var client = new HttpClient();
@@ -94,7 +99,8 @@ namespace Client.Controllers
                 return BadRequest(new { result });
             }
         }
-        
+
+        [HttpPut]
         public IActionResult ResetPassword(ChangePasswordVM resetPassword)
         {
             var client = new HttpClient();
@@ -107,6 +113,24 @@ namespace Client.Controllers
             else
             {
                 return BadRequest(new { result });
+            }
+        }
+
+        [HttpPost]
+        public string Register(RegisterVM registerVM)
+        {
+            var httpClient = new HttpClient();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(registerVM), Encoding.UTF8, "application/json");
+            var response = httpClient.PostAsync("https://localhost:44321/api/Accounts/register/", content);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return Url.Action("Index", "Authentication");
+            }
+            else
+            {
+                return "Error";
             }
         }
     }

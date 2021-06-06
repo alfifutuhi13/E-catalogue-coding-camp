@@ -102,8 +102,12 @@ namespace API.Controllers
         [HttpPut("Change-Password")]
         public ActionResult ChangePassword(ChangePasswordVM changePasswordVM)
         {
-            
-            var foundAccount = context.Accounts.Where(account => account.User.Email == changePasswordVM.Email).FirstOrDefault();
+            var jwt = new JwtSecurityTokenHandler();
+            var jwtRead = jwt.ReadJwtToken(changePasswordVM.Token);
+
+            var foundEmail = jwtRead.Claims.First(email => email.Type == "email").Value;
+
+            var foundAccount = context.Accounts.Where(account => account.User.Email == foundEmail).FirstOrDefault();
 
             if (foundAccount == null || !Hash.ValidatePassword(changePasswordVM.CurrentPassword, foundAccount.Password))
             {

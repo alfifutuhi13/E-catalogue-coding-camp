@@ -7,6 +7,8 @@ namespace API.ViewModels
 {
     public class InsertCVVM
     {
+        public string Email { get; set; }
+        public string Role { get; set; }
         public List<OrganizationVM> Organizations { get; set; }
         public List<SkillVM> Skills { get; set; }
         public List<WorkVM> Works { get; set; }

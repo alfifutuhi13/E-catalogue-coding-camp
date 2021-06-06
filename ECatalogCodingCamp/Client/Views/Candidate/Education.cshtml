@@ -1,6 +1,5 @@
-﻿@{
-    ViewData["Title"] = "E-Catalogue Coding Camp";
-}
+﻿@{ ViewData["Title"] = "E-Catalogue Coding Camp";
+    Layout = "/Views/Shared/_LayoutCandidate.cshtml"; }
 
 <div class="card-body">
     <h4 class="card-title">Update Education</h4>
@@ -71,7 +70,7 @@
                     console.log(JSON.stringify(data));
                 }
             })
-            
+
         })
 
         $("#submit").click(function () {
@@ -90,16 +89,10 @@
                 UpdateEdu(obj);
             }
 
-            
+
         })
 
         let InsertEdu = (Obj) => {
-            //let Obj = new Object();
-            //Obj.Major = $("#major").val();
-            //Obj.University = $("#univ").val();
-            //Obj.Degree = $("#degree").val();
-            //Obj.GPA = $("#gpa").val();
-
             console.log(JSON.stringify(Obj));
             alert(JSON.stringify(Obj));
             $.ajax({

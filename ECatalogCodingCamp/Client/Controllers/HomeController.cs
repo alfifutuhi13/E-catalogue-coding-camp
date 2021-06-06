@@ -130,7 +130,22 @@ namespace Client.Controllers
         }
         public IActionResult Profile()
         {
-            return View();
+            var token = HttpContext.Session.GetString("JWToken");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = myContext.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
         }
 
         public IActionResult Logout()

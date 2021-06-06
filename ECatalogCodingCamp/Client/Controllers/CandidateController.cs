@@ -33,7 +33,7 @@ namespace Client.Controllers
         {
             return View();
         }
-        public IActionResult Biodata()
+        public IActionResult Profile()
         {
             return View();
         }

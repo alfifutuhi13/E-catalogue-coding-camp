@@ -1,15 +1,16 @@
 ﻿@{
     ViewData["Title"] = "E-Catalogue Coding Camp";
+    Layout = "/Views/Shared/_LayoutCandidate.cshtml";
 }
 
 <div class="card-body">
-    <h4 class="card-title">Update Education</h4>
+    
     <form class="my-login-validation" novalidate="" id="registerForm">
         <!--Id-->
         <input type="hidden" class="form-control" id="id" name="id">
         <!--Major-->
         <div class="form-group">
-            <label for="name">Major</label>
+            <label for="major">Major</label>
             <input id="major" type="text" class="form-control" name="major" placeholder="Ex: Teknik Informatika" required autofocus>
             <div class="invalid-feedback">
                 Major is required
@@ -38,7 +39,7 @@
             <div class="invalid-feedback">GPA is required</div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block" id="submit">Update</button>
+        <button type="submit" class="btn btn-primary btn-block" id="submit">Submit</button>
 
     </form>
 </div>

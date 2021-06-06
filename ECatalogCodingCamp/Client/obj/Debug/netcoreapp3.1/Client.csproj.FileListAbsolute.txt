@@ -194,3 +194,4 @@ C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Clien
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Profile.cshtml.g.cs
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Admin.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Admin.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Biodata.cshtml.g.cs

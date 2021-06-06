@@ -68,17 +68,60 @@
                 success: (data) => {
                     console.log(data);
                     var obj = JSON.parse(data);
+                    console.log(obj);
 
-                    $("#organization0").val(`${obj.organizationName}`);
-                    $("#roleorganization0").val(`${obj.roleOrganization}`);
-                    $("#skill0").val(`${obj.skillName}`);
-                    $("#work0").val(`${obj.workName}`);
+                    $("#organization0").val(`${obj[0].OrganizationName}`);
+                    $("#roleorganization0").val(`${obj[0].RoleOrganization}`);
+                    $("#skill0").val(`${obj[0].SkillName}`);
+                    $("#work0").val(`${obj[0].WorkName}`);
+
+                    if (obj.length > 1) {
+                        for (let ij = 1; ij < obj.length; ij++) {
+                            if (obj[ij].OrganizationName == "") {
+                                //nothing to do
+                            }
+                            else {
+                                $(wrapperOrg).append(`<div><label for="organization${ij}">Organization</label><br /><input id="organization${ij}" type="text" class="form-control" name="organization${ij}" value="" placeholder="Ex: Himpunan" required /><br /><div class="invalid-feedback">Organization is required</div><label for="roleorganization${ij}">Role Organization</label><br /><input id="roleorganization${ij}" type="text" class="form-control" name="roleorganization${ij}" value="" placeholder="Ex: Ketua" required /><br /><div class="invalid-feedback">Role Organization is required</div> <a href="javascript:void(0);" class="remove_button">Remove Organization and Role Organization Field</a></div>`); //add field html
+                                countOrg = ij; //increment field counter
+
+                                $(`#organization${ij}`).val(`${obj[ij].OrganizationName}`);
+                                $(`#roleorganization${ij}`).val(`${obj[ij].RoleOrganization}`);
+                            }
+                        }
+
+                        for (let ik = 1; ik < obj.length; ik++) {
+                            if (obj[ik].SkillName == "") {
+                                //nothing to do
+                            }
+                            else {
+                                $(wrapperSkill).append(`<div><label for="skill${ik}">Skill</label><input id="skill${ik}" type="text" class="form-control" name="skill${ik}" placeholder="Ex: Python" required><br /><div class="invalid-feedback">Skill is required</div> <a href="javascript:void(0);" class="remove_button">Remove Skill Field</a></div>`); //add field html
+                                countSkill = ik; //increment field counter
+
+                                $(`#skill${ik}`).val(`${obj[ik].SkillName}`);
+                            }
+                        }
+
+                        for (let il = 1; il < obj.length; il++) {
+                            if (obj[il].WorkName == "") {
+                                //nothing to do
+                            }
+                            else {
+                                $(wrapperWork).append(`<div><label for="work${il}" >Work Experience</label><input id="work${il}" type="text" class="form-control" name="work${il}" placeholder="Ex: Metrodata" required><br /><div class="invalid-feedback">Work is required</div> <a href="javascript:void(0);" class="remove_button">Remove Work Field</a></div>`); //add field html
+                                countWork = il; //increment field counter
+
+                                $(`#work${il}`).val(`${obj[il].WorkName}`);
+                            }
+                        }
+
+                    }
+                        
+                    
 
                 },
                 error: (data) => {
                     console.log(JSON.stringify(data));
                 }
-            })
+            });
 
             //dynamic input Experiences Fields
             var maxField = 10; //input fields increment limitation
@@ -168,7 +211,7 @@
                     Obj.Works[k] = new Object();
                     Obj.Works[k].WorkName = $(`#work${k}`).val();
                 }
-
+                console.log(Obj);
                 console.log(JSON.stringify(Obj));
                 alert(JSON.stringify(Obj));
                 $.ajax({
@@ -200,7 +243,7 @@
             }
 
 
-        })
+        });
        
     </script>
 }

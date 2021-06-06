@@ -12,11 +12,11 @@ namespace API.Repositories.Data
     {
         private readonly MyContext context;
 
-        public EducationRepository(MyContext myContext) : base(myContext)
+        public EducationRepository(MyContext context) : base(context)
         {
-
+            this.context = context;
         }
-        public Education GetById(int id)
+        public Education GetEducationId(int id)
         {
             var get = context.Educations
                 .Include(e => e.Major).ThenInclude(m => m.Name)
@@ -25,7 +25,7 @@ namespace API.Repositories.Data
             return get;
         }
 
-        public IEnumerable<Education> GetAll()
+        public IEnumerable<Education> GetAllEducation()
         {
             var get = context.Educations
                 .Include(e => e.Major).ThenInclude(m => m.Name)

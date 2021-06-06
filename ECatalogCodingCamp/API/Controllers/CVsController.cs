@@ -8,9 +8,11 @@ using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,11 +27,13 @@ namespace API.Controllers
         private readonly CVRepository cvRepository;
         private readonly MyContext context;
         private readonly IGenericDapper _dapper;
-        public CVsController(CVRepository cvRepository, MyContext context, IGenericDapper dapper) : base(cvRepository)
+        private readonly IConfiguration config;
+        public CVsController(CVRepository cvRepository, MyContext context, IGenericDapper dapper, IConfiguration config) : base(cvRepository)
         {
             this.cvRepository = cvRepository;
             this.context = context;
             _dapper = dapper;
+            this.config = config;
         }
 
 
@@ -90,13 +94,17 @@ namespace API.Controllers
         }
 
         [HttpGet("Experience")]
-        public ActionResult GetAllExp(InsertCVVM cv)
+        public dynamic GetAllExp()
         {
-            var param = new DynamicParameters();
-            param.Add("Email", cv.Email, DbType.String);
-            var result = Task.FromResult(_dapper.Get<int>("[dbo].[SP_RetrieveCVId]", param, commandType: CommandType.StoredProcedure));
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
 
-            return Ok(result);
+            var param = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            param.Add("Email", getEmail, DbType.String);
+            var queryCV = db.Query<dynamic>("[dbo].[SP_RetrieveCVId]", param, commandType: CommandType.StoredProcedure);
+            return queryCV;
         }
     }
 }

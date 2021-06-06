@@ -54,19 +54,20 @@
             $.ajax({
                 type: "GET",
                 url: `/Candidate/GetEduId/`,
-                dataSrc: '',
                 success: (data) => {
                     console.log(data);
                     var obj = JSON.parse(data);
+                    console.log(obj);
 
-                    $("#id").val(`${obj.id}`);
-                    $("#major").val(`${obj.major}`);
-                    $("#univ").val(`${obj.university}`);
-                    $("#degree").val(`${obj.degree}`);
-                    $("#gpa").val(`${obj.gpa}`);
+                    $("#id").val(`${obj[0].Id}`);
+                    $("#major").val(`${obj[0].MajorName}`);
+                    $("#univ").val(`${obj[0].UniversityName}`);
+                    $("#degree").val(`${obj[0].Degree}`);
+                    $("#gpa").val(`${obj[0].GPA}`);
 
                 },
                 error: (data) => {
+                    console.log("error");
                     console.log(JSON.stringify(data));
                 }
             })
@@ -109,6 +110,7 @@
                 location.reload(true);
             });
         }
+
 
         
 

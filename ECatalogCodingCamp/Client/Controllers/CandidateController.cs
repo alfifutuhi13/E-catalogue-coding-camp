@@ -33,6 +33,10 @@ namespace Client.Controllers
         {
             return View();
         }
+        public IActionResult Biodata()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult InsertEducation(EducationVM educationVM)
@@ -113,39 +117,22 @@ namespace Client.Controllers
         {
             var httpClient = new HttpClient();
             var token = HttpContext.Session.GetString("JWToken");
-            var jwtReader = new JwtSecurityTokenHandler();
-            var jwt = jwtReader.ReadJwtToken(token);
-            var email = jwt.Claims.First(c => c.Type == "email").Value;
-
-            var Candidate = context.Users.FirstOrDefault(c => c.Email == email);
-            //EducationVM educationVM = new EducationVM();
-            //educationVM.Email = email;
 
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            //StringContent content = new StringContent(JsonConvert.SerializeObject(educationVM), Encoding.UTF8, "application/json");
-            //var responseAll = httpClient.PostAsync("https://localhost:44321/api/Educations/GetAllData", content).Result;
-            //var apiResponseAll = responseAll.Content.ReadAsStringAsync();
-            //apiResponseAll.Wait();
-            var response = httpClient.GetAsync("https://localhost:44321/api/Educations/" + Candidate.Id).Result;
+            var response = httpClient.GetAsync("https://localhost:44321/api/Educations/GetAllData").Result;
             var apiResponse = response.Content.ReadAsStringAsync();
             apiResponse.Wait();
             return apiResponse.Result;
         }
+       
         [HttpGet]
         public string GetCVId()
         {
-            InsertCVVM cv = new InsertCVVM();
             var httpClient = new HttpClient();
             var token = HttpContext.Session.GetString("JWToken");
-            var jwtReader = new JwtSecurityTokenHandler();
-            var jwt = jwtReader.ReadJwtToken(token);
-            var email = jwt.Claims.First(c => c.Type == "email").Value;
-            cv.Email = email;
-            var Candidate = context.Users.FirstOrDefault(c => c.Email == email);
 
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            StringContent content = new StringContent(JsonConvert.SerializeObject(cv), Encoding.UTF8, "application/json");
-            var response = httpClient.PostAsync("https://localhost:44321/api/CVs/Experience", content).Result;
+            var response = httpClient.GetAsync("https://localhost:44321/api/CVs/Experience").Result;
             var apiResponse = response.Content.ReadAsStringAsync();
             apiResponse.Wait();
             return apiResponse.Result;

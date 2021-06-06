@@ -100,11 +100,27 @@ namespace API.Controllers
             var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
             var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
 
-            var param = new DynamicParameters();
+            var paramOrg = new DynamicParameters();
+            var paramSkill = new DynamicParameters();
+            var paramWork = new DynamicParameters();
             using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
-            param.Add("Email", getEmail, DbType.String);
-            var queryCV = db.Query<dynamic>("[dbo].[SP_RetrieveCVId]", param, commandType: CommandType.StoredProcedure);
-            return queryCV;
+            paramOrg.Add("Email", getEmail, DbType.String);
+            var queryOrg = db.Query<dynamic>("[dbo].[SP_RetrieveOrganization]", paramOrg, commandType: CommandType.StoredProcedure);
+
+            paramSkill.Add("Email", getEmail, DbType.String);
+            var querySkill = db.Query<dynamic>("[dbo].[SP_RetrieveSkill]", paramSkill, commandType: CommandType.StoredProcedure);
+
+            paramWork.Add("Email", getEmail, DbType.String);
+            var queryWork = db.Query<dynamic>("[dbo].[SP_RetrieveWork]", paramWork, commandType: CommandType.StoredProcedure);
+
+            var queryObject = new
+            {
+                Organizations = queryOrg,
+                Skills = querySkill,
+                Works = queryWork
+            };
+
+            return queryObject;
         }
     }
 }

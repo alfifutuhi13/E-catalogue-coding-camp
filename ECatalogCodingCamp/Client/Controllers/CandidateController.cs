@@ -118,8 +118,14 @@ namespace Client.Controllers
             var email = jwt.Claims.First(c => c.Type == "email").Value;
 
             var Candidate = context.Users.FirstOrDefault(c => c.Email == email);
+            //EducationVM educationVM = new EducationVM();
+            //educationVM.Email = email;
 
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            //StringContent content = new StringContent(JsonConvert.SerializeObject(educationVM), Encoding.UTF8, "application/json");
+            //var responseAll = httpClient.PostAsync("https://localhost:44321/api/Educations/GetAllData", content).Result;
+            //var apiResponseAll = responseAll.Content.ReadAsStringAsync();
+            //apiResponseAll.Wait();
             var response = httpClient.GetAsync("https://localhost:44321/api/Educations/" + Candidate.Id).Result;
             var apiResponse = response.Content.ReadAsStringAsync();
             apiResponse.Wait();

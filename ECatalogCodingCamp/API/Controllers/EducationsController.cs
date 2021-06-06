@@ -54,5 +54,15 @@ namespace API.Controllers
             return Ok(new { result = result, message = "Education has been updated." });
         }
 
+        //[Authorize(Roles = "Candidate")]
+        //[HttpPost("GetAllData")]
+        //public ActionResult GetAllData(EducationVM educationVM)
+        //{
+        //    var dbparams = new DynamicParameters();
+        //    dbparams.Add("Email", educationVM.Email, DbType.String);
+        //    var result = Task.FromResult(_dapper.Get<int>("[dbo].[SP_RetrieveEducation]", dbparams, commandType: CommandType.StoredProcedure));
+        //    return Ok(result);
+        //}
+
     }
 }

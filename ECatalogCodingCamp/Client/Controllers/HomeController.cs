@@ -13,6 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -117,6 +118,7 @@ namespace Client.Controllers
         {
             changePasswordVM.Token = HttpContext.Session.GetString("JWToken");
             var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", changePasswordVM.Token);
             StringContent content = new StringContent(JsonConvert.SerializeObject(changePasswordVM), Encoding.UTF8, "application/json");
             var result = httpClient.PutAsync("https://localhost:44321/api/Accounts/Change-Password", content).Result;
             return result.StatusCode;

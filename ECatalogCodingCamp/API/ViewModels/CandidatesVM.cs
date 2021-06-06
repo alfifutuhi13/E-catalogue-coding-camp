@@ -9,6 +9,7 @@ namespace API.ViewModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string JobRole { get; set; }  
+        public string JobRole { get; set; }
+        public string StatusBook { get; set; }
     }
 }

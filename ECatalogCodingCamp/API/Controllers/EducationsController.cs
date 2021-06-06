@@ -59,6 +59,23 @@ namespace API.Controllers
         }
 
         [Authorize(Roles = "Candidate")]
+        [HttpPut("Update-Education")]
+        public ActionResult UpdateEducation(EducationVM educationVM)
+        {
+
+            var dbparams = new DynamicParameters();
+            dbparams.Add("Email", educationVM.Email, DbType.String);
+            dbparams.Add("Major", educationVM.Major, DbType.String);
+            dbparams.Add("Univ", educationVM.University, DbType.String);
+            dbparams.Add("Degree", educationVM.Degree, DbType.String);
+            dbparams.Add("GPA", educationVM.GPA, DbType.Double);
+
+            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_Update_TB_T_Education]", dbparams, commandType: CommandType.StoredProcedure));
+
+            return Ok(new { result = result, message = "Education has been updated." });
+        }
+
+        [Authorize(Roles = "Candidate")]
         [HttpGet("GetAllData")]
         public dynamic GetAllData()
         {

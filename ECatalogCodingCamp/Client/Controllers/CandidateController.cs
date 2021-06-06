@@ -124,7 +124,29 @@ namespace Client.Controllers
             apiResponse.Wait();
             return apiResponse.Result;
         }
-       
+
+        [HttpPut]
+        public HttpStatusCode UpdateEducation(EducationVM education)
+        {
+            var httpClient = new HttpClient();
+
+            var token = HttpContext.Session.GetString("JWToken");
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var role = jwt.Claims.First(c => c.Type == "role").Value;
+            var email = jwt.Claims.First(c => c.Type == "email").Value;
+
+            education.Role = role;
+            education.Email = email;
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(education), Encoding.UTF8, "application/json");
+            var response = httpClient.PutAsync("https://localhost:44321/api/Educations/update-education/", content);
+            response.Wait();
+            var result = response.Result;
+            return result.StatusCode;
+        }
+
         [HttpGet]
         public string GetCVId()
         {
@@ -138,5 +160,7 @@ namespace Client.Controllers
             return apiResponse.Result;
 
         }
+
+        
     }
 }

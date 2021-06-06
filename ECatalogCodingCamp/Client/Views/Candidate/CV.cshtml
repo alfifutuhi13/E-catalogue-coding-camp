@@ -1,9 +1,10 @@
 ﻿@{
     ViewData["Title"] = "E-Catalogue Coding Camp";
+    Layout = "/Views/Shared/_LayoutCandidate.cshtml";
 }
 
 <div class="card-body">
-    <h4 class="card-title">Update Experiences</h4>
+    <h4 class="card-title">Update Experiences</h4><br />
     <form class="my-login-validation" novalidate="" id="registerForm">
         <!--Id-->
         <input type="hidden" class="form-control" id="id" name="id">
@@ -51,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block" id="submit">Update</button>
+        <button type="submit" class="btn btn-primary btn-block" id="submit">Submit</button>
     </form>
 </div>
 
@@ -208,24 +209,6 @@
             })
 
             let InsertCV = (Obj) => {
-                //let Obj = new Object();
-                //Obj.Organizations = [];
-                //Obj.Skills = [];
-                //Obj.Works = [];
-
-                //for (let i = 0; i < countOrg; i++) {
-                //    Obj.Organizations[i] = new Object();
-                //    Obj.Organizations[i].OrganizationName = $(`#organization${i}`).val();
-                //    Obj.Organizations[i].RoleOrganization = $(`#roleorganization${i}`).val();
-                //}
-                //for (let j = 0; j < countSkill; j++) {
-                //    Obj.Skills[j] = new Object();
-                //    Obj.Skills[j].SkillName = $(`#skill${j}`).val();
-                //}
-                //for (let k = 0; k < countWork; k++) {
-                //    Obj.Works[k] = new Object();
-                //    Obj.Works[k].WorkName = $(`#work${k}`).val();
-                //}
                 console.log(Obj);
                 console.log(JSON.stringify(Obj));
                 alert(JSON.stringify(Obj));
@@ -243,24 +226,6 @@
             }
 
             let UpdateCV = (Obj) => {
-                //let Obj = new Object();
-                //Obj.Organizations = [];
-                //Obj.Skills = [];
-                //Obj.Works = [];
-
-                //for (let i = 0; i < Obj.Organizations.length; i++) {
-                //    Obj.Organizations[i] = new Object();
-                //    Obj.Organizations[i].OrganizationName = $(`#organization${i}`).val();
-                //    Obj.Organizations[i].RoleOrganization = $(`#roleorganization${i}`).val();
-                //}
-                //for (let j = 0; j < Obj.Skills.length; j++) {
-                //    Obj.Skills[j] = new Object();
-                //    Obj.Skills[j].SkillName = $(`#skill${j}`).val();
-                //}
-                //for (let k = 0; k < Obj.Works.length; k++) {
-                //    Obj.Works[k] = new Object();
-                //    Obj.Works[k].WorkName = $(`#work${k}`).val();
-                //}
                 console.log(Obj);
                 console.log(JSON.stringify(Obj));
                 alert(JSON.stringify(Obj));
@@ -276,6 +241,7 @@
                     alert("Failed to Add Data!");
                 });
             }
+
 
             let sAlertAdd = () => {
                 swal({

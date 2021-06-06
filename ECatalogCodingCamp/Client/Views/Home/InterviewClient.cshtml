@@ -46,7 +46,7 @@
                 url: `GetClientId`
             }).done(result => {
                 let json = JSON.parse(result);
-                getCandidateById(json[0].Id);
+                getCandidateById(json[0].id);
             }).fail(result => {
                 console.log(result);
             })

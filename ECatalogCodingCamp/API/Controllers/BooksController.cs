@@ -58,5 +58,32 @@ namespace API.Controllers
             dbparams.Add("Email", getEmail, DbType.String);
             return db.Query<dynamic>("[dbo].[SP_GetCandidate]", dbparams, commandType: CommandType.StoredProcedure);
         }
+
+        [HttpGet("GetClientId")]
+        public dynamic GetClientId()
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
+
+            var dbparams = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            dbparams.Add("Email", getEmail, DbType.String);
+            return db.Query<dynamic>("[dbo].[SP_GetClientId]", dbparams, commandType: CommandType.StoredProcedure);
+        }
+
+        [HttpGet("GetCandidate/{id}")]
+        public dynamic GetCandidate(int id)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
+
+            var paramsGetClient = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            paramsGetClient.Add("Id", id, DbType.Int32);
+            return db.Query<dynamic>("[dbo].[SP_GetCandidateInterview]", paramsGetClient, commandType: CommandType.StoredProcedure);
+
+        }
     }
 }

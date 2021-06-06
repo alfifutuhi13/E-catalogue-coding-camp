@@ -5,19 +5,14 @@
     <table id="table_id" class="display">
         <thead>
             <tr>
-                <th>Column 1</th>
-                <th>Column 2</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Bid Salary</th>
+                <th>Interview Schedule</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Row 1 Data 1</td>
-                <td>Row 1 Data 2</td>
-            </tr>
-            <tr>
-                <td>Row 2 Data 1</td>
-                <td>Row 2 Data 2</td>
-            </tr>
         </tbody>
     </table>
 </div>
@@ -25,8 +20,36 @@
 
 @section Scripts{
     <script>
-        $(document).ready( function () {
-            $('#table_id').DataTable();
-        } );
+        $(document).ready(function () {
+            getClient();
+        });
+
+        let getCandidateById = id => {
+            $('#table_id').DataTable({
+                ajax: {
+                    url: `GetCandidate/${id}`,
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'Name' },
+                    { data: 'Email' },
+                    { data: 'Phone' },
+                    { data: 'BidSalary' },
+                    { data: 'Schedule' }
+                ]
+            });
+        }
+
+        let getClient = () => {
+            $.ajax({
+                type: 'GET',
+                url: `GetClientId`
+            }).done(result => {
+                let json = JSON.parse(result);
+                getCandidateById(json[0].Id);
+            }).fail(result => {
+                console.log(result);
+            })
+        }
     </script>
 }

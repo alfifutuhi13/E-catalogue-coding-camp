@@ -36,7 +36,8 @@ namespace API.Controllers
         public ActionResult InterviewRequest(InterviewRequestVM interviewRequestVM)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
+            //var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
             var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value; //email client
 
             var foundClient = context.Users.Where(user => user.Email == getEmail).FirstOrDefault();

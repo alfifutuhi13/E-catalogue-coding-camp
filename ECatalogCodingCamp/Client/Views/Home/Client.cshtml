@@ -74,7 +74,28 @@
 
             $('#submit').click(function () {
                 let bookCandidate = new Object();
-                bookCandidate.Id = can
+                bookCandidate.candidateId = $("#id").val();
+                bookCandidate.bidSalary = $("#salary").val();
+                bookCandidate.schedule = $("#interviewdate").val();
+
+                $.ajax({
+                    url: `InterviewRequest`,
+                    type: `POST`,
+                    data: bookCandidate,
+                    success: data => {
+                        console.log(data);
+                        if (data == 200) {
+                            alert("success");
+                        }
+                        else {
+                            alert("error success");
+                        }
+                    },
+                    error: data => {
+                        console.log(data);
+                        alert("error error");
+                    }
+                })
             })
         })
 
@@ -105,48 +126,24 @@
 
                     function eachCandidates(candidate) {
                         cardDeck.innerHTML += `<div class="card">
-            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title text-center">${candidate.name}</h5>
-                <p class="card-text text-center">${candidate.jobRole}</p>
-                <button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
-                    Book
-                </button>
-            </div>
-        </div>`;
-
-                        cardDeck.innerHTML += `<div class="card">
-            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title text-center">${candidate.name}</h5>
-                <p class="card-text text-center">${candidate.jobRole}</p>
-                <button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
-                    Book
-                </button>
-            </div>
-        </div>`;
-
-                        cardDeck.innerHTML += `<div class="card">
-            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title text-center">${candidate.name}</h5>
-                <p class="card-text text-center">${candidate.jobRole}</p>
-                <button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
-                    Book
-                </button>
-            </div>
-        </div>`;
-
-                        cardDeck.innerHTML += `<div class="card">
-            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title text-center">${candidate.name}</h5>
-                <p class="card-text text-center">${candidate.jobRole}</p>
-                <button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
-                    Book
-                </button>
-            </div>
-        </div>`;
+                            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">${candidate.name}</h5>
+                                <p class="card-text text-center">${candidate.jobRole}</p>
+                                ${(() => {
+                                                if (candidate.statusBook == "Open") {
+                                                    return `<button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success                           my-3" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
+                                                                Book
+                                                            </button>`
+                                                } else {
+                                                    return `<button type="button" class="btn btn-success my-3" disabled>
+                                                                Booked
+                                                            </button>`
+                                                }
+                                            })()}
+                
+                            </div>
+                        </div>`;
                     }
                     
                 },

@@ -166,6 +166,25 @@ namespace Client.Controllers
             return Json(apiResponse.Result);
         }
 
+        [HttpPost]
+        public HttpStatusCode InterviewRequest(InterviewRequestVM interviewRequest)
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(interviewRequest), Encoding.UTF8, "application/json");
+            var response = client.PostAsync("https://localhost:44321/api/InterviewRequests/Interview-Request", stringContent );
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return HttpStatusCode.OK;
+            }
+            //var apiResponse = result.Content.ReadAsStringAsync();
+
+            return HttpStatusCode.BadRequest;
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

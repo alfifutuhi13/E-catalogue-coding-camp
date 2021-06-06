@@ -93,6 +93,21 @@ namespace API.Controllers
             return Ok(new { message = "CV has been updated." });
         }
 
+        //[HttpPut("UpdateCV")]
+        //public ActionResult UpdateEducation(InsertCVVM cv)
+        //{
+
+        //    var dbparams = new DynamicParameters();
+        //    dbparams.Add("Email", cv.Email, DbType.String);
+        //    dbparams.Add("Major", cv.Major, DbType.String);
+        //    dbparams.Add("Univ", cv.University, DbType.String);
+        //    dbparams.Add("Degree", cv.Degree, DbType.String);
+        //    dbparams.Add("GPA", cv.GPA, DbType.Double);
+
+        //    var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_Update_TB_T_Education]", dbparams, commandType: CommandType.StoredProcedure));
+
+        //    return Ok(new { result = result, message = "Education has been updated." });
+        //}
         [HttpGet("Experience")]
         public dynamic GetAllExp()
         {

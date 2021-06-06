@@ -91,15 +91,15 @@
                     { data: 'Phone' },
                     { data: 'BidSalary' },
                     { data: 'Schedule' },
-                    {
-                        "render": function (data, type, row) {
-                            return `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yes" onclick="getId(' + row.id + ')" data-toggle="tooltip" data-placement="top" title="Confirm">Yes</button>`
-                                +
-                                ` <button class="btn btn-danger" data-bs-toggle="modal" data-toggle="tooltip" onclick="getById(${row.id})" data-placement="top" title="Reschedule">Reschedule</button>`;
-                        },
-                        "orderable": false,
-                        "searchable": false
-                    },
+                    //{
+                    //    "render": function (data, type, row) {
+                    //        return `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yes" onclick="getId(' + row.id + ')" data-toggle="tooltip" data-placement="top" title="Confirm">Confirm</button>`
+                    //            +
+                    //            /*` <button class="btn btn-danger" data-bs-toggle="modal" data-toggle="tooltip" onclick="getById(${row.id})" data-placement="top" title="Reschedule">Reschedule</button>`;*/
+                    //    },
+                    //    "orderable": false,
+                    //    "searchable": false
+                    //},
 
                 ]
             });

@@ -5959,23 +5959,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
+    "C:\\Users\\alfat\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\Client\\Client.csproj",
+      "projectUniqueName": "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\Client\\Client.csproj",
       "projectName": "Client",
-      "projectPath": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\Client\\Client.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\Client\\obj\\",
+      "projectPath": "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\Client\\Client.csproj",
+      "packagesPath": "C:\\Users\\alfat\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alfat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5990,8 +5990,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj": {
-              "projectPath": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj"
+            "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj": {
+              "projectPath": "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj"
             }
           }
         }

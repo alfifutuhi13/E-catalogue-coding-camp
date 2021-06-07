@@ -95,7 +95,11 @@
         }
 
         $("#submit").click(function () {
-            Register();
+            if (User.Name == "" || User.Email == "" || User.Password == "" ||  User.Phone == "") {
+                alert("Please fill all fields required")
+            } else {
+                Register();
+            }
         })
 
 

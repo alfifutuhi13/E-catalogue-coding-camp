@@ -82,12 +82,21 @@
             obj.Degree = $("#degree").val();
             obj.GPA = $("#gpa").val();
 
-            if (obj.id == "") {
-                InsertEdu(obj);
+            console.log(obj);
+            if (obj.Major == "" || obj.University == "" || obj.Degree == "" || obj.GPA == "") {
+                //Can't insert or update
+                alert("Can't update data");
             }
             else {
-                UpdateEdu(obj);
+                if (obj.id == "") {
+                    InsertEdu(obj);
+                }
+                else {
+                    UpdateEdu(obj);
+                }
             }
+
+            
 
 
         })

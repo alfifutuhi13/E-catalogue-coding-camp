@@ -65,42 +65,39 @@
                 e.preventDefault();
             });
 
-        })
-
-        let Register = () => {
-            let User = new Object();
-            User.Name = $("#name").val();
-            User.Email = $("#email").val();
-            User.Password = $("#password").val();
-            User.Phone = $("#phone").val();
-            User.RoleId = 2;
-
-            console.log(JSON.stringify(User));
-            alert(JSON.stringify(User));
-            $.ajax({
-                url: '/Authentication/Register',
-                type: 'POST',
-                data: User
-            }).done((result) => {
-                console.log(result);
-                alert(result);
-                if (result == 200) {
-                    alert("Successed to Add Data!");
-                    location.reload(true);
-                }
-            }).fail((result) => {
-                console.log(result);
-                alert("Failed to Add Data!");
-            });
-        }
-
-        $("#submit").click(function () {
-            if (User.Name == "" || User.Email == "" || User.Password == "" ||  User.Phone == "") {
-                alert("Please fill all fields required")
-            } else {
-                Register();
+            let Register = (User) => {
+                console.log(JSON.stringify(User));
+                alert(JSON.stringify(User));
+                $.ajax({
+                    url: '/Authentication/Register',
+                    type: 'POST',
+                    data: User
+                }).done((result) => {
+                    console.log(result);
+                    window.location.href = result;
+                }).fail((result) => {
+                    console.log(result);
+                    alert("Failed to Add Data!");
+                });
             }
+
+            $("#submit").click(function () {
+                let User = new Object();
+                User.Name = $("#name").val();
+                User.Email = $("#email").val();
+                User.Password = $("#password").val();
+                User.Phone = $("#phone").val();
+                User.RoleId = 2;
+
+                if (User.Name == "" || User.Email == "" || User.Password == "" || User.Phone == "") {
+                    alert("Please fill all fields required")
+                } else {
+                    Register(User);
+                }
+            })
         })
+
+        
 
 
     </script>

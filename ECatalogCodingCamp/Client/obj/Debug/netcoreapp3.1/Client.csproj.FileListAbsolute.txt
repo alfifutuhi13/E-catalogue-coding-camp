@@ -195,9 +195,9 @@ C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Clien
 C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Admin.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Admin.cshtml.g.cs
 D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Biodata.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutCandidate.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Profile.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\ProfileCandidate.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\ProfileClient.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\InterviewCandidate.cshtml.g.cs
-C:\Users\alfat\Documents\GitHub\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\InterviewClient.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutCandidate.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Candidate\Profile.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\InterviewCandidate.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\InterviewClient.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\ProfileCandidate.cshtml.g.cs
+D:\Visual Studio Source\E-catalogue-coding-camp\ECatalogCodingCamp\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\ProfileClient.cshtml.g.cs

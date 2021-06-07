@@ -152,11 +152,22 @@
                 type: 'POST',
                 data: User
             }).done((result) => {
-                console.log(result);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Succesfully Registered',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 window.location.href = result;
             }).fail((result) => {
-                console.log(result);
-                alert("Failed to Add Data!");
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Failed Registered',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             });
         }
 

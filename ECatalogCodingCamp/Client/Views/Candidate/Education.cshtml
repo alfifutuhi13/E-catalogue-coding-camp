@@ -2,7 +2,7 @@
     Layout = "/Views/Shared/_LayoutCandidate.cshtml"; }
 
 <div class="card-body">
-    <h4 class="card-title">Update Education</h4>
+    <h4 class="card-title">Update Education</h4> <br />
     <form class="my-login-validation" novalidate="" id="registerForm">
         <!--Id-->
         <input type="hidden" class="form-control" id="id" name="id">
@@ -82,12 +82,21 @@
             obj.Degree = $("#degree").val();
             obj.GPA = $("#gpa").val();
 
-            if (obj.id == "") {
-                InsertEdu(obj);
+            console.log(obj);
+            if (obj.Major == "" || obj.University == "" || obj.Degree == "" || obj.GPA == "") {
+                //Can't insert or update
+                alert("Can't update data");
             }
             else {
-                UpdateEdu(obj);
+                if (obj.id == "") {
+                    InsertEdu(obj);
+                }
+                else {
+                    UpdateEdu(obj);
+                }
             }
+
+            
 
 
         })

@@ -161,7 +161,12 @@
         }
 
         $("#submit").click(function () {
-            Register();
+            if(User.Name == "" || User.Email == "" || User.Password == "" || User.BirthDate == "" || User.Gender == null || User.Phone == "" || User.JobRoleId == null){
+                alert("Please fill all fields required")
+            }else {
+                Register();
+            }
+ 
         })
 
         //let getRoleValue = (str) => {

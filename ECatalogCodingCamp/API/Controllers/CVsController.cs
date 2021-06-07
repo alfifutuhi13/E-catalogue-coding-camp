@@ -40,13 +40,6 @@ namespace API.Controllers
         [HttpPost("InsertCV")]
         public ActionResult InsertCV(InsertCVVM insert)
         {
-            //var tokenHandler = new JwtSecurityTokenHandler();
-            //var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
-            //var readToken = tokenHandler.ReadJwtToken(token);
-            //var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
-
-            //var foundCandidate = context.Users.Where(user => user.Email == getEmail).FirstOrDefault();
-
             var paramsGetCVId = new DynamicParameters();
             paramsGetCVId.Add("Email", insert.Email, DbType.String);
             var CVId = Task.FromResult(_dapper.Get<int>("[dbo].[SP_GetInsertCVId]", paramsGetCVId, commandType: CommandType.StoredProcedure));

@@ -47,17 +47,18 @@ namespace API.Controllers
             //var result = (_dapper.Get<dynamic>("[dbo].[SP_RetrieveEducation]", dbparams, commandType: CommandType.StoredProcedure);
         }
 
-        [HttpGet("Detail/${id}")]
-        public dynamic Detail(int id)
+        [HttpGet("Detail/{id}")]
+        public ActionResult Detail(int id)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
-            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
+            //var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            //var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
 
             var dbparams = new DynamicParameters();
             using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
             dbparams.Add("Id", id, DbType.Int32);
-            return db.Query<dynamic>("[dbo].[SP_GetDetail]", dbparams, commandType: CommandType.StoredProcedure);
+            var queryResult =  _dapper.Get<dynamic>("[dbo].[SP_GetDetail]", dbparams, commandType: CommandType.StoredProcedure);
+            return Ok(queryResult);
             //var result = (_dapper.Get<dynamic>("[dbo].[SP_RetrieveEducation]", dbparams, commandType: CommandType.StoredProcedure);
         }
 

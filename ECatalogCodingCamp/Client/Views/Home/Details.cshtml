@@ -80,19 +80,16 @@
     </form>
 </div>
 
-@section Scripts{ 
+@section Scripts{
     <script>
         $(document).ready(function () {
             $("#registerForm").submit(function (e) {
                 e.preventDefault();
             });
 
-            let candidateId = `@ViewData["candidateId"]`;
-
-                $.ajax({
-                    type: "GET",
-                    url: `GetDetail/`,
-                    data: candidateId,
+            $.ajax({
+                type: "GET",
+                url: `GetDetail/@ViewData["candidateId"]`,
                 success: (data) => {
                     console.log(data);
                     var obj = JSON.parse(data);

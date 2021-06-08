@@ -138,8 +138,9 @@
                                             } else {
                                                 return `<button type="button" class="btn btn-success my-3 mx-auto" disabled>Booked</button>`
                                             }
-                                        })()}
-                                        <button type="button" class="btn btn-warning my-3 mx-auto">Detail</button>
+                            })()}
+                                        <a onclick="getDetail(${candidate.id})" class="my-3 mx-auto btn btn-warning">Detail
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +167,19 @@
                 },
                 error: data => {
                     console.log(data);
+                }
+            })
+        }
+
+        const getDetail = id => {
+            $.ajax({
+                type: 'GET',
+                url: `Candidate/GoDetails/${id}`,
+                success: data => {
+                    window.location.href = data
+                },
+                error: data => {
+                    alert(data);
                 }
             })
         }

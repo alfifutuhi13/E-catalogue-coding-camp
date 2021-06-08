@@ -181,6 +181,20 @@ namespace Client.Controllers
             return apiResponse.Result;
         }
 
+        [HttpGet("GetDetail")]
+        public dynamic GetDetail()
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+            var candidateId = HttpContext.Session.GetString("CandidateID");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = httpClient.GetAsync(string.Format("https://localhost:44321/api/Users/Detail/{0}", candidateId)).Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+        }
+
         [HttpGet]
         public string GetCandidateId()
         {

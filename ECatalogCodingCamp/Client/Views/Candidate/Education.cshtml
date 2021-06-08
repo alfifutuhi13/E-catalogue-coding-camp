@@ -56,13 +56,21 @@
                 success: (data) => {
                     console.log(data);
                     var obj = JSON.parse(data);
-                    console.log(obj);
-
-                    $("#id").val(`${obj[0].Id}`);
-                    $("#major").val(`${obj[0].MajorName}`);
-                    $("#univ").val(`${obj[0].UniversityName}`);
-                    $("#degree").val(`${obj[0].Degree}`);
-                    $("#gpa").val(`${obj[0].GPA}`);
+                    console.log(obj.length);
+                    if (obj.length > 0) {
+                        $("#id").val(`${obj[0].Id}`);
+                        $("#major").val(`${obj[0].MajorName}`);
+                        $("#univ").val(`${obj[0].UniversityName}`);
+                        $("#degree").val(`${obj[0].Degree}`);
+                        $("#gpa").val(`${obj[0].GPA}`);
+                    } else {
+                        $("#id").val(``);
+                        $("#major").val(``);
+                        $("#univ").val(``);
+                        $("#degree").val(``);
+                        $("#gpa").val(``);
+                    }
+                    
 
                 },
                 error: (data) => {
@@ -82,7 +90,7 @@
             obj.Degree = $("#degree").val();
             obj.GPA = $("#gpa").val();
 
-            if (obj.id == "") {
+            if (obj.Id == "") {
                 InsertEdu(obj);
             }
             else {

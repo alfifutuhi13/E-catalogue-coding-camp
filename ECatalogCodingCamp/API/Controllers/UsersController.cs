@@ -47,6 +47,20 @@ namespace API.Controllers
             //var result = (_dapper.Get<dynamic>("[dbo].[SP_RetrieveEducation]", dbparams, commandType: CommandType.StoredProcedure);
         }
 
+        [HttpGet("Detail/${id}")]
+        public dynamic Detail(int id)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
+
+            var dbparams = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            dbparams.Add("Id", id, DbType.Int32);
+            return db.Query<dynamic>("[dbo].[SP_GetDetail]", dbparams, commandType: CommandType.StoredProcedure);
+            //var result = (_dapper.Get<dynamic>("[dbo].[SP_RetrieveEducation]", dbparams, commandType: CommandType.StoredProcedure);
+        }
+
         [HttpPut("Update-Profile")]
         public ActionResult UpdateProfile(ProfileVM profile)
         {

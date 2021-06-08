@@ -67,6 +67,28 @@ namespace Client.Controllers
         {
             return View();
         }
+
+        public IActionResult Details()
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var candidateId = HttpContext.Session.GetString("CandidateID");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = context.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                ViewData["candidateId"] = candidateId;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+        }
         public IActionResult Biodata()
         {
             return View();
@@ -215,6 +237,13 @@ namespace Client.Controllers
             response.Wait();
             var result = response.Result;
             return result.StatusCode;
+        }
+
+        [HttpGet("Home/Candidate/GoDetails/{id}")]
+        public string GoDetails(int id)
+        {
+            HttpContext.Session.SetInt32("CandidateID", id);
+            return Url.Action("Details", "Candidate");
         }
     }
 }

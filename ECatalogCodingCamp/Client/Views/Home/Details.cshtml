@@ -61,21 +61,34 @@
             <div class="invalid-feedback">GPA is required</div>
         </div>
         <!-------------------------------------------------------------------------->
+        <h5 class="product-title"><strong>Experiences</strong></h5><br /><br />
         <!--Organization-->
-        <div class="form-group">
-            <label for="organization">Major</label>
-            <input id="organization" type="text" class="form-control" name="organization" readonly>
+        <div class="field_wrapperOrg">
+            <div class="form-groupOrg">
+                <label for="organization0">Organization</label>
+                <input id="organization0" type="text" class="form-control" name="organization0" readonly>
+                <label for="roleorganization0">Role Organization</label>
+                <input id="roleorganization0" type="text" class="form-control" name="roleorganization0" readonly><br />
+            </div>
         </div>
+
         <!--Skill-->
-        <div class="form-group">
-            <label for="skill">Skill</label>
-            <input id="skill" type="email" class="form-control" name="skill" readonly>
+        <div class="field_wrapperSkill">
+            <div class="form-groupSkill">
+                <label for="skill0">Skill</label>
+                <input id="skill0" type="text" class="form-control" name="skill0" readonly><br />
+            </div>
         </div>
+
         <!--Work-->
-        <div class="form-group">
-            <label for="work">Work Experience</label>
-            <input id="work" type="text" class="form-control" name="work" readonly>
+        <div class="field_wrapperWork">
+            <div class="form-groupWork">
+                <label for="work0">Work Experience</label>
+                <input id="work0" type="text" class="form-control" name="work0" readonly><br />
+            </div>
+
         </div>
+
 
     </form>
 </div>
@@ -102,6 +115,71 @@
                     $("#gpa").val(`${obj.GPA}`);
                     $("#major").val(`${obj.MajorName}`);
                     $("#univ").val(`${obj.UnivName}`);
+
+                },
+                error: (data) => {
+                    console.log("error");
+                    console.log(JSON.stringify(data));
+                }
+            })
+
+            $.ajax({
+                type: "GET",
+                url: `GetDetailCV/@ViewData["candidateId"]`,
+                success: (data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    //for (let i = 0; i < obj.organizations.length; i++) {
+                    //    $(`#organization${i}`).val(`${obj.organizations[i].OrganizationName}`);
+                    //    $(`#roleorganization${i}`).val(`${obj.organizations[i].RoleOrganization}`);
+                    //}
+
+                    //for (let i = 0; i < obj.skills.length; i++) {
+                    //    $(`#skill${i}`).val(`${obj.skills[0].SkillName}`);
+                    //} 
+
+                    //for (let i = 0; i < obj.works.length; i++) {
+                    //    $(`#work${i}`).val(`${obj.works[0].WorkName}`);
+                    //} 
+
+                    //if (obj.organizations.length > 0 && obj.skills.length > 0 && obj.works.length > 0) {
+                    //    $("#id").val(`${obj.id}`);
+                    //}
+
+                    if (obj.organizations.length > 0) {
+                        $("#organization0").val(`${obj.organizations[0].OrganizationName}`);
+                        $("#roleorganization0").val(`${obj.organizations[0].RoleOrganization}`);
+
+                        for (let ij = 1; ij < obj.organizations.length; ij++) {
+                            $('.field_wrapperOrg').append(`<div class="field_wrapperOrg"><div class="form-groupOrg"><label for="organization${ij}">Organization</label><input id="organization${ij}" type="text" class="form-control" name="organization${ij}" readonly><label for="roleorganization${ij}">Role Organization</label><input id="roleorganization${ij}" type="text" class="form-control" name="roleorganization${ij}" readonly><br /></div></div>`); //add field html
+                            //countOrg++; //increment field counter
+
+                            $(`#organization${ij}`).val(`${obj.organizations[ij].OrganizationName}`);
+                            $(`#roleorganization${ij}`).val(`${obj.organizations[ij].RoleOrganization}`);
+                        }
+                    }
+
+                    if (obj.skills.length > 0) {
+                        $("#skill0").val(`${obj.skills[0].SkillName}`);
+                        for (let ik = 1; ik < obj.skills.length; ik++) {
+                            $('.field_wrapperSkill').append(`<div class="field_wrapperSkill"><div class="form-groupSkill"><label for="skill${ik}">Skill</label><input id="skill${ik}" type="text" class="form-control" name="skill${ik}" readonly><br /></div></div>`); //add field html
+                            //countSkill++; //increment field counter
+
+                            $(`#skill${ik}`).val(`${obj.skills[ik].SkillName}`);
+                        }
+                    }
+
+                    if (obj.works.length > 0) {
+                        $("#work0").val(`${obj.works[0].WorkName}`);
+                        for (let il = 1; il < obj.works.length; il++) {
+                            $('.field_wrapperWork').append(`<div class="field_wrapperWork"><div class="form-groupWork"><label for="work${il}">Work Experience</label><input id="work${il}" type="text" class="form-control" name="work${il}" readonly><br /></div></div>`); //add field html
+                            //countWork++; //increment field counter
+
+                            $(`#work${il}`).val(`${obj.works[il].WorkName}`);
+                        }
+                    }
 
                 },
                 error: (data) => {

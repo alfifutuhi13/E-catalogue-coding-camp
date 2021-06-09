@@ -200,6 +200,20 @@ namespace Client.Controllers
             return Json(apiResponse.Result);
         }
 
+        public string GetDetailCV(int id)
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+            //var candidateId = HttpContext.Session.GetInt32("CandidateID");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = client.GetAsync($"Users/DetailCV/{id}");
+            var result = response.Result;
+            var apiResponse = result.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+        }
+
         [HttpGet]
         public string GetCandidateId()
         {

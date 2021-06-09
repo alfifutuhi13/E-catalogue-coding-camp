@@ -146,7 +146,7 @@
                     },
                     {
                         "render": function (data, type, row) {
-                            return `<button type="button" class="btn btn-primary" id="confirm" onclick="UpdateStatusHired(${id})" title="Confirm">Confirm</button>`
+                            return `<button type="button" class="btn btn-primary" id="confirm" onclick="SendConfirm(${id})" title="Confirm">Confirm</button>`
                                 +
                                 ` <button class="btn btn-danger" id"reschedule" onclick="clickFunction(${id})" title="Reschedule">Reschedule</button>`;
                         },
@@ -195,9 +195,9 @@
             })
         }
 
-        let UpdateStatusHired = id => {
+        let SendConfirm = id => {
             $.ajax({
-                url: `UpdateStatusHired/${id}`,
+                url: `SendConfirm`,
                 type: `PUT`,
                 data: { "id": id },
                 dataSrc: "",

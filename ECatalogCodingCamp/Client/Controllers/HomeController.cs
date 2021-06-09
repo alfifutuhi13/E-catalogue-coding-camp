@@ -340,18 +340,18 @@ namespace Client.Controllers
             return result.StatusCode;
         }
 
-        //[HttpPut("UpdateStatusHired/{id}")]
-        //public HttpStatusCode UpdateStatusHired(int id) 
-        //{
-        //    var token = HttpContext.Session.GetString("JWToken");
-        //    var client = new HttpClient();
-        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        //    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
-        //    var response = client.PutAsync("https://localhost:44321/api/Books/UpdateStatusHired", stringContent);
-        //    response.Wait();
-        //    var result = response.Result;
-        //    return result.StatusCode;
-        //}
+        [HttpPut("SendConfirm")]
+        public HttpStatusCode SendConfirm(int id)
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
+            var response = client.PutAsync("https://localhost:44321/api/Books/SendConfirm", stringContent);
+            response.Wait();
+            var result = response.Result;
+            return result.StatusCode;
+        }
 
         public IActionResult InterviewCandidate()
         {

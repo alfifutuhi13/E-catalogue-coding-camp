@@ -26,6 +26,10 @@ namespace Client.Controllers
         private readonly MyContext myContext = new MyContext();
         List<CandidatesVM> candidates = new List<CandidatesVM>();
         HttpClientHandler clientHandler = new HttpClientHandler();
+        readonly HttpClient client = new HttpClient
+        {
+            BaseAddress = new Uri("https://localhost:44321/API/")
+        };
 
         public HomeController(ILogger<HomeController> logger, CandidateRepository candidateRepository, MyContext myContext)
         {
@@ -177,6 +181,35 @@ namespace Client.Controllers
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = httpClient.GetAsync("https://localhost:44321/api/Users/GetUser").Result;
             var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+        }
+
+        //[HttpGet("Candidate/Home/GetDetail")]
+        public JsonResult GetDetail(int id)
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+            //var candidateId = HttpContext.Session.GetInt32("CandidateID");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = client.GetAsync($"Users/Detail/{id}");
+            var result = response.Result;
+            var apiResponse = result.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return Json(apiResponse.Result);
+        }
+
+        public string GetDetailCV(int id)
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+            //var candidateId = HttpContext.Session.GetInt32("CandidateID");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = client.GetAsync($"Users/DetailCV/{id}");
+            var result = response.Result;
+            var apiResponse = result.Content.ReadAsStringAsync();
             apiResponse.Wait();
             return apiResponse.Result;
         }
@@ -365,6 +398,35 @@ namespace Client.Controllers
             var apiResponse = result.Content.ReadAsStringAsync();
 
             return apiResponse.Result;
+        }
+
+        public IActionResult Details()
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var candidateId = HttpContext.Session.GetInt32("CandidateID");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = myContext.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                ViewData["candidateId"] = candidateId;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+        }
+
+        [HttpGet]
+        public string GoDetails(int id)
+        {
+            HttpContext.Session.SetInt32("CandidateID", id);
+            return Url.Action("Details", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

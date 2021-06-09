@@ -21,18 +21,6 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a asp-controller="Home" asp-action="InterviewCandidate" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a asp-controller="Home" asp-action="ProfileCandidate" class="nav-link">Profile</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a asp-area="" asp-controller="Candidate" asp-action="Education" class="nav-link">Education</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a asp-area="" asp-controller="Candidate" asp-action="CV" class="nav-link">Experience</a>
-                </li>
             </ul>
 
             <!-- Right navbar links -->
@@ -64,6 +52,63 @@
                 <img src="~/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">E-Catalogue</span>
             </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="InterviewCandidate" class="nav-link">
+                                <i class="fas fa-home nav-icon"></i>
+                                <p>Home</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="ProfileCandidate" class="nav-link">
+                                <i class="far fa-id-card nav-icon"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Candidate" asp-action="Education" class="nav-link">
+                                <i class="fas fa-university nav-icon"></i>
+                                <p>Education</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Candidate" asp-action="CV" class="nav-link">
+                                <i class="fas fa-building nav-icon"></i>
+                                <p>
+                                    Experience
+                                </p>
+                            </a>
+                        </li>
+                            @*<ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="Candidate" asp-action="Organization" class="nav-link">
+                                        <i class="fas fa-sitemap nav-icon"></i>
+                                        <p>Organization</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-code nav-icon"></i>
+                                        <p>Skill</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-briefcase nav-icon"></i>
+                                        <p>Work</p>
+                                    </a>
+                                </li>
+                            </ul>*@
+                        
+                    </ul>
+                </nav>
+                <!-- /.sidebar Menu -->
+            </div>
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
@@ -145,6 +190,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script>
         let ChangePassword = () => {
             var forms = document.getElementsByClassName('changePassword');

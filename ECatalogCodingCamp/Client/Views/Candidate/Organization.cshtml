@@ -1,0 +1,202 @@
+﻿@{
+    ViewData["Title"] = "E-Catalogue Coding Camp";
+    Layout = "/Views/Shared/_LayoutCandidate.cshtml";
+}
+
+<div class="card-body">
+    <h4 class="card-title">Update Your Organizations</h4><br />
+    <form class="my-login-validation" novalidate="" id="registerForm">
+        <!--Id-->
+        <input type="hidden" class="form-control" id="number0" name="number0">
+        <!--List Organization-->
+        <div class="form-group">
+            <div class="field_wrapperOrg">
+                <a href="javascript:void(0);" class="add_buttonOrg" title="Add More Organization and Role Organization"><i class="fas fa-plus-square"></i></a> <br />
+                <div>
+                    <label for="organization0">Organization</label><br />
+                    <input id="organization0" type="text" class="form-control" name="organization0" value="" placeholder="Ex: Himpunan" required /><br />
+                    <div class="invalid-feedback">
+                        Organization is required
+                    </div>
+                    <label for="roleorganization0">Role Organization</label><br />
+                    <input id="roleorganization0" type="text" class="form-control" name="roleorganization0" value="" placeholder="Ex: Ketua" required /><br />
+                    <div class="invalid-feedback">
+                        Role Organization is required
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="submit">Submit</button>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#registerForm").submit(function (e) {
+                e.preventDefault();
+            });
+            //dynamic input Experiences Fields
+            let maxField = 10; //input fields increment limitation
+
+            //Organization Inputs
+            let addButtonOrg = $('.add_buttonOrg');//add button Org
+            let wrapperOrg = $('.field_wrapperOrg');//input field wrapper
+
+            countOrg = 1; //initial field counter Organization
+            $.ajax({
+                type: "GET",
+                url: `/Candidate/GetOrganizationId/`,
+                dataSrc: '',
+                success: (data) => {
+                    console.log(data);
+                    let obj = JSON.parse(data);
+                    alert("Get Organization Id");
+                    console.log(obj);
+
+                    if (obj.organizations.length > 1)
+                    {
+                        $("#number0").val(`${obj.organizations[0].OrganizationId}`);
+                        $("#organization0").val(`${obj.organizations[0].OrganizationName}`);
+                        $("#roleorganization0").val(`${obj.organizations[0].RoleOrganization}`);
+                    }
+                    
+
+                    for (let i = 1; i < obj.organizations.length; i++) {
+                        $(wrapperOrg).append(`<div><br /><a href="javascript:void(0);" class="remove_button" title="Remove Organization and Role Organization Field"><i class="fas fa-minus-square"></i></a><br /><input type="hidden" class="form-control" id="number${i}" name="number${i}"><label for="organization${i}">Organization</label><br /><input id="organization${i}" type="text" class="form-control" name="organization${i}" value="" placeholder="Ex: Himpunan" required /><br /><div class="invalid-feedback">Organization is required</div><label for="roleorganization${i}">Role Organization</label><br /><input id="roleorganization${i}" type="text" class="form-control" name="roleorganization${i}" value="" placeholder="Ex: Ketua" required /><br /><div class="invalid-feedback">Role Organization is required</div></div>`); //add field html
+                        countOrg++; //increment field counter
+
+                        $(`#number${i}`).val(`${obj.organizations[i].OrganizationId}`);
+                        $(`#organization${i}`).val(`${obj.organizations[i].OrganizationName}`);
+                        $(`#roleorganization${i}`).val(`${obj.organizations[i].RoleOrganization}`);
+                    }
+
+                },
+                error: (data) => {
+                    console.log(JSON.stringify(data));
+                }
+            });
+
+            
+
+            //Once add button is clicked
+            $(addButtonOrg).click(function () {
+                //check maximum number of input fields
+                if (countOrg < maxField) {
+                    $(wrapperOrg).append(`<div><br /><a href="javascript:void(0);" class="remove_button" title="Remove Organization and Role Organization Field"><i class="fas fa-minus-square"></i></a><br /><input type="hidden" class="form-control" id="number${countOrg}" name="number${countOrg}"><label for="organization${countOrg}">Organization</label><br /><input id="organization${countOrg}" type="text" class="form-control" name="organization${countOrg}" value="" placeholder="Ex: Himpunan" required /><br /><div class="invalid-feedback">Organization is required</div><label for="roleorganization${countOrg}">Role Organization</label><br /><input id="roleorganization${countOrg}" type="text" class="form-control" name="roleorganization${countOrg}" value="" placeholder="Ex: Ketua" required /><br /><div class="invalid-feedback">Role Organization is required</div> </div>`); //add field html
+                    countOrg++; //increment field counter
+                }
+            });
+
+            //Once remove button is clicked
+            $(wrapperOrg).on('click', '.remove_button', function (e) {
+                e.preventDefault();
+                $(this).parent('div').remove(); //remove field html
+                countOrg--; //decrement field counter
+            });
+
+            $("#submit").click(function () {
+                let Obj = new Object();
+                Obj.Organizations = [];
+
+                for (let i = 0; i < countOrg; i++) {
+                    Obj.Organizations[i] = new Object();
+                    Obj.Organizations[i].OrganizationId = $(`#number${i}`);
+                    Obj.Organizations[i].OrganizationName = $(`#organization${i}`).val();
+                    Obj.Organizations[i].RoleOrganization = $(`#roleorganization${i}`).val();
+                }
+                console.log(Obj);
+                alert("submit");
+
+                var checkOrgId = 0;
+
+                for (let i = 0; i < countOrg; i++) {
+                    if (Obj.Organizations[i].OrganizationId == "") {
+                        checkOrgId++;
+                    }
+                }
+                if (checkOrgId == 0) {
+                    InsertOrganization(Obj);
+                } else {
+                    UpdateOrganization(Obj);
+                }
+            })
+
+            let InsertOrganization = (Obj) => {
+                console.log(Obj);
+                //console.log(JSON.stringify(Obj));
+                //alert(JSON.stringify(Obj));
+                $.ajax({
+                    url: '/Candidate/InsertOrganization',
+                    type: 'POST',
+                    data: Obj
+                }).done((result) => {
+                    if (result == 200) {
+                        console.log(result);
+                        sAlertAdd();
+                    }
+                    else {
+                        alert("Error Insert");
+                        console.log(result);
+                    }
+                }).fail((result) => {
+                    console.log(result);
+                    alert("Failed to Add Data!");
+                });
+            }
+
+            let UpdateOrganization = (Obj) => {
+                console.log(Obj);
+                //console.log(JSON.stringify(Obj));
+                //alert(JSON.stringify(Obj));
+                $.ajax({
+                    url: '/Candidate/UpdateOrganization',
+                    type: 'PUT',
+                    data: Obj
+                }).done((result) => {
+                    if (result == 200) {
+                        console.log(result);
+                        sAlertPut();
+                    }
+                    else {
+                        alert("Error Update");
+                        console.log(result);
+                    }
+
+                }).fail((result) => {
+                    console.log(result);
+                    alert("Failed to Update Data!");
+                });
+            }
+        });
+
+        
+
+        
+
+
+        let sAlertAdd = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully added.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        let sAlertPut = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully updated.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+    </script>
+}

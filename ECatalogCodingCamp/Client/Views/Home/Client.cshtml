@@ -7,7 +7,7 @@
     <p>Place where you look for your future candidates.</p>
 </div>
 
-<div class="card-deck d-flex justify-content-center"></div>
+<div class="row row-cols-1 row-cols-md-4"></div>
 
 <div class="modal fade" id="book" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -83,10 +83,11 @@
                     success: data => {
                         console.log(data);
                         if (data == 200) {
-                            alert("success");
+                            sAlertAdd();
                         }
                         else {
                             alert("error success");
+                            location.reload();
                         }
                     },
                     error: data => {
@@ -119,27 +120,29 @@
                 success: data => {
                     console.log(`masuk done`);
                     console.log(data);
-                    const cardDeck = document.querySelector('div.card-deck');
+                    const cardDeck = document.querySelector('div.row-cols-1');
                     data.forEach(eachCandidates);
 
                     function eachCandidates(candidate) {
-                        cardDeck.innerHTML += `<div class="card">
-                            <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title text-center mx-auto">${candidate.name}</h5>
-                                <p class="card-text text-center mx-auto">${candidate.jobRole}</p>
-                                ${(() => {
-                                                if (candidate.statusBook == "Open") {
-                                                    return `<button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success                           my-3 mx-auto" data-toggle="modal" data-target="#book" data-placement="top" title="Book">
-                                                                Book
-                                                            </button>`
-                                                } else {
-                                                    return `<button type="button" class="btn btn-success my-3 mx-auto" disabled>
-                                                                Booked
-                                                            </button>`
-                                                }
-                                            })()}
-                
+                        cardDeck.innerHTML += `
+                        <div class="col mb-4">
+                            <div class="card d-flex">
+                                <img class="card-img-top" src="/img/no-image.jpg" alt="Card image cap">
+                                <div class="card-body align-items-center flex-column d-flex justify-content-center">
+                                    <h5 class="card-title text-center mx-auto">${candidate.name}</h5>
+                                    <p class="card-text text-center mx-auto">${candidate.jobRole}</p>
+                                    <div class="button-group">
+                                        ${(() => {
+                                            if (candidate.statusBook == "Open") {
+                                                return `<button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3 mx-auto" data-toggle="modal" data-target="#book" data-placement="top"                              title="Book">Book</button>`
+                                            } else {
+                                                return `<button type="button" class="btn btn-success my-3 mx-auto" disabled>Booked</button>`
+                                            }
+                            })()}
+                                        <a onclick="getDetail(${candidate.id})" class="my-3 mx-auto btn btn-warning">Detail
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>`;
                     }
@@ -166,6 +169,30 @@
                     console.log(data);
                 }
             })
+        }
+
+        const getDetail = id => {
+            $.ajax({
+                type: 'GET',
+                url: `GoDetails/${id}`,
+                success: data => {
+                    window.location.href = data
+                },
+                error: data => {
+                    alert(data);
+                }
+            })
+        }
+
+        let sAlertAdd = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully added.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
         }
 
     </script>

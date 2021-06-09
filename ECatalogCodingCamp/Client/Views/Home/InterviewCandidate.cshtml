@@ -89,7 +89,12 @@
                     { data: 'Email' },
                     { data: 'Phone' },
                     { data: 'BidSalary' },
-                    { data: 'Schedule' }
+                    {
+                        "render": function (data, type, row) {
+                            var date = moment(row['Schedule']).format('DD MMMM YYYY');
+                            return date;
+                        }
+                    }
                     //{
                     //    "render": function (data, type, row) {
                     //        return `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yes" onclick="getId(' + row.id + ')" data-toggle="tooltip" data-placement="top" title="Confirm">Confirm</button>`

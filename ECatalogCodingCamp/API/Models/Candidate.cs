@@ -19,6 +19,6 @@ namespace API.Models
         public string StatusBook { get; set; }
         public string Gender { get; set; }
         public string JobRole { get; set; }
-        public Book Book { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }

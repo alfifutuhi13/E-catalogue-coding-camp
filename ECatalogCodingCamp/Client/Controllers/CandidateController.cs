@@ -63,12 +63,71 @@ namespace Client.Controllers
                 return RedirectToAction("Index", "Authentication");
             }
         }
+
+        public IActionResult Organization() 
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = context.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+        }
+
+        public IActionResult Skill() 
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = context.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+        }
+
+        public IActionResult Work() 
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            if (token != null)
+            {
+                var jwtReader = new JwtSecurityTokenHandler();
+                var jwt = jwtReader.ReadJwtToken(token);
+                var role = jwt.Claims.First(c => c.Type == "role").Value;
+                var email = jwt.Claims.First(c => c.Type == "email").Value;
+                var foundUser = context.Users.FirstOrDefault(user => user.Email == email);
+                ViewData["name"] = foundUser.Name;
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+        }
+
         public IActionResult Profile()
         {
             return View();
         }
-
-        
         public IActionResult Biodata()
         {
             return View();
@@ -219,6 +278,75 @@ namespace Client.Controllers
             return result.StatusCode;
         }
 
-        
+        [HttpGet]
+        public string GetOrganizationId()
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = httpClient.GetAsync("https://localhost:44321/api/Organizations/OrganizationData").Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+
+        }
+
+        [HttpPost]
+        public HttpStatusCode InsertOrganization(InsertCVVM cv)
+        {
+            var httpClient = new HttpClient();
+
+            var token = HttpContext.Session.GetString("JWToken");
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var role = jwt.Claims.First(c => c.Type == "role").Value;
+            var email = jwt.Claims.First(c => c.Type == "email").Value;
+
+            cv.Role = role;
+            cv.Email = email;
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(cv), Encoding.UTF8, "application/json");
+            var response = httpClient.PostAsync("https://localhost:44321/api/Organizations/InsertOrganization/", content);
+            response.Wait();
+            var result = response.Result;
+            return result.StatusCode;
+        }
+        [HttpPut]
+        public HttpStatusCode UpdateOrganization(InsertCVVM cv)
+        {
+            var httpClient = new HttpClient();
+
+            var token = HttpContext.Session.GetString("JWToken");
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var role = jwt.Claims.First(c => c.Type == "role").Value;
+            var email = jwt.Claims.First(c => c.Type == "email").Value;
+
+            cv.Role = role;
+            cv.Email = email;
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(cv), Encoding.UTF8, "application/json");
+            var response = httpClient.PutAsync("https://localhost:44321/api/Organizations/UpdateOrganization/", content);
+            response.Wait();
+            var result = response.Result;
+            return result.StatusCode;
+        }
+
+        [HttpGet]
+        public string GetSkillId()
+        {
+            var httpClient = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = httpClient.GetAsync("https://localhost:44321/api/Skillss/SkillData").Result;
+            var apiResponse = response.Content.ReadAsStringAsync();
+            apiResponse.Wait();
+            return apiResponse.Result;
+
+        }
     }
 }

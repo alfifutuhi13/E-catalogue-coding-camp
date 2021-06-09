@@ -90,6 +90,31 @@ namespace API.Controllers
             return db.Query<dynamic>("[dbo].[SP_GetCandidateInterview]", paramsGetClient, commandType: CommandType.StoredProcedure);
 
         }
+        [HttpGet("GetInterviewRequest/{id}")]
+        public dynamic GetInterviewRequests(int id) 
+        {
+            var paramsGetClient = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            paramsGetClient.Add("UserId", id, DbType.Int32);
+            return db.Query<dynamic>("[dbo].[SP_RetrieveInterviewRequest]", paramsGetClient, commandType: CommandType.StoredProcedure);
+        }
+
+        [HttpPut("Response-Interview-Request")]
+        public ActionResult UpdateInterviewRequest(InterviewRequestVM interviewRequestVM)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            //var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value; //email client
+
+            var dbparams = new DynamicParameters();
+            dbparams.Add("Email", getEmail, DbType.String);
+            dbparams.Add("BidSalary", interviewRequestVM.BidSalary, DbType.Int64);
+            dbparams.Add("Schedule", interviewRequestVM.Schedule, DbType.DateTime);
+            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_UpdateInterviewRequest]", dbparams, commandType: CommandType.StoredProcedure));
+
+            return Ok(new { result = result, message = "Interview Request has been sent." });
+        }
 
         [HttpDelete("Rejected/{id}")]
         public IActionResult Rejected(int id)

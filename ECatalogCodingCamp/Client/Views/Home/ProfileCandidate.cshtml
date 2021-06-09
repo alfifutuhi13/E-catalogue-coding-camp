@@ -74,9 +74,12 @@
             obj.Email = $("#email").val();
             obj.Phone = $("#phone").val();
 
-            UpdateProfile(obj);
-
-
+            if (obj.Name == "" || obj.Email == "" || obj.Phone == "") {
+                //can't update data
+                alert("can't update data");
+            } else {
+                UpdateProfile(obj);
+            }
         });
 
 

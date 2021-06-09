@@ -33,25 +33,12 @@
                                 Please fill the salary.
                             </div>
                         </div>
-                    </div>
+                    </div>                   
 
                     <div class="form-group row">
                         <label for="interviewdate" class="col-sm-2 col-form-label">Interview Date</label>
                         <div class="col-sm-10">
                             <input type="date" class="form-control" id="interviewdate" name="interviewdate" placeholder="Place your Inteview Date" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please Choose Interview Date.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="message" class="col-sm-2 col-form-label">Message</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="message" name="Message" placeholder="Place your Message" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -88,7 +75,6 @@
                 bookCandidate.candidateId = $("#id").val();
                 bookCandidate.bidSalary = $("#salary").val();
                 bookCandidate.schedule = $("#interviewdate").val();
-                bookCandidate.message = $("#message").val();
 
                 $.ajax({
                     url: `InterviewRequest`,
@@ -97,30 +83,16 @@
                     success: data => {
                         console.log(data);
                         if (data == 200) {
-                            swal({
-                                title: "Success!",
-                                text: "Interview Request Has Been Sent!",
-                                icon: "success",
-                                buttons: false,
-                                timer: 2000
-                            }).then(() => {
-                                window.location.reload();
-                            })
+                            sAlertAdd();
                         }
                         else {
-                            swal({
-                                text: "Oops..",
-                                buttons: false,
-                                time: 2000
-                            })
+                            alert("error success");
+                            location.reload();
                         }
                     },
                     error: data => {
-                        swal({
-                            text: "Oops..",
-                            buttons: false,
-                            time: 2000
-                        })
+                        console.log(data);
+                        alert("error error");
                     }
                 })
             })
@@ -212,6 +184,17 @@
                     alert(data);
                 }
             })
+        }
+
+        let sAlertAdd = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully added.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
         }
 
     </script>

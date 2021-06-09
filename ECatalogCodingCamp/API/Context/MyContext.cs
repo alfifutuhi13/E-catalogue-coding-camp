@@ -112,16 +112,16 @@ namespace API.Context
                .WithMany(jobrole => jobrole.Users);
 
             //Book-Candidate
-            modelBuilder.Entity<Candidate>()
-                .HasOne(candidate => candidate.Book)
-                .WithOne(book => book.Candidate)
-                .HasForeignKey<Book>(book => book.CandidateId);
+            modelBuilder.Entity<Book>()
+                .HasOne(book => book.Candidate)
+                .WithMany(candidate => candidate.Books);
+            //.HasForeignKey<Book>(book => book.CandidateId);
 
             //User-Book
-            modelBuilder.Entity<User>()
-               .HasOne(user => user.Book)
-               .WithOne(book => book.User)
-               .HasForeignKey<Book>(book => book.UserId);
+            modelBuilder.Entity<Book>()
+               .HasOne(book => book.User)
+               .WithMany(user => user.Books);
+               //.HasForeignKey<Book>(book => book.UserId);
 
             //Book-InterviewRequest
             modelBuilder.Entity<Book>()

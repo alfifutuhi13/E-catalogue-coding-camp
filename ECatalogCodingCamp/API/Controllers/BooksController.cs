@@ -114,5 +114,33 @@ namespace API.Controllers
             sendEmail.SendRejected(candidateEmail, nameClient, candidateName, message);
             return Ok(new { result = result, message = "Candidate Has Been Rejected" });
         }
+
+        [HttpDelete("Accepted/{id}")]
+        public IActionResult Accepted(int id)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var emailClient = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
+
+            var foundClient = context.Users.Where(user => user.Email == emailClient).FirstOrDefault();
+            var nameClient = foundClient.Name;
+
+            var foundCandidate = context.Users.Where(user => user.Id == id).FirstOrDefault();
+            var candidateName = foundCandidate.Name;
+            var candidateEmail = foundCandidate.Email;
+            var message = "Congratulations, you got the job";
+
+            var paramsGetClient = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            paramsGetClient.Add("Id", id, DbType.Int32);
+            db.Query<dynamic>("[dbo].[SP_Rejected]", paramsGetClient, commandType: CommandType.StoredProcedure);
+
+            paramsGetClient.Add("Id", id, DbType.Int32);
+            var result = db.Query<dynamic>("[dbo].[SP_RenameStatusBook]", paramsGetClient, commandType: CommandType.StoredProcedure);
+
+            var sendEmail = new SendEmail(context);
+            sendEmail.SendAccepted(candidateEmail, nameClient, candidateName, message);
+            return Ok(new { result = result, message = "Candidate Has Been Accepted" });
+        }
     }
 }

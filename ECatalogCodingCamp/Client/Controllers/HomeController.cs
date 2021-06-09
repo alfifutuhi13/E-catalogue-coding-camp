@@ -387,6 +387,20 @@ namespace Client.Controllers
         }
 
         [HttpDelete]
+        public string Accepted(int id)
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = client.DeleteAsync("https://localhost:44321/api/Books/Accepted/" + id);
+            response.Wait();
+            var result = response.Result;
+            var apiResponse = result.Content.ReadAsStringAsync();
+
+            return apiResponse.Result;
+        }
+
+        [HttpDelete]
         public string Rejected(int id)
         {
             var token = HttpContext.Session.GetString("JWToken");

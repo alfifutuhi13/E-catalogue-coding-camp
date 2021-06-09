@@ -107,11 +107,22 @@
                     {
                         data: null,
                         render: function (data, type, row) {
-                            return `<button type="button" class="btn btn-success">Accepted</button> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#reschedule">Reschedule</button> <button type="button" class="btn btn-danger" onclick="rejected(${row["CandidateId"]})">Rejected</button>`
+                            return `<button type="button" class="btn btn-success" onclick="accepted(${row["CandidateId"]})">Accepted</button> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#reschedule" >Reschedule</button> <button type="button" class="btn btn-danger" onclick="rejected(${row["CandidateId"]})">Rejected</button>`
                         }
                     }
                 ]
             });
+        }
+
+        let accepted = id => {
+            $.ajax({
+                type: 'DELETE',
+                url: `Accepted/${id}`
+            }).done(result => {
+                console.log(result);
+            }).fail(result => {
+                console.log(result);
+            })
         }
 
         let rejected = id => {

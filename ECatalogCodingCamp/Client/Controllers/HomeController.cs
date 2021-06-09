@@ -414,6 +414,33 @@ namespace Client.Controllers
             return apiResponse.Result;
         }
 
+        [HttpGet]
+        public string Reschedule(int id)
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = client.GetAsync("https://localhost:44321/api/Books/Reschedule/" + id);
+            response.Wait();
+            var result = response.Result;
+            var apiResponse = result.Content.ReadAsStringAsync();
+
+            return apiResponse.Result;
+        }
+
+        [HttpPut]
+        public HttpStatusCode UpdateInterviewRequestClient(InterviewRequestVM interviewRequest)
+        {
+            var token = HttpContext.Session.GetString("JWToken");
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(interviewRequest), Encoding.UTF8, "application/json");
+            var response = client.PutAsync("https://localhost:44321/api/Books/UpdateInterviewRequestClient", stringContent);
+            response.Wait();
+            var result = response.Result;
+            return result.StatusCode;
+        }
+
         public IActionResult Details()
         {
             var token = HttpContext.Session.GetString("JWToken");

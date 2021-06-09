@@ -4,6 +4,7 @@ using API.Handlers;
 using API.Models;
 using API.Repositories.Data;
 using API.Repositories.Interface;
+using API.ViewModels;
 using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -141,6 +142,36 @@ namespace API.Controllers
             var sendEmail = new SendEmail(context);
             sendEmail.SendAccepted(candidateEmail, nameClient, candidateName, message);
             return Ok(new { result = result, message = "Candidate Has Been Accepted" });
+        }
+
+        [HttpGet("Reschedule/{id}")]
+        public dynamic Reschedule(int id)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var emailClient = readToken.Claims.First(getEmail => getEmail.Type == "email").Value;
+
+            var paramsGetClient = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            paramsGetClient.Add("Id", id, DbType.Int32);
+            return db.Query<dynamic>("[dbo].[SP_GetSchedule]", paramsGetClient, commandType: CommandType.StoredProcedure);
+        }
+
+        [HttpPut("UpdateInterviewRequestClient")]
+        public ActionResult UpdateInterviewRequestClient(InterviewRequestVM interviewRequestVM)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            //var readToken = tokenHandler.ReadJwtToken(Request.Query["Token"]);
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+            var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value; //email client
+
+            var dbparams = new DynamicParameters();
+            dbparams.Add("Id", interviewRequestVM.CandidateId, DbType.Int32);
+            dbparams.Add("BidSalary", interviewRequestVM.BidSalary, DbType.Int64);
+            dbparams.Add("Schedule", interviewRequestVM.Schedule, DbType.DateTime);
+            var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_UpdateInterviewRequestClient]", dbparams, commandType: CommandType.StoredProcedure));
+
+            return Ok(new { result = result, message = "Interview Request has been sent." });
         }
     }
 }

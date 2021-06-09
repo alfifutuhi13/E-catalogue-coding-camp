@@ -83,7 +83,7 @@
                     success: data => {
                         console.log(data);
                         if (data == 200) {
-                            alert("success");
+                            sAlertAdd();
                         }
                         else {
                             alert("error success");
@@ -182,6 +182,17 @@
                     alert(data);
                 }
             })
+        }
+
+        let sAlertAdd = () => {
+            swal({
+                title: "Done",
+                text: "Data successfully added.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
         }
 
     </script>

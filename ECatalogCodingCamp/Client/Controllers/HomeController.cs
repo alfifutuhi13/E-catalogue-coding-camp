@@ -294,6 +294,20 @@ namespace Client.Controllers
             return Json(apiResponse.Result);
         }
 
+        [HttpGet]
+        public JsonResult GetBookById(int id)
+        {
+            var client = new HttpClient();
+            var token = HttpContext.Session.GetString("JWToken");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = client.GetAsync("https://localhost:44321/api/books/GetInterviewRequest/" + id);
+            response.Wait();
+            var result = response.Result;
+            var apiResponse = result.Content.ReadAsStringAsync();
+
+            return Json(apiResponse.Result);
+        }
+
         [HttpPost]
         public HttpStatusCode InterviewRequest(InterviewRequestVM interviewRequest)
         {

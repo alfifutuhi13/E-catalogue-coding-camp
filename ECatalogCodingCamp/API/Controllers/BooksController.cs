@@ -85,5 +85,13 @@ namespace API.Controllers
             return db.Query<dynamic>("[dbo].[SP_GetCandidateInterview]", paramsGetClient, commandType: CommandType.StoredProcedure);
 
         }
+        [HttpGet("GetInterviewRequest/{id}")]
+        public dynamic GetInterviewRequests(int id) 
+        {
+            var paramsGetClient = new DynamicParameters();
+            using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
+            paramsGetClient.Add("UserId", id, DbType.Int32);
+            return db.Query<dynamic>("[dbo].[SP_RetrieveInterviewRequest]", paramsGetClient, commandType: CommandType.StoredProcedure);
+        }
     }
 }

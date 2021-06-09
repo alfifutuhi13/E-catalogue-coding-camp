@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj": {}
+    "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj": {
+    "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio Source\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\obj\\",
+        "projectPath": "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\alfat\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alfat\\Documents\\GitHub\\E-catalogue-coding-camp\\ECatalogCodingCamp\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\alfat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -61,10 +61,6 @@
               "version": "[3.1.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Analyzers": {
               "target": "Package",
               "version": "[3.1.0, )"
             },

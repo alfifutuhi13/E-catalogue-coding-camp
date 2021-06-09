@@ -197,10 +197,8 @@
 
         let SendConfirm = id => {
             $.ajax({
-                url: `SendConfirm`,
-                type: `PUT`,
-                data: { "id": id },
-                dataSrc: "",
+                url: `SendConfirm/${id}`,
+                type: `GET`,
                 success: result => {
                     console.log(result)
                     if (result == 200) {

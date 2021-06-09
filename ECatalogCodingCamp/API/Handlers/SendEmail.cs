@@ -136,5 +136,38 @@ namespace API.Handlers
             body = body.Replace("{Message}", aMessage);
             return body;
         }
+
+        public void SendConfirmation(string aClientEmail, string aClientName, string aCandidateName, string aMessage)
+        {
+            var parameter = context.Parameters.Find(1);
+
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.UseDefaultCredentials = false;
+            smtp.EnableSsl = true;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential(parameter.Name, parameter.Value);
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(parameter.Name);
+            message.To.Add(new MailAddress(aClientEmail));
+            message.Subject = "CONFIRMATION INTERVIEW INVITATIONAL";
+            message.IsBodyHtml = true;
+            message.Body = CreateConfirmationBody(aClientName, aCandidateName, aMessage);
+            smtp.Send(message);
+        }
+
+        private string CreateConfirmationBody(string aClientName, string aCandidateName, string aMessage)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader("Handlers/EmailConfirmation.html"))
+            {
+                body = reader.ReadToEnd();
+            }
+
+            body = body.Replace("{CandidateName}", aCandidateName);
+            body = body.Replace("{ClientName}", aClientName);
+            body = body.Replace("{Message}", aMessage);
+            return body;
+        }
     }
 }

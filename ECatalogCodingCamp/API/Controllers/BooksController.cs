@@ -48,7 +48,7 @@ namespace API.Controllers
             using IDbConnection db = new SqlConnection(config.GetConnectionString("MyConnection"));
             paramsGetClient.Add("Id", id, DbType.Int32);
             return db.Query<dynamic>("[dbo].[SP_GetClient]", paramsGetClient, commandType: CommandType.StoredProcedure);
-
+            
         }
 
         [HttpGet("GetCandidate")]
@@ -197,6 +197,29 @@ namespace API.Controllers
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_UpdateInterviewRequestClient]", dbparams, commandType: CommandType.StoredProcedure));
 
             return Ok(new { result = result, message = "Interview Request has been sent." });
+        }
+
+        [HttpGet("SendConfirm/{id}")]
+        public IActionResult SendConfirm(int id)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var readToken = tokenHandler.ReadJwtToken(Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty));
+
+            var foundBookTransaction = context.Books.Where(book => book.CandidateId == id).FirstOrDefault();
+            var clientId = foundBookTransaction.UserId;
+            var foundClient = context.Users.Where(user => user.Id == clientId).FirstOrDefault();
+            var nameClient = foundClient.Name;
+            var emailClient = foundClient.Email;
+
+
+            var emailCandidate = readToken.Claims.First(getEmail => getEmail.Type == "email").Value; //email client
+            var foundCandidate = context.Users.Where(user => user.Email == emailCandidate).FirstOrDefault();
+            var candidateName = foundCandidate.Name;
+            var message = "I Can Attend Interview";
+
+            var sendEmail = new SendEmail(context);
+            sendEmail.SendConfirmation(emailClient, nameClient, candidateName, message);
+            return Ok(new { message = "Candidate Has Been Accepted" });
         }
     }
 }

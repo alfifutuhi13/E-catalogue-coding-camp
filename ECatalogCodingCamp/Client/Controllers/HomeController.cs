@@ -340,14 +340,13 @@ namespace Client.Controllers
             return result.StatusCode;
         }
 
-        [HttpPut("SendConfirm")]
+        [HttpGet]
         public HttpStatusCode SendConfirm(int id)
         {
             var token = HttpContext.Session.GetString("JWToken");
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
-            var response = client.PutAsync("https://localhost:44321/api/Books/SendConfirm", stringContent);
+            var response = client.GetAsync("https://localhost:44321/api/Books/SendConfirm/" + id);
             response.Wait();
             var result = response.Result;
             return result.StatusCode;

@@ -1,0 +1,116 @@
+﻿@{ ViewData["Title"] = "E-Catalogue Coding Camp";
+    Layout = "/Views/Shared/_Layout.cshtml"; }
+
+<h1>ID = @ViewData["candidateId"]</h1>
+<div class="card-body">
+
+    <form class="my-login-validation" novalidate="" id="registerForm">
+        <!--Id-->
+        <!--Name-->
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" type="text" class="form-control">
+            <div class="invalid-feedback">
+                Name is required
+            </div>
+        </div>
+        <!--Email-->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" class="form-control">
+            <div class="invalid-feedback">
+                Email is required
+            </div>
+        </div>
+        <!--Gender-->
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <input id="gender" type="text" class="form-control">
+            <div class="invalid-feedback">
+                gender is required
+            </div>
+        </div>
+        <!--Major-->
+        <div class="form-group">
+            <label for="major">Major</label>
+            <input id="major" type="text" class="form-control" name="major">
+            <div class="invalid-feedback">
+                Major is required
+            </div>
+        </div>
+        <!--Univ-->
+        <div class="form-group">
+            <label for="univ">University</label>
+            <input id="univ" type="email" class="form-control" name="univ">
+            <div class="invalid-feedback">
+                University is required
+            </div>
+        </div>
+        <!--Degree-->
+        <div class="form-group">
+            <label for="degree">Degree</label>
+            <input id="degree" type="text" class="form-control" name="degree">
+            <div class="invalid-feedback">
+                Degree is required
+            </div>
+        </div>
+        <!--GPA-->
+        <div class="form-group">
+            <label for="gpa">GPA</label>
+            <input id="gpa" type="text" class="form-control" name="gpa">
+            <div class="invalid-feedback">GPA is required</div>
+        </div>
+        <!-------------------------------------------------------------------------->
+        <!--Organization-->
+        <div class="form-group">
+            <label for="organization">Major</label>
+            <input id="organization" type="text" class="form-control" name="organization" readonly>
+        </div>
+        <!--Skill-->
+        <div class="form-group">
+            <label for="skill">Skill</label>
+            <input id="skill" type="email" class="form-control" name="skill" readonly>
+        </div>
+        <!--Work-->
+        <div class="form-group">
+            <label for="work">Work Experience</label>
+            <input id="work" type="text" class="form-control" name="work" readonly>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#registerForm").submit(function (e) {
+                e.preventDefault();
+            });
+
+            $.ajax({
+                type: "GET",
+                url: `GetDetail/@ViewData["candidateId"]`,
+                success: (data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    $("#name").val(`${obj.Name}`);
+                    $("#email").val(`${obj.Email}`);
+                    $("#gender").val(`${obj.Gender}`);
+                    $("#degree").val(`${obj.Degree}`);
+                    $("#gpa").val(`${obj.GPA}`);
+                    $("#major").val(`${obj.MajorName}`);
+                    $("#univ").val(`${obj.UnivName}`);
+
+                },
+                error: (data) => {
+                    console.log("error");
+                    console.log(JSON.stringify(data));
+                }
+            })
+
+        })
+    </script>
+
+}

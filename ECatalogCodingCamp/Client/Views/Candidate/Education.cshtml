@@ -2,7 +2,7 @@
     Layout = "/Views/Shared/_LayoutCandidate.cshtml"; }
 
 <div class="card-body">
-    <h4 class="card-title">Update Education</h4><br /><br />
+    <h1 class="product-title"><strong>Update Education</strong></h1><br />
     <form class="my-login-validation" novalidate="" id="registerForm">
         <!--Id-->
         <input type="hidden" class="form-control" id="id" name="id">
@@ -58,12 +58,13 @@
                     var obj = JSON.parse(data);
                     console.log(obj);
 
-                    $("#id").val(`${obj[0].Id}`);
-                    $("#major").val(`${obj[0].MajorName}`);
-                    $("#univ").val(`${obj[0].UniversityName}`);
-                    $("#degree").val(`${obj[0].Degree}`);
-                    $("#gpa").val(`${obj[0].GPA}`);
-
+                    if (obj[0]) {
+                        $("#id").val(`${obj[0].Id}`);
+                        $("#major").val(`${obj[0].MajorName}`);
+                        $("#univ").val(`${obj[0].UniversityName}`);
+                        $("#degree").val(`${obj[0].Degree}`);
+                        $("#gpa").val(`${obj[0].GPA}`);
+                    }
                 },
                 error: (data) => {
                     console.log("error");
@@ -75,21 +76,22 @@
 
         $("#submit").click(function () {
             let obj = new Object();
-
             obj.Id = $("#id").val();
             obj.Major = $("#major").val();
             obj.University = $("#univ").val();
             obj.Degree = $("#degree").val();
             obj.GPA = $("#gpa").val();
 
-            if (obj.id == "") {
-                InsertEdu(obj);
+            if (obj.Major == "" || obj.University == "" || obj.Degree == "" || obj.GPA == "") {
+                sAlertNull();
+            } else {
+                if (obj.Id == "") {
+                    InsertEdu(obj);
+                }
+                else {
+                    UpdateEdu(obj);
+                }
             }
-            else {
-                UpdateEdu(obj);
-            }
-
-
         })
 
         let InsertEdu = (Obj) => {
@@ -116,7 +118,6 @@
             }).done((result) => {
                 console.log(result);
                 if (result == 200) {
-                    alert("Data updated.");
                     sAlertPut();
                 }
                 else {
@@ -149,6 +150,15 @@
             }).then(() => {
                 location.reload(true);
             });
+        }
+
+        let sAlertNull = () => {
+            swal({
+                title: "Empty Data",
+                text: "All fields should not be empty.",
+                icon: "warning",
+                button: "Ok",
+            })
         }
     </script>
 }

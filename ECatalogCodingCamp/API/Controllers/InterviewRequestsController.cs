@@ -1,5 +1,6 @@
 ﻿using API.Base;
 using API.Context;
+using API.Handlers;
 using API.Models;
 using API.Repositories.Data;
 using API.Repositories.Interface;
@@ -41,6 +42,11 @@ namespace API.Controllers
             var getEmail = readToken.Claims.First(getEmail => getEmail.Type == "email").Value; //email client
 
             var foundClient = context.Users.Where(user => user.Email == getEmail).FirstOrDefault();
+            var foundCandidate = context.Users.Where(user => user.Id == interviewRequestVM.CandidateId).FirstOrDefault();
+            var emailCandidate = foundCandidate.Email;
+            var nameClient = foundClient.Name;
+            var nameCandidate = foundCandidate.Name;
+            var message = interviewRequestVM.Message;
 
             var dbparams = new DynamicParameters();
             dbparams.Add("candidateId", interviewRequestVM.CandidateId, DbType.Int32);
@@ -49,6 +55,9 @@ namespace API.Controllers
             dbparams.Add("schedule", interviewRequestVM.Schedule, DbType.DateTime);
 
             var result = Task.FromResult(_dapper.Insert<int>("[dbo].[SP_InsertInterviewRequest]", dbparams, commandType: CommandType.StoredProcedure));
+
+            var sendEmail = new SendEmail(context);
+            sendEmail.SendInterviewRequest(emailCandidate, nameClient, nameCandidate, message);
             return Ok(new { result = result, message = "Interview Request has been sent." });
         }
     }

@@ -47,11 +47,9 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CandidateId")
-                        .IsUnique();
+                    b.HasIndex("CandidateId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("TB_T_Book");
                 });
@@ -395,14 +393,14 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Book", b =>
                 {
                     b.HasOne("API.Models.Candidate", "Candidate")
-                        .WithOne("Book")
-                        .HasForeignKey("API.Models.Book", "CandidateId")
+                        .WithMany("Books")
+                        .HasForeignKey("CandidateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("API.Models.User", "User")
-                        .WithOne("Book")
-                        .HasForeignKey("API.Models.Book", "UserId")
+                        .WithMany("Books")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

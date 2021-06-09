@@ -80,18 +80,18 @@
 
             $('#submit').click(function () {
                 let bookCandidate = new Object();
-                bookCandidate.id = $("#id").val();
-                bookCandidate.bidSalary = $("#salary").val();
-                bookCandidate.schedule = $("#interviewdate").val();
+                bookCandidate.CandidateId = $("#id").val();
+                bookCandidate.BidSalary = $("#salary").val();
+                bookCandidate.Schedule = $("#interviewdate").val();
 
                 $.ajax({
-                    url: `InterviewRequest`,
-                    type: `POST`,
+                    url: `UpdateInterviewRequest`,
+                    type: `PUT`,
                     data: bookCandidate,
                     success: data => {
                         console.log(data);
                         if (data == 200) {
-                            sAlertAdd();
+                            sAlertPut();
                         }
                         else {
                             alert("error success");
@@ -105,6 +105,27 @@
                 })
             })
         });
+        let sAlertPut = () => {
+            swal({
+                title: "Sent",
+                text: "Response has been sent to the client.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        let sAlertConfirm = () => {
+            swal({
+                title: "Confirmed",
+                text: "You just confirmed the interview request.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
 
         let getClientById = id => {
             $('#table_id').DataTable({
@@ -125,7 +146,7 @@
                     },
                     {
                         "render": function (data, type, row) {
-                            return `<button type="button" class="btn btn-primary" id="confirm" onclick="confirmFunction(${row.id})" title="Confirm">Confirm</button>`
+                            return `<button type="button" class="btn btn-primary" id="confirm" onclick="UpdateStatusHired(${id})" title="Confirm">Confirm</button>`
                                 +
                                 ` <button class="btn btn-danger" id"reschedule" onclick="clickFunction(${id})" title="Reschedule">Reschedule</button>`;
                         },
@@ -151,7 +172,7 @@
             })
         }
 
-        let getById = id => {
+        let getBookById = id => {
             $.ajax({
                 url: `GetBookById/`,
                 type: `GET`,
@@ -163,10 +184,32 @@
                     console.log(data)
                     $("#id").val(jsonResult[0].Id);
                     $("#salary").val(jsonResult[0].BidSalary);
-                    let scheduleDate = moment(jsonResult[0].Schedule).format('YYYY MM DD');
+                    let scheduleDate = moment(jsonResult[0].Schedule).format('YYYY-MM-DD');
                     $("#interviewdate").val(scheduleDate);
                     let myModal = $("#book");
                     myModal.modal("show");
+                },
+                error: data => {
+                    console.log(data);
+                }
+            })
+        }
+
+        let UpdateStatusHired = id => {
+            $.ajax({
+                url: `UpdateStatusHired/${id}`,
+                type: `PUT`,
+                data: { "id": id },
+                dataSrc: "",
+                success: result => {
+                    console.log(result)
+                    if (result == 200) {
+                        sAlertConfirm();
+                    }
+                    else {
+                        console.log(result);
+                        alert("Error confirming");
+                    } 
                 },
                 error: data => {
                     console.log(data);
@@ -182,8 +225,9 @@
 
         let clickFunction = id => {
             //clearModal();
-            getById(id);
+            getBookById(id);
         }
+
 
     </script>
 

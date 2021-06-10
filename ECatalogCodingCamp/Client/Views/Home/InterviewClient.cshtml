@@ -133,7 +133,7 @@
                     {
                         data: null,
                         render: function (data, type, row) {
-                            return `<button type="button" class="btn btn-success" onclick="accepted(${row["CandidateId"]})">Accepted</button> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#reschedule" onclick="getReschedule(${row["CandidateId"]})">Reschedule</button> <button type="button" class="btn btn-danger" onclick="rejected(${row["CandidateId"]})">Rejected</button>`
+                            return `<button type="button" class="btn btn-success" onclick="accepted(${row["CandidateId"]})">Accept</button> <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#reschedule" onclick="getReschedule(${row["CandidateId"]})">Negotiate</button> <button type="button" class="btn btn-danger" onclick="rejected(${row["CandidateId"]})">Rejected</button>`
                         }
                     }
                 ]
@@ -160,9 +160,18 @@
         let accepted = id => {
             $.ajax({
                 type: 'DELETE',
-                url: `Accepted/${id}`
+                url: `Accepted/${id}`,
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Please wait...',
+                        showConfirmButton: false,
+                        imageUrl: 'https://media.giphy.com/media/y1ZBcOGOOtlpC/giphy.gif',
+                        backdrop: `rgba(0,0,0,0.6)`
+                    })
+                },
             }).done(result => {
                 console.log(result);
+                sAlertAccept();
             }).fail(result => {
                 console.log(result);
             })
@@ -171,8 +180,17 @@
         let rejected = id => {
             $.ajax({
                 type: 'DELETE',
-                url: `Rejected/${id}`
+                url: `Rejected/${id}`,
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Please wait...',
+                        showConfirmButton: false,
+                        imageUrl: 'https://media.giphy.com/media/y1ZBcOGOOtlpC/giphy.gif',
+                        backdrop: `rgba(0,0,0,0.6)`
+                    })
+                },
             }).done(result => {
+                sAlertReject();
                 console.log(result);
             }).fail(result => {
                 console.log(result);
@@ -194,7 +212,29 @@
         let sAlertPut = () => {
             swal({
                 title: "Sent",
-                text: "Response has been sent to the client.",
+                text: "Response has been sent to the candidate.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        let sAlertAccept = () => {
+            swal({
+                title: "Sent",
+                text: "Your Acceptance Email has been sent.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        let sAlertReject = () => {
+            swal({
+                title: "Sent",
+                text: "Your Rejection Email has been sent.",
                 icon: "success",
                 button: "Ok",
             }).then(() => {

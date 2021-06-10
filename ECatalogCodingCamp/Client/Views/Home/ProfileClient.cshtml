@@ -76,7 +76,7 @@
 
             if (obj.Name == "" || obj.Email == "" || obj.Phone == "") {
                 //can't update data
-                alert("can't update data");
+                sAlertNull();
             } else {
                 UpdateProfile(obj);
             }
@@ -93,11 +93,10 @@
             }).done((result) => {
                 console.log(result);
                 if (result == 200) {
-                    alert("Data updated.");
                     sAlertPut();
                 }
                 else {
-                    alert("status code: " + result);
+                    sAlertError();
                 }
 
             }).fail((error) => {
@@ -127,6 +126,25 @@
                 location.reload(true);
             });
         }
+
+        let sAlertNull = () => {
+            swal({
+                title: "Field Empty",
+                text: "All fields should not be empty.",
+                icon: "warning",
+                button: "Ok",
+            })
+        }
+
+        let sAlertError = () => {
+            swal({
+                title: "Something went wrong",
+                text: "Cannot update profile.",
+                icon: "warning",
+                button: "Ok",
+            })
+        }
+
     </script>
 
 }

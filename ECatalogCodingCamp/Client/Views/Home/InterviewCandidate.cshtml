@@ -148,7 +148,7 @@
                         "render": function (data, type, row) {
                             return `<button type="button" class="btn btn-primary" id="confirm" onclick="SendConfirm(${id})" title="Confirm">Confirm</button>`
                                 +
-                                ` <button class="btn btn-danger" id"reschedule" onclick="clickFunction(${id})" title="Reschedule">Reschedule</button>`;
+                                ` <button class="btn btn-danger" id"reschedule" onclick="clickFunction(${id})" title="Reschedule">Negotiate</button>`;
                         },
                         "orderable": false,
                         "searchable": false
@@ -199,6 +199,14 @@
             $.ajax({
                 url: `SendConfirm/${id}`,
                 type: `GET`,
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Please wait...',
+                        showConfirmButton: false,
+                        imageUrl: 'https://media.giphy.com/media/y1ZBcOGOOtlpC/giphy.gif',
+                        backdrop: `rgba(0,0,0,0.6)`
+                    })
+                },
                 success: result => {
                     console.log(result)
                     if (result == 200) {

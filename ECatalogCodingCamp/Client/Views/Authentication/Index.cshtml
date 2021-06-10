@@ -72,10 +72,30 @@
                 url: `Authentication/Login`,
                 type: `POST`,
                 data: loginData,
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Please wait...',
+                        showConfirmButton: false,
+                        imageUrl: 'https://media.giphy.com/media/y1ZBcOGOOtlpC/giphy.gif',
+                        backdrop: `rgba(0,0,0,0.6)`
+                    })
+                },
                 success: data => {
                     console.log(`masuk done`);
                     console.log(data);
-                    window.location.href = data;
+                    if (data == "Error") {
+                        swal({
+                            title: "Cannot login",
+                            text: "Your Email and Password are incorrect.",
+                            icon: "warning",
+                            button: "Ok",
+                        }).then(() => {
+                            location.reload(true);
+                        });
+                    }
+                    else {
+                        window.location.href = data;
+                    }
                 },
                 error: data => {
                     console.log(`masuk fail`);
@@ -83,6 +103,17 @@
                 }
             });
         }
+
+        let sAlertLogin = () => {
+            swal({
+                title: "Done",
+                text: "Successfully login.",
+                icon: "success",
+                button: "Ok",
+            })
+        }
+
+       
     </script>
     
 

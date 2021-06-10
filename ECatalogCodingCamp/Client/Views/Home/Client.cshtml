@@ -133,11 +133,13 @@
                                     <p class="card-text text-center mx-auto">${candidate.jobRole}</p>
                                     <div class="button-group">
                                         ${(() => {
-                                            if (candidate.statusBook == "Open") {
-                                                return `<button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3 mx-auto" data-toggle="modal" data-target="#book" data-placement="top"                              title="Book">Book</button>`
-                                            } else {
-                                                return `<button type="button" class="btn btn-success my-3 mx-auto" disabled>Booked</button>`
-                                            }
+                            if (candidate.statusBook == "Open") {
+                                return `<button type="button" onclick="clickFunction(${candidate.id})" class="btn btn-success my-3 mx-auto" data-toggle="modal" data-target="#book" data-placement="top"                              title="Book">Book</button>`
+                            } else if (candidate.statusBook == "Hired") {
+                                return `<button type="button" class="btn btn-success my-3 mx-auto" disabled>Hired</button>`
+                            } else {
+                                return `<button type="button" class="btn btn-success my-3 mx-auto" disabled>Booked</button>`
+                            }
                             })()}
                                         <a onclick="getDetail(${candidate.id})" class="my-3 mx-auto btn btn-warning">Detail
                                         </a>

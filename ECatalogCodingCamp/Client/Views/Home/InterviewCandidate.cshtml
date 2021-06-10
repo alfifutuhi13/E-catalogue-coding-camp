@@ -10,6 +10,7 @@
                 <th>Phone</th>
                 <th>Bid Salary</th>
                 <th>Interview Schedule</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -76,7 +77,55 @@
     <script>
         $(document).ready(function () {
             getCandidate();
+
+            $('#submit').click(function () {
+                let bookCandidate = new Object();
+                bookCandidate.CandidateId = $("#id").val();
+                bookCandidate.BidSalary = $("#salary").val();
+                bookCandidate.Schedule = $("#interviewdate").val();
+
+                $.ajax({
+                    url: `UpdateInterviewRequest`,
+                    type: `PUT`,
+                    data: bookCandidate,
+                    success: data => {
+                        console.log(data);
+                        if (data == 200) {
+                            sAlertPut();
+                        }
+                        else {
+                            alert("error success");
+                            location.reload();
+                        }
+                    },
+                    error: data => {
+                        console.log(data);
+                        alert("error error");
+                    }
+                })
+            })
         });
+        let sAlertPut = () => {
+            swal({
+                title: "Sent",
+                text: "Response has been sent to the client.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
+
+        let sAlertConfirm = () => {
+            swal({
+                title: "Confirmed",
+                text: "You just confirmed the interview request.",
+                icon: "success",
+                button: "Ok",
+            }).then(() => {
+                location.reload(true);
+            });
+        }
 
         let getClientById = id => {
             $('#table_id').DataTable({
@@ -94,16 +143,16 @@
                             var date = moment(row['Schedule']).format('DD MMMM YYYY');
                             return date;
                         }
-                    }
-                    //{
-                    //    "render": function (data, type, row) {
-                    //        return `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yes" onclick="getId(' + row.id + ')" data-toggle="tooltip" data-placement="top" title="Confirm">Confirm</button>`
-                    //            +
-                    //            /*` <button class="btn btn-danger" data-bs-toggle="modal" data-toggle="tooltip" onclick="getById(${row.id})" data-placement="top" title="Reschedule">Reschedule</button>`;*/
-                    //    },
-                    //    "orderable": false,
-                    //    "searchable": false
-                    //},
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return `<button type="button" class="btn btn-primary" id="confirm" onclick="SendConfirm(${id})" title="Confirm">Confirm</button>`
+                                +
+                                ` <button class="btn btn-danger" id"reschedule" onclick="clickFunction(${id})" title="Reschedule">Negotiate</button>`;
+                        },
+                        "orderable": false,
+                        "searchable": false
+                    },
 
                 ]
             });
@@ -115,21 +164,28 @@
                 url: `GetCandidateId`
             }).done(result => {
                 let json = JSON.parse(result);
+                console.log(result);
+                console.log(json);
                 getClientById(json[0].Id);
             }).fail(result => {
                 console.log(result);
             })
         }
 
-        let getById = id => {
+        let getBookById = id => {
             $.ajax({
-                url: `GetById/`,
+                url: `GetBookById/`,
                 type: `GET`,
                 data: { "id": id },
                 dataSrc: "",
                 success: data => {
                     let jsonResult = JSON.parse(data);
-                    $(`#id`).val(jsonResult.id);
+                    //$(`#id`).val(jsonResult.id);
+                    console.log(data)
+                    $("#id").val(jsonResult[0].Id);
+                    $("#salary").val(jsonResult[0].BidSalary);
+                    let scheduleDate = moment(jsonResult[0].Schedule).format('YYYY-MM-DD');
+                    $("#interviewdate").val(scheduleDate);
                     let myModal = $("#book");
                     myModal.modal("show");
                 },
@@ -138,6 +194,47 @@
                 }
             })
         }
+
+        let SendConfirm = id => {
+            $.ajax({
+                url: `SendConfirm/${id}`,
+                type: `GET`,
+                beforeSend: () => {
+                    Swal.fire({
+                        title: 'Please wait...',
+                        showConfirmButton: false,
+                        imageUrl: 'https://media.giphy.com/media/y1ZBcOGOOtlpC/giphy.gif',
+                        backdrop: `rgba(0,0,0,0.6)`
+                    })
+                },
+                success: result => {
+                    console.log(result)
+                    if (result == 200) {
+                        sAlertConfirm();
+                    }
+                    else {
+                        console.log(result);
+                        alert("Error confirming");
+                    } 
+                },
+                error: data => {
+                    console.log(data);
+                }
+            })
+        }
+
+        let clearModal = () => {
+            $("#salary").val("");
+            $("#id").val("");
+            $("#interviewdate").val("");
+        }
+
+        let clickFunction = id => {
+            //clearModal();
+            getBookById(id);
+        }
+
+
     </script>
 
 }

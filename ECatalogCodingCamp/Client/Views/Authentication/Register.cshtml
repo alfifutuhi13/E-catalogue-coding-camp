@@ -132,14 +132,32 @@
 
             let Register = (User) => {
                 console.log(JSON.stringify(User));
-                alert(JSON.stringify(User));
                 $.ajax({
                     url: '/Authentication/Register',
                     type: 'POST',
                     data: User
                 }).done((result) => {
                     console.log(result);
-                    window.location.href = result;
+                    if (result == "Error") {
+                        swal({
+                            title: "Cannot login",
+                            text: "Your Email and Password are incorrect.",
+                            icon: "warning",
+                            button: "Ok",
+                        }).then(() => {
+                            location.reload(true);
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Done",
+                            text: "You just registered your account.",
+                            icon: "success",
+                            button: "Ok",
+                        }).then(() => {
+                            window.location.href = result;
+                        });
+                    }
                 }).fail((result) => {
                     console.log(result);
                     alert("Failed to Add Data!");
@@ -158,7 +176,7 @@
                 User.RoleId = 1;
 
                 if (User.Name == "" || User.Email == "" || User.Password == "" || User.BirthDate == "" || User.Gender == null || User.Phone == "" || User.JobRoleId == null) {
-                    alert("Please fill all fields required")
+                    sAlertNull();
                 } else {
                     Register(User);
                 }
@@ -167,12 +185,14 @@
             
         })
 
-        
-
-        //let getRoleValue = (str) => {
-        //    let roleValue = 
-        //}
-
+        let sAlertNull = () => {
+            swal({
+                title: "Field Empty",
+                text: "All fields should not be empty.",
+                icon: "warning",
+                button: "Ok",
+            })
+        }
 
     </script>
 }
